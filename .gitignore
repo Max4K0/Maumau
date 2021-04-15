@@ -27,13 +27,13 @@
 
 # Gradle
 .idea/**/gradle.xml
-.idea/**/libraries
+.idea/**/libraries/
 
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
  auto-import.
- .idea/artifacts
+ .idea/artifacts/
  .idea/compiler.xml
  .idea/jarRepositories.xml
  .idea/modules.xml
@@ -72,7 +72,7 @@ crashlytics-build.properties
 fabric.properties
 
 # Editor-based Rest Client
-.idea/httpRequests
+.idea/httpRequests/
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
