@@ -38,7 +38,6 @@
  .idea/jarRepositories.xml
  .idea/modules.xml
  .idea/*.iml
- .idea/modules/
  .idea/modules/main.iml
  .idea/modules/main-build.iml
  *.iml
