@@ -1,4 +1,4 @@
-package Maumau
+package main
 
 object Main {
 
@@ -13,5 +13,7 @@ object Main {
   }
 
 }
+
+
 
 
