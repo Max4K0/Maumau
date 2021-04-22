@@ -1,18 +1,23 @@
 package de.htwg.se.maumau.model
-import org.scalatest.wordspec.AnyWordSpec
+
 import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import de.htwg.se.maumau.model.Symbol._
+import de.htwg.se.maumau.model.Color._
 
-
-class PlayerSpec extends AnyWordSpec with Matchers {
+class CardSpec extends AnyWordSpec with Matchers {
 
   "Card" when {
     "new" should {
-      val Card = Card("scala.Player Name")
-      "name should" in {
-        player.name should be("scala.Player Name")
+      val card = Card(Cross, ASS)
+      "Symbol should" in {
+        card.color should be(Cross)
       }
-      "String representation" in {
-        player.toString should be("scala.Player Name")
+      "Color should" in {
+        card.symbol should be(ASS)
+      }
+      "String should look like" in {
+        card.toString should be("Cross ASS")
       }
     }
   }
