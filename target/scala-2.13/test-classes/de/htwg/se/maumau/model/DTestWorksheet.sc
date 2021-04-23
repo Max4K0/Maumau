@@ -1,24 +1,15 @@
 //package test
-import de.htwg.se.maumau.model.Player
+import de.htwg.se.maumau.model._
 import org.scalatest.wordspec._
 import org.scalatest.matchers.should.Matchers._
 import org.scalatest.matchers.should._
 
 
 //val arraystring = List(1, 2, 3, 4, 5, 6, 7, 8, 9)
-//val newarraystring = for(array <- arraystring if array < 5)yield array
-
-
-
-val p = new Player("Test")
-
-p.name
-
-1+2
-
-
-
-
+//val newarraystring = for(array <- arraystring if array < 5)yield arra
+//
+//
+"\u0052"
 
 //
 //

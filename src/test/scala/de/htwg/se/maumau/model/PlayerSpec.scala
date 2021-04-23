@@ -3,7 +3,7 @@ package de.htwg.se.maumau.model
 import de.htwg.se.maumau.model._
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
-import  org.scalatest.matchers.should.Matchers._
+import org.scalatest.matchers.should.Matchers._
 
 class PlayerSpec extends AnyWordSpec with Matchers {
 
