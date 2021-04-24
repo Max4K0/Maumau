@@ -1,6 +1,0 @@
-[debug] > Exec(;project {file:/C:/Users/Max/Desktop/Programmierung/Scala/Maumau/}maumau; reboot, None, None)
-[debug] > Exec(project {file:/C:/Users/Max/Desktop/Programmierung/Scala/Maumau/}maumau, None, None)
-[info] set current project to main (in build file:/C:/Users/Max/Desktop/Programmierung/Scala/Maumau/)
-[debug] > Exec(reboot, None, None)
-[debug] > Exec(sbtRebootNetwork, None, None)
-[debug] > Exec(sbtRebootImpl, None, None)
