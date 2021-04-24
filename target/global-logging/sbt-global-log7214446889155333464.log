@@ -1,0 +1,103 @@
+[debug] > Exec(early(addDefaultCommands), None, None)
+[debug] > Exec(addDefaultCommands, None, None)
+[debug] > Exec(early(initialize), None, None)
+[debug] > Exec(initialize, None, None)
+[debug] > Exec(early(addPluginSbtFile="""C:\Users\Max\AppData\Local\Temp\idea2.sbt"""), None, None)
+[debug] > Exec(addPluginSbtFile="""C:\Users\Max\AppData\Local\Temp\idea2.sbt""", None, None)
+[debug] > Exec(boot, None, None)
+[debug] > Exec(writeSbtVersion, None, None)
+[debug] > Exec(reload, None, None)
+[debug] > Exec(sbtStashOnFailure, None, None)
+[debug] > Exec(onFailure loadFailed, None, None)
+[debug] > Exec(loadp, None, None)
+[info] welcome to sbt 1.4.3 (Amazon.com Inc. Java 1.8.0_275)
+[debug]       Load.loadUnit: plugins took 236.4768ms
+[debug]       Load.loadUnit: defsScala took 0.9868ms
+[debug] [Loading] Scanning directory C:\Users\Max\.sbt\1.0\plugins
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in C:\Users\Max\.sbt\1.0\plugins, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(List(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin))), Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin)))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 57.7327 ms
+[debug]           Load.resolveProject(global-plugins) took 115.8942ms
+[debug]         Load.loadTransitive: finalizeProject(Project(id global-plugins, base: C:\Users\Max\.sbt\1.0\plugins, plugins: List(<none>))) took 237.5646ms
+[debug] [Loading] Done in C:\Users\Max\.sbt\1.0\plugins, returning: (global-plugins)
+[debug]       Load.loadUnit: loadedProjectsRaw took 290.8776ms
+[debug]       Load.loadUnit: cleanEvalClasses took 0.749ms
+[debug]     Load.loadUnit(file:/C:/Users/Max/.sbt/1.0/plugins/, ...) took 548.4243ms
+[debug]   Load.apply: load took 992.1735ms
+[debug]   Load.apply: resolveProjects took 16.192ms
+[debug]   Load.apply: finalTransforms took 175.089ms
+[debug]   Load.apply: config.delegates took 25.3194ms
+[debug]   Load.apply: Def.make(settings)... took 1838.9061ms
+[debug]   Load.apply: structureIndex took 296.8412ms
+[debug]   Load.apply: mkStreams took 4.4857ms
+[info] loading global plugins from C:\Users\Max\.sbt\1.0\plugins
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[debug] Load.defaultLoad until apply took 7527.0871ms
+[debug]           Load.loadUnit: plugins took 59.1672ms
+[debug]           Load.loadUnit: defsScala took 0.0069ms
+[debug] [Loading] Scanning directory C:\Users\Max\Desktop\Programmierung\Scala\Maumau\project
+[debug]             Load.loadUnit: mkEval took 15.7184ms
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in C:\Users\Max\Desktop\Programmierung\Scala\Maumau\project, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(List(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin))), Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin)))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)
+[debug] Plugins.deducer#function took 3.3321 ms
+[info] loading settings for project maumau-build from idea2.sbt ...
+[debug]               Load.resolveProject(maumau-build) took 23.0381ms
+[debug]             Load.loadTransitive: finalizeProject(Project(id maumau-build, base: C:\Users\Max\Desktop\Programmierung\Scala\Maumau\project, plugins: List(<none>))) took 27.2315ms
+[debug] [Loading] Done in C:\Users\Max\Desktop\Programmierung\Scala\Maumau\project, returning: (maumau-build)
+[debug]           Load.loadUnit: loadedProjectsRaw took 286.1858ms
+[debug]           Load.loadUnit: cleanEvalClasses took 7.495ms
+[debug]         Load.loadUnit(file:/C:/Users/Max/Desktop/Programmierung/Scala/Maumau/project/, ...) took 355.2358ms
+[debug]       Load.apply: load took 358.6292ms
+[debug]       Load.apply: resolveProjects took 0.2171ms
+[debug]       Load.apply: finalTransforms took 17.6798ms
+[debug]       Load.apply: config.delegates took 0.8244ms
+[debug]       Load.apply: Def.make(settings)... took 139.2415ms
+[debug]       Load.apply: structureIndex took 62.5485ms
+[debug]       Load.apply: mkStreams took 0.0041ms
+[info] loading project definition from C:\Users\Max\Desktop\Programmierung\Scala\Maumau\project
+[debug] Running task... Cancel: Signal, check cycles: false, forcegc: true
+[debug]     Load.loadUnit: plugins took 3763.695ms
+[debug]     Load.loadUnit: defsScala took 0.0056ms
+[debug] [Loading] Scanning directory C:\Users\Max\Desktop\Programmierung\Scala\Maumau
+[debug]       Load.loadUnit: mkEval took 0.6908ms
+[debug] [Loading] Found non-root projects 
+[debug] [Loading] Done in C:\Users\Max\Desktop\Programmierung\Scala\Maumau, returning: ()
+[debug] deducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(List(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin))), Clause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(org.jetbrains.sbt.StructurePlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(org.jetbrains.sbt.IdeaShellPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(org.jetbrains.sbt.indices.SbtIntellijIndicesPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin))), Clause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin))), Clause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(org.jetbrains.sbt.StructurePlugin))), Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(org.jetbrains.sbt.IdeaShellPlugin))), Clause(And(Set(Atom(sbt.plugins.CorePlugin), Atom(sbt.plugins.JvmPlugin))),Set(Atom(org.jetbrains.sbt.indices.SbtIntellijIndicesPlugin)))))
+[debug]   :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.SemanticdbPlugin,org.jetbrains.sbt.indices.SbtIntellijIndicesPlugin,sbt.plugins.JUnitXmlReportPlugin,org.jetbrains.sbt.IdeaShellPlugin,org.jetbrains.sbt.StructurePlugin,sbt.plugins.MiniDependencyTreePlugin)
+[debug] Plugins.deducer#function took 8.4685 ms
+[info] loading settings for project maumau from build.sbt ...
+[debug]         Load.resolveProject(maumau) took 162.4347ms
+[debug]       Load.loadTransitive: finalizeProject(Project(id maumau, base: C:\Users\Max\Desktop\Programmierung\Scala\Maumau, plugins: List(<none>))) took 174.4344ms
+[debug] [Loading] Done in C:\Users\Max\Desktop\Programmierung\Scala\Maumau, returning: (maumau)
+[debug]     Load.loadUnit: loadedProjectsRaw took 8306.5161ms
+[debug]     Load.loadUnit: cleanEvalClasses took 49.8845ms
+[debug]   Load.loadUnit(file:/C:/Users/Max/Desktop/Programmierung/Scala/Maumau/, ...) took 12121.5804ms
+[debug] Load.apply: load took 12125.6744ms
+[debug] Load.apply: resolveProjects took 0.2834ms
+[debug] Load.apply: finalTransforms took 71.1587ms
+[debug] Load.apply: config.delegates took 0.7424ms
+[debug] Load.apply: Def.make(settings)... took 509.5452ms
+[debug] Load.apply: structureIndex took 89.7142ms
+[debug] Load.apply: mkStreams took 0.0056ms
+[info] set current project to main (in build file:/C:/Users/Max/Desktop/Programmierung/Scala/Maumau/)
+[debug] > Exec(sbtPopOnFailure, None, None)
+[debug] > Exec(resumeFromFailure, None, None)
+[debug] > Exec(notifyUsersAboutShell, None, None)
+[debug] > Exec(iflast shell, None, None)
+[debug] > Exec(; set ideaPort in Global := 1426 ; idea-shell, None, None)
+[debug] > Exec(set ideaPort in Global := 1426, None, None)
+[info] Defining Global / ideaPort
+[info] The new value will be used by Compile / compile, Test / compile
+[debug] Defining 
+[debug] 	Global / ideaPort
+[debug] 
+[debug] The new value will be used by 
+[debug] 	Compile / compile
+[debug] 	Test / compile
+[info] Reapplying settings...
+[info] set current project to main (in build file:/C:/Users/Max/Desktop/Programmierung/Scala/Maumau/)
+[debug] > Exec(idea-shell, None, None)
