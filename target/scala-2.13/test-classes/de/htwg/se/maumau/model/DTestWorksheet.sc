@@ -8,24 +8,24 @@ import scala.collection.mutable.ListBuffer
 import de.htwg.se.maumau.model.Card
 
 import scala.util.Random
-import Color.{Color, Cross}
+import Color.{Color, Clubs}
 import Symbol.{ASS, Symbols}
 case class Deck() {
 
   val rawDeck: ListBuffer[Card] = ListBuffer[Card](
-    Card(Color.Cross, Symbol.ASS),
-    Card(Color.Cross, Symbol.Two),
-    Card(Color.Cross, Symbol.Three),
-    Card(Color.Cross, Symbol.Four),
-    Card(Color.Cross, Symbol.Five),
-    Card(Color.Cross, Symbol.Six),
-    Card(Color.Cross, Symbol.Seven),
-    Card(Color.Cross, Symbol.Eight),
-    Card(Color.Cross, Symbol.Nine),
-    Card(Color.Cross, Symbol.Ten),
-    Card(Color.Cross, Symbol.Jack),
-    Card(Color.Cross, Symbol.Lady),
-    Card(Color.Cross, Symbol.King),
+    Card(Color.Clubs, Symbol.ASS),
+    Card(Color.Clubs, Symbol.Two),
+    Card(Color.Clubs, Symbol.Three),
+    Card(Color.Clubs, Symbol.Four),
+    Card(Color.Clubs, Symbol.Five),
+    Card(Color.Clubs, Symbol.Six),
+    Card(Color.Clubs, Symbol.Seven),
+    Card(Color.Clubs, Symbol.Eight),
+    Card(Color.Clubs, Symbol.Nine),
+    Card(Color.Clubs, Symbol.Ten),
+    Card(Color.Clubs, Symbol.Jack),
+    Card(Color.Clubs, Symbol.Lady),
+    Card(Color.Clubs, Symbol.King),
     Card(Color.Spades, Symbol.ASS),
     Card(Color.Spades, Symbol.Two),
     Card(Color.Spades, Symbol.Three),
@@ -52,20 +52,20 @@ case class Deck() {
     Card(Color.Diamonds, Symbol.Jack),
     Card(Color.Diamonds, Symbol.Lady),
     Card(Color.Diamonds, Symbol.King),
-    Card(Color.Heart, Symbol.ASS),
-    Card(Color.Heart, Symbol.Two),
-    Card(Color.Heart, Symbol.Three),
-    Card(Color.Heart, Symbol.Four),
-    Card(Color.Heart, Symbol.Five),
-    Card(Color.Heart, Symbol.Six),
-    Card(Color.Heart, Symbol.Seven),
-    Card(Color.Heart, Symbol.Eight),
-    Card(Color.Heart, Symbol.Nine),
-    Card(Color.Heart, Symbol.Ten),
-    Card(Color.Heart, Symbol.Jack),
-    Card(Color.Heart, Symbol.Lady),
-    Card(Color.Heart, Symbol.King))
-  
+    Card(Color.Hearts, Symbol.ASS),
+    Card(Color.Hearts, Symbol.Two),
+    Card(Color.Hearts, Symbol.Three),
+    Card(Color.Hearts, Symbol.Four),
+    Card(Color.Hearts, Symbol.Five),
+    Card(Color.Hearts, Symbol.Six),
+    Card(Color.Hearts, Symbol.Seven),
+    Card(Color.Hearts, Symbol.Eight),
+    Card(Color.Hearts, Symbol.Nine),
+    Card(Color.Hearts, Symbol.Ten),
+    Card(Color.Hearts, Symbol.Jack),
+    Card(Color.Hearts, Symbol.Lady),
+    Card(Color.Hearts, Symbol.King))
+
 
 
 
@@ -76,7 +76,7 @@ case class Deck() {
 
   def getCard (deck : ListBuffer[Card]): Card ={
     val card = deck.last
-    val shuffledDeck = deck.drop(51)
+    val shuffledDeck = deck.drop(52)
     card
   }
 
@@ -90,8 +90,7 @@ print(shuffledDeck)
 //val deck2 = Deck().getCard(shuffledDeck)
 
 val card = Deck().getCard(shuffledDeck).toString
-
-val shuffledDeck2 = shuffledDeck.drop(51)
+val shuffledDeck2 = shuffledDeck.drop(52)
 
 print(shuffledDeck2)
 print(shuffledDeck)

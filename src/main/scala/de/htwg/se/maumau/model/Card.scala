@@ -85,6 +85,9 @@ case class Card(color: Color, symbol: Symbols) {
 
   def UTFSymbols:String = {
     symbol match {
+
+//  override def toString:String = {
+//    symbol match {
       case Symbol.ASS if (color == Hearts) =>    HA
       case Symbol.Two if (color == Hearts) =>    H2
       case Symbol.Three if (color == Hearts) =>  H3

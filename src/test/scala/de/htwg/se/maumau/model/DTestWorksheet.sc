@@ -65,7 +65,7 @@ case class Deck() {
     Card(Color.Hearts, Symbol.Jack),
     Card(Color.Hearts, Symbol.Lady),
     Card(Color.Hearts, Symbol.King))
-  
+
 
 
 
@@ -76,7 +76,7 @@ case class Deck() {
 
   def getCard (deck : ListBuffer[Card]): Card ={
     val card = deck.last
-    val shuffledDeck = deck.drop(51)
+    val shuffledDeck = deck.drop(52)
     card
   }
 
@@ -90,8 +90,7 @@ print(shuffledDeck)
 //val deck2 = Deck().getCard(shuffledDeck)
 
 val card = Deck().getCard(shuffledDeck).toString
-
-val shuffledDeck2 = shuffledDeck.drop(51)
+val shuffledDeck2 = shuffledDeck.drop(52)
 
 print(shuffledDeck2)
 print(shuffledDeck)

@@ -17,12 +17,17 @@ class CardSpec extends AnyWordSpec with Matchers {
       "Color of card should" in {
         card.symbol should be(Symbol.ASS)
       }
-      "String of card should look like" in {
-        card.toString should be("C A")
-      }
+//      "String of card should look like" in {
+//        card.toString should be("C A")
+//      }
+//      "UTF 8 View of card should look like" in {
+//        card.UTFSymbols should be("\u001B[31m\uD83C\uDCC1")
+//      }
+
       "UTF 8 View of card should look like" in {
-        card.UTFSymbols should be("\u001B[31m\uD83C\uDCC1")
+        card.toString should be("\u001B[31m\uD83C\uDCC1")
       }
+
 
       "Symbol of card2 should" in {
         card2.color should be(Color.Diamonds)
@@ -30,11 +35,15 @@ class CardSpec extends AnyWordSpec with Matchers {
       "Color of card2 should" in {
         card2.symbol should be(Symbol.King)
       }
-      "String of card2 should look like" in {
-        card2.toString should be("D K")
-      }
+//      "String of card2 should look like" in {
+//        card2.toString should be("D K")
+//      }
+//      "UTF 8 View of card2 should look like" in {
+//        card2.UTFSymbols should be("\u001B[30m\uD83C\uDCCE")
+//      }
+
       "UTF 8 View of card2 should look like" in {
-        card2.UTFSymbols should be("\u001B[30m\uD83C\uDCCE")
+        card2.toString should be("\u001B[30m\uD83C\uDCCE")
       }
 
 
