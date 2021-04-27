@@ -16,7 +16,8 @@ object Main {
 
 
 
-
+    print("\u001B[48;5;15m")
+    //print("\u001B[48;5;15m" + "\u001B[31m" + "\uD83C\uDCB1\u001b[0m")
     print("\u001B[31m" + "\uD83C\uDCB1")
     print("\u001B[31m" + "\uD83C\uDCB2")
     print("\u001B[31m" + "\uD83C\uDCB3")
@@ -29,7 +30,7 @@ object Main {
     print("\u001B[31m" + "\uD83C\uDCBA")
     print("\u001B[31m" + "\uD83C\uDCBB")
     print("\u001B[31m" + "\uD83C\uDCBD")
-    print("\u001B[31m" + "\uD83C\uDCBE")
+    println("\u001B[31m" + "\uD83C\uDCBE")
 
     print("\u001B[30m" + "\uD83C\uDCA1")
     print("\u001B[30m" + "\uD83C\uDCA2")
@@ -43,7 +44,7 @@ object Main {
     print("\u001B[30m" + "\uD83C\uDCAA")
     print("\u001B[30m" + "\uD83C\uDCAB")
     print("\u001B[30m" + "\uD83C\uDCAE")
-    print("\u001B[30m" + "\uD83C\uDCAD")
+    println("\u001B[30m" + "\uD83C\uDCAD")
 
 
     print("\u001B[31m" + "\uD83C\uDCC1")
@@ -58,7 +59,7 @@ object Main {
     print("\u001B[31m" + "\uD83C\uDCCA")
     print("\u001B[31m" + "\uD83C\uDCCB")
     print("\u001B[31m" + "\uD83C\uDCCE")
-    print("\u001B[31m" + "\uD83C\uDCCD")
+    println("\u001B[31m" + "\uD83C\uDCCD")
 
     print("\u001B[30m" + "\uD83C\uDCD1")
     print("\u001B[30m" + "\uD83C\uDCD2")

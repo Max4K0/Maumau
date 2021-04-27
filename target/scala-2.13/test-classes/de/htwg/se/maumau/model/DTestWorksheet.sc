@@ -3,12 +3,13 @@ import de.htwg.se.maumau.model._
 import org.scalatest.wordspec._
 import org.scalatest.matchers.should.Matchers._
 import org.scalatest.matchers.should._
+
 import scala.collection.mutable.ListBuffer
 import de.htwg.se.maumau.model.Card
-import scala.util.Random
 
-import Color.Color
-import Symbol.Symbols
+import scala.util.Random
+import Color.{Color, Cross}
+import Symbol.{ASS, Symbols}
 case class Deck() {
 
   val rawDeck: ListBuffer[Card] = ListBuffer[Card](
@@ -74,19 +75,24 @@ case class Deck() {
   }
 
   def getCard (deck : ListBuffer[Card]): Card ={
-    val card = deck.head
-    val shuffledDeck = deck.drop(1)
+    val card = deck.last
+    val shuffledDeck = deck.drop(51)
     card
   }
 
 }
 val stdDeck = Deck()
 print(stdDeck)
+
 val shuffledDeck = stdDeck.shuffle()
 print(shuffledDeck)
+
 //val deck2 = Deck().getCard(shuffledDeck)
+
 val card = Deck().getCard(shuffledDeck).toString
-val shuffledDeck2 = shuffledDeck.drop(1)
+
+val shuffledDeck2 = shuffledDeck.drop(51)
+
 print(shuffledDeck2)
 print(shuffledDeck)
 
