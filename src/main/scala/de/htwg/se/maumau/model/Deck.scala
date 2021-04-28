@@ -3,7 +3,8 @@ import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
 
-case class Deck( rawDeck: ListBuffer[Card] = ListBuffer[Card](
+case class Deck(
+                 rawDeck: ListBuffer[Card] = ListBuffer[Card](
     Card(Color.Clubs, Symbol.ASS),
     Card(Color.Clubs, Symbol.Two),
     Card(Color.Clubs, Symbol.Three),
@@ -56,23 +57,16 @@ case class Deck( rawDeck: ListBuffer[Card] = ListBuffer[Card](
     Card(Color.Hearts, Symbol.Jack),
     Card(Color.Hearts, Symbol.Lady),
     Card(Color.Hearts, Symbol.King))
-               ) {
+               )
+{
 
 
 
-  def shuffle () : ListBuffer[Card] = {
-    val shuffledDeck =  Random.shuffle(rawDeck)
-    shuffledDeck
-  }
+  def shuffle (deck : ListBuffer[Card]): Deck = copy(Random.shuffle(deck))
 
-  def getCard(deck : ListBuffer[Card]): Deck = copy()
-  {deck.asInstanceOf[Deck].
+  def getCard(deck : ListBuffer[Card]): (Deck, Card) = (copy(deck.drop(deck.size)), deck.last)
 
-
-    val card = deck.last
-    val size = deck.size
-    val deck2 = deck.drop(size)
-
-  //}
-
+  def throwCards(deck: ListBuffer[Card], deck2: ListBuffer[Card], number : Int) = {
+      for (i <- 1 to number if deck.size > 0) deck2.addOne(getCard(deck)._2)
+     }
 }
