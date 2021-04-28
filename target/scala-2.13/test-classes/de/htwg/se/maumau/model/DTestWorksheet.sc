@@ -8,8 +8,9 @@ import scala.collection.mutable.ListBuffer
 import de.htwg.se.maumau.model.Card
 
 import scala.util.Random
-import Color.{Color, Clubs}
+import Color.{Clubs, Color}
 import Symbol.{ASS, Symbols}
+
 case class Deck() {
 
   val rawDeck: ListBuffer[Card] = ListBuffer[Card](
@@ -74,11 +75,11 @@ case class Deck() {
     shuffledDeck
   }
 
-  def getCard (deck : ListBuffer[Card]): Card ={
-    val card = deck.last
-    val shuffledDeck = deck.drop(52)
-    card
-  }
+  def getCard (deck : ListBuffer[Card]): Card = copy(deck.drop(52))
+//    val card = deck.last
+//    val shuffledDeck =
+//    card
+
 
 }
 val stdDeck = Deck()
