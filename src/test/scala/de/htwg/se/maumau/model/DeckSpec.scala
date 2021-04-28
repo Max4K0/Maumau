@@ -11,7 +11,7 @@ class DeckSpec extends AnyWordSpec with Matchers {
   val stdDeck = Deck()
   print(stdDeck)
 
-  val shuffledDeck = stdDeck.shuffle()
+  val shuffledDeck = stdDeck.shuffle(stdDeck)
   print(shuffledDeck)
 
   //val deck2 = Deck().getCard(shuffledDeck)
