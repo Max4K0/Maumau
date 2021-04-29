@@ -3,19 +3,19 @@
 
 
 package de.htwg.se.maumau
-
+import de.htwg.se.maumau.model._
 object Main {
   def main(args: Array[String]): Unit = {
     val arraystring = List(1, 2, 3, 4, 5, 6, 7, 8, 9)
     val newarraystring = for(array <- arraystring if array < 5)yield array
-
+    val cardd = Card(Color.Clubs, Symbol.Ten)
   //Editor --> File Encoding
     //Global Encoding:                  windows-1252
     //Project Encoding:                 UTF-8
     //Default Encoding for properties:  UTF-8
 
 
-
+    println(cardd.UTFSymbols)
     print("\u001B[48;5;15m")
     //print("\u001B[48;5;15m" + "\u001B[31m" + "\uD83C\uDCB1\u001b[0m")
     println("\u001B[38;5;27m" + "\uD83C\uDCA0")
