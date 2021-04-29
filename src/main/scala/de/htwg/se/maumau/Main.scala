@@ -15,7 +15,7 @@ object Main {
     //Default Encoding for properties:  UTF-8
 
 
-    println(cardd.UTFSymbols)
+   // println(cardd.UTFSymbols)
     print("\u001B[48;5;15m")
     //print("\u001B[48;5;15m" + "\u001B[31m" + "\uD83C\uDCB1\u001b[0m")
     println("\u001B[38;5;27m" + "\uD83C\uDCA0")

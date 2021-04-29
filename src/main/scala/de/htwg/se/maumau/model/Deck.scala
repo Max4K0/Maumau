@@ -61,13 +61,13 @@ case class Deck(cards: ListBuffer[Card] = ListBuffer[Card]()){
         Card(Color.Hearts, Symbol.King))
     val emptyDeck = ListBuffer[Card]()
 
-    def throwDeck: Deck = copy(cards = ListBuffer[Card]())
+    def throwDeck: Deck = copy(cards = cards.drop(cards.size))
 
     def fillDeck: Deck = copy(cards = cards.addAll(fullDeck))
 
     def shuffleDeck: Deck = copy(cards = Random.shuffle(cards))
 
-    def getCard(deck : ListBuffer[Card]): (Deck, Card) = (copy(cards = cards.drop(deck.size)), deck.last)
+    def throwCard(deck1: Deck): (Deck, Deck) = (copy(deck1.cards.addOne(cards.head)), copy(cards.drop(1)))
 
 //  def throwCards(deck: ListBuffer[Card], deck2: ListBuffer[Card], number : Int) = {
 //      for (i <- 1 to number if deck.size > 0) deck2. (getCard(deck)._2)

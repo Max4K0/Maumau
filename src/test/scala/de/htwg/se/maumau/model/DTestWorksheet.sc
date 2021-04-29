@@ -12,25 +12,29 @@ import scala.util.Random
 
 val emptyLB = ListBuffer[Card]()
 
-val deck1 = Deck(emptyLB)
+val deck1 = Deck(ListBuffer[Card]())
 print(deck1)
 deck1.fillDeck
 print(deck1)
 deck1.throwDeck
+deck1
+deck1.fillDeck
+deck1.shuffleDeck
+val deck3 = Deck()
+deck1.throwCard(deck3)
+print(deck3)
+deck1.throwCard(deck3)
+print(deck3)
 print(deck1)
+//deck1.getCard
 
-val deck2 = Deck(ListBuffer[Card]()).throwDeck
-deck2.shuffleDeck
-deck2
+
+
 //deck2.getCard(deck2.cards)
 //val deck3 = deck2.getCard(deck2.cards)._1
 //deck2.getCard(deck2.cards)._2
 
 
-
-print(deck2)
-deck1.shuffleDeck
-print(deck1.cards)
 
 //deck2.copy(cards = ListBuffer[Card](
 //  Card(Color.Clubs, Symbol.ASS),
