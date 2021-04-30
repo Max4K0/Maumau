@@ -18,10 +18,13 @@ deck1.throwDeck
 deck1
 val deck2 = deck1.fillDeck
 print(deck2)
-val deck4 = deck2.throwDeck
-val dropNumber = 5
-val deck3 = deck2.throwCard(dropNumber, deck4)._2
-val deck5 = deck2.throwCard(dropNumber, deck4)._1
+val deck4 = Deck(List[Card]())
+val dropNumber = 2
+val deck6 = deck2.shuffleDeck(new Random(2))
+val deck3 = deck2.throwCards(dropNumber, deck4)._2
+val deck5 = deck2.throwCards(dropNumber, deck4)
+val deck7 = deck2.throwOneCard(3, deck4)._1
+
 //val deck3 = deck2.shuffleDeck
 //deck3
 
