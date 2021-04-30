@@ -1,6 +1,6 @@
 //package test
 import de.htwg.se.maumau.model.{Card, Color, Deck, Symbol}
-import de.htwg.se.maumau.model.Deck._
+import de.htwg.se.maumau.model
 import org.scalatest.wordspec._
 import org.scalatest.matchers.should.Matchers._
 import org.scalatest.matchers.should._
@@ -12,7 +12,7 @@ import scala.util.Random
 
 val emptyLB = ListBuffer[Card]()
 
-val deck1 = Deck(ListBuffer[Card]())
+val deck1 = model.Deck(ListBuffer[Card]())
 print(deck1)
 deck1.fillDeck
 print(deck1)
