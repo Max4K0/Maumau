@@ -1,5 +1,6 @@
 package de.htwg.se.maumau.aview
-import de.htwg.se.maumau.controller.{Hand, Player}
+import de.htwg.se.maumau.model.Hand
+
 class TUI extends Hand {
 
 

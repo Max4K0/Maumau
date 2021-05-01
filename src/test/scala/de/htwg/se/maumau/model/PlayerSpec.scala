@@ -1,6 +1,5 @@
 package de.htwg.se.maumau.model
 
-import de.htwg.se.maumau.controller.Player
 import de.htwg.se.maumau.model._
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers

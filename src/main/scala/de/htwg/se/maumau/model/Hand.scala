@@ -1,6 +1,4 @@
-package de.htwg.se.maumau.controller
-
-import de.htwg.se.maumau.model.Card
+package de.htwg.se.maumau.model
 
 import scala.collection.mutable.ListBuffer
 
@@ -8,7 +6,7 @@ case class Hand(playerHand: ListBuffer[Card] = ListBuffer[Card]()) {
 
 
   def seeHand(): ListBuffer[Card] = {
-    return playerHand
+    playerHand
   }
 
   def addtoHand(card: Card): Hand = copy(playerHand = playerHand.addOne(card))
@@ -23,5 +21,3 @@ case class Hand(playerHand: ListBuffer[Card] = ListBuffer[Card]()) {
     eigene Werte bei den Aufrufen bekommen.
   */
 }
-
-

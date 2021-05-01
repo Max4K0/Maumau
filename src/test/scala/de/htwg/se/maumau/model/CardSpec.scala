@@ -36,9 +36,9 @@ class CardSpec extends AnyWordSpec with Matchers {
       "Color of card2 should" in {
         card2.symbol should be(Symbol.King)
       }
-//      "String of card2 should look like" in {
-//        card2.toString should be("D K")
-//      }
+      "String of card2 should look like" in {
+        card2.toString should be("D K")
+      }
 //      "UTF 8 View of card2 should look like" in {
 //        card2.UTFSymbols should be("\u001B[30m\uD83C\uDCCE")
 //      }
