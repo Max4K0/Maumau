@@ -10,9 +10,9 @@ import scala.util.Random
 val cardd = Card(Color.Clubs, Symbol.Ten)
 val emptyLB = List[Card]()
 
-val deck1 = Deck(List[Card]())
+val deck1 = Deck(List[Card]()).fillDeck.shuffleDeck(new Random(3))
 print(deck1)
-deck1.fillDeck
+
 print(deck1)
 deck1.throwDeck
 deck1
