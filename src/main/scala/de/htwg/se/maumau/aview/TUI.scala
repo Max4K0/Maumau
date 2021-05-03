@@ -1,6 +1,6 @@
 package de.htwg.se.maumau.aview
 import de.htwg.se.maumau.controller.Controller
-import de.htwg.se.maumau.model.{Card, Deck, Player, Table}
+import de.htwg.se.maumau.model.{Card, Deck, Player, Table, Symbol, Color}
 import de.htwg.se.maumau.util.Observer
 
 import scala.util.Random
@@ -10,6 +10,7 @@ case class TUI(contoller: Controller) extends Observer {
 
   contoller.add(this)
   val startDeck = Deck(List[Card]()).fillDeck.shuffleDeck(new Random(3))
+  val tableDeck = Deck(List[Card]())
   def gamestart(): Unit = {
     val playerAmount: Int = readLine(
       """||==== Welcome to MauMau! ====|
@@ -23,24 +24,31 @@ case class TUI(contoller: Controller) extends Observer {
         case _ => false
       }
     }
-    val table = Table(startDeck)
+    val table = Table(startDeck, tableDeck)
     val player: List[Player] = List.tabulate(playerAmount) {
       n => Player(readLine(s"Player ${n + 1}, type your name: "), Deck(List[Card]()))
     }
     start(player, table)
   }
   def start(players: List[Player], table: Table): Unit = {
-    for(player <- players) {
+    for (player <- players) {
       startDeck.throwCards(5, player.playerDeck)
     }
     val tableDeck = Deck(List[Card]())
     startDeck.throwCards(1, tableDeck)
-    while(true) {
-      for(player <- players) {
+    while (true) {
+      for (player <- players) {
+        print(table)
+        var validMove = false
+        do {
+          val playerCardNr = readLine("choose a Card to throw").toInt
+          var validMove = if ((player.playerDeck.cards.lift(playerCardNr - 1).get.symbol == tableDeck.cards.head.symbol) ||
+            (player.playerDeck.cards.lift(playerCardNr - 1).get.color == tableDeck.cards.head.color) ||
+            player.playerDeck.cards.lift(playerCardNr - 1).get.symbol == Symbol.Jack) true else false
+        }while (validMove == false)
 
       }
     }
   }
-
   override def update: Unit = ???
 }

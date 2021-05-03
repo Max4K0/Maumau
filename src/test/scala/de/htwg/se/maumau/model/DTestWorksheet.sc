@@ -1,5 +1,5 @@
 //package test
-import de.htwg.se.maumau.model.{Card, Color, Deck, Symbol}
+import de.htwg.se.maumau.model.{Card, Color, Deck, Player, Symbol}
 import de.htwg.se.maumau.model
 import org.scalatest.wordspec._
 import org.scalatest.matchers.should.Matchers._
@@ -12,6 +12,13 @@ val emptyLB = List[Card]()
 
 val deck1 = Deck(List[Card]()).fillDeck.shuffleDeck(new Random(3))
 print(deck1)
+val playerDeck = Deck(List[Card]()).fillDeck
+
+
+val player = Player("joe", playerDeck)
+var playerCardNr = 1
+player.playerDeck.cards.lift(playerCardNr-1).get.color
+Color.Hearts
 
 print(deck1)
 deck1.throwDeck
