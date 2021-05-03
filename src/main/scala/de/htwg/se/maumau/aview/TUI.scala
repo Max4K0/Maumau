@@ -39,14 +39,20 @@ case class TUI(contoller: Controller) extends Observer {
     while (true) {
       for (player <- players) {
         print(table)
+
+        val  usableCards = if ((player.playerDeck.cards.contains(tableDeck.cards.head.symbol) ||
+            player.playerDeck.cards.contains(tableDeck.cards.head.color)) ||
+            player.playerDeck.cards.contains(Symbol.Jack)) true else false
         var validMove = false
+
         do {
-          val playerCardNr = readLine("choose a Card to throw").toInt
-          var validMove = if ((player.playerDeck.cards.lift(playerCardNr - 1).get.symbol == tableDeck.cards.head.symbol) ||
+          val playerCardNr = readLine("choose a valid Card to throw").toInt
+            validMove = if ((player.playerDeck.cards.lift(playerCardNr - 1).get.symbol == tableDeck.cards.head.symbol) ||
             (player.playerDeck.cards.lift(playerCardNr - 1).get.color == tableDeck.cards.head.color) ||
             player.playerDeck.cards.lift(playerCardNr - 1).get.symbol == Symbol.Jack) true else false
         }while (validMove == false)
 
+        if (player.playerDeck.cards.equals(List[Card]())) print(player.name, "Won") false
       }
     }
   }

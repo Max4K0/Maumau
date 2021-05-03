@@ -20,6 +20,7 @@ var playerCardNr = 1
 player.playerDeck.cards.lift(playerCardNr-1).get.color
 Color.Hearts
 
+
 print(deck1)
 deck1.throwDeck
 deck1
