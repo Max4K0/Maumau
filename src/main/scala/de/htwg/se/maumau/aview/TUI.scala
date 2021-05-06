@@ -1,71 +1,66 @@
 package de.htwg.se.maumau.aview
 import de.htwg.se.maumau.controller.Controller
-import de.htwg.se.maumau.model.{Card, Deck, Player, Table, Symbol, Color} //muss weg
+
 import de.htwg.se.maumau.util.Observer
 
 import scala.util.Random
 import scala.io.StdIn.readLine
 
 case class TUI(controller: Controller) extends Observer {
-
   controller.add(this)
-  val startDeck = Deck(List[Card]()).fillDeck.shuffleDeck(new Random(3))
 
-  def gamestart(): Unit = {
+  def welcome():Unit= {
     val playerAmount: Int = readLine(
-      """||==== Welcome to MauMau! ====|
-         ||   How many players want to play?  |
-         ||   Type a number between 2-4: """.stripMargin).toInt
-    if (!controller.testPlayeramount(playerAmount)) return
+      """|•♦♣♠♥•Welcome to MauMau!•♥♠♣♦•
+         |   Type a player number between 2-4: """.stripMargin).toInt
 
-
-
-    val player: List[Player] = List.tabulate(playerAmount) {
-      n => Player(readLine(s"Player ${n + 1}, type your name: "), Deck(List[Card]()))
-    }
-    start(player)
-  }
-  def start(players: List[Player]): Unit = {
-
-
-
-    val tableDeck = Deck(List[Card]()) //Ablegestapel
-    startDeck.throwCards(1, tableDeck)
-    while (true) {
-      for (player <- players) {
-
-
-        val  usableCards = if ((player.playerDeck.cards.contains(tableDeck.cards.head.symbol) ||
-            player.playerDeck.cards.contains(tableDeck.cards.head.color)) ||
-            player.playerDeck.cards.contains(Symbol.Jack)) true else false
-        var validMove = false
-        val playerCardNr = readLine("choose a valid Card to throw").toInt
-        do {
-
-            validMove = if ((player.playerDeck.cards.lift(playerCardNr - 1).get.symbol == tableDeck.cards.head.symbol) ||
-            (player.playerDeck.cards.lift(playerCardNr - 1).get.color == tableDeck.cards.head.color) ||
-            player.playerDeck.cards.lift(playerCardNr - 1).get.symbol == Symbol.Jack) true else false
-        }while (validMove == false)
-
-
-        player.playerDeck.throwOneCard(playerCardNr, tableDeck)
-
-        if (player.playerDeck.cards.equals(List[Card]())) print(player.name, "Won") false
+    val playrr:Unit = List.tabulate(playerAmount) {
+      n => controller.addPlayer(readLine(s"Player ${n + 1}, type your name: "), n)
       }
+
+
+  }
+
+
+  def processInputLine(input: String):Unit = {
+    input match {
+      case "help" =>
+        println("throw Card")
+        println("take Card")
+        println("q = quit Game")
+      case "throw Card" => println("wich Card?")
+        val cardNumber = readLine().toInt
+        controller.throwCard(cardNumber)
     }
   }
-  override def update: Unit = ???
+
+
+//  def gamestart(): Unit = {
+//
+//    if (!testPlayeramount(playerAmount)) return
+//
+//    def testPlayeramount(amount: Int): Boolean = {
+//      amount match {
+//        case 2 | 3 | 4 => true
+//        case _ => false
+//      }
+//    }
+//
+//    val player: List[Player] = List.tabulate(playerAmount) {
+//      n => Player(readLine(s"Player ${n + 1}, type your name: "), Deck(List[Card]()))
+//    }
+//
+//  }
+
+
+
+
+
+
+
+
+  override def update: Unit = println(controller)
 }
-  /*
-##############
-
-    H  L
-
-dfsdfdsaffsdfs
-------------------------
-player1: choose a card
-
-*/
 
 
 
