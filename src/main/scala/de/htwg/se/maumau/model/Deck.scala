@@ -69,5 +69,7 @@ case class Deck(cards : List[Card]) {
 
   def throwCards(dropNumber: Integer, deck1: Deck): (Deck, Deck) = (copy(deck1.cards.appendedAll(cards.takeRight(dropNumber))), copy(cards.drop(dropNumber)))
 
-  def throwOneCard(cardNumber: Integer, deck1: Deck): (Deck, Deck) = (copy(deck1.cards.appendedAll(cards.slice(cardNumber-1, cardNumber))), copy(cards.patch(cardNumber-1, Nil, 1)))
+  def throwOneCard(cardNumber: Integer, deck1: Deck): (Deck, Deck) =
+    (copy(deck1.cards.appendedAll(cards.slice(cardNumber-1, cardNumber))),
+      copy(cards.patch(cardNumber-1, Nil, 1)))
 }
