@@ -1,7 +1,6 @@
 package de.htwg.se.maumau.model
 import de.htwg.se.maumau.model.{Player, Deck, Card}
-case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Player("P2", Deck())), tableDecks: List[Deck] = List[Deck](Deck().fillDeck,Deck(List[Card](
-  Card(Color.Clubs, Symbol.ASS))))) {
+case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Player("P2", Deck())), tableDecks: List[Deck] = List[Deck](Deck().fillDeck,Deck(List[Card]()))) {
 
 //  override def toString: String = {
 //    println(tableDeck.cards.head)
@@ -13,10 +12,17 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
 
   def addPlayers(table: Table, name: String, playerNumber: Int): Table = {
     val emptyDeck = Deck()
-    val changedDeck = tableDecks(0).throwCards(5, emptyDeck)
-    val newPlayer = Player(name, changedDeck._2)
-    val newDeck = changedDeck._1
+    val changedDeck = tableDecks.head.throwCards(5, emptyDeck)
+    val newPlayer = Player(name, changedDeck._1)
+    val newDeck = changedDeck._2
     val newTable = table.copy(player = table.player.updated(playerNumber, newPlayer), tableDecks.updated(0, newDeck))
+    newTable
+  }
+
+  def throwFirstCard(table: Table): Table = {
+    val emptyDeck = Deck()
+    val changedDeck = tableDecks.head.throwOneCard(1, emptyDeck)
+    val newTable = table.copy(player = player,tableDecks.updated(1, changedDeck._1).updated(0, changedDeck._2))
     newTable
   }
 
@@ -30,10 +36,10 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
 
   override def toString: String = {
     val table = new StringBuilder(" tablecards: ")
-    table.append(tableDecks(1).cards.head.UTFSymbols)
+    table.append(tableDecks(1).cards.last.UTFSymbols)
 
     val hand = new StringBuilder(" playercards: ")
-    hand.append(player(0).playerDeck.cards.map(Card => Card.UTFSymbols).mkString(" "))
+    hand.append(player.head.playerDeck.cards.map(Card => Card.UTFSymbols).mkString(" "))
 
     val Statement = new StringBuilder()
     Statement.append(table + "\n\n")

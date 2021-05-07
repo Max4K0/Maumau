@@ -9,20 +9,7 @@ import scala.io.StdIn.readLine
 case class TUI(controller: Controller) extends Observer {
   controller.add(this)
 
-  def welcome():Unit= {
-    println("""|•♦♣♠♥•Welcome to MauMau!•♥♠♣♦•
-               |   Type a player number between 2-4: """.stripMargin)
-    controller.addPlayer("P1", 0)
-//    val playerAmount: Int = readLine(
-//      """|•♦♣♠♥•Welcome to MauMau!•♥♠♣♦•
-//         |   Type a player number between 2-4: """.stripMargin).toInt
-//
-//    val playrr:Unit = List.tabulate(playerAmount) {
-//      n => controller.addPlayer(readLine(s"Player ${n + 1}, type your name: "), n)
-//      }
 
-
-  }
 
 
   def processInputLine(input: String):Unit = {
@@ -36,8 +23,6 @@ case class TUI(controller: Controller) extends Observer {
         controller.throwCard(cardNumber)
     }
   }
-
-
 //  def gamestart(): Unit = {
 //
 //    if (!testPlayeramount(playerAmount)) return

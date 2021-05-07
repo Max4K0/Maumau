@@ -11,6 +11,11 @@ class Controller(var table: Table) extends Observable {
     notifyObservers()
   }
 
+  def throwFirstCard(): Unit = {
+    table = table.throwFirstCard(table)
+    notifyObservers()
+  }
+
   def addPlayer(name: String, playerNum: Int): Unit = {
     table = table.addPlayers(table, name, playerNum)
   }
