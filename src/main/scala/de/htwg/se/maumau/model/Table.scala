@@ -1,6 +1,7 @@
 package de.htwg.se.maumau.model
 import de.htwg.se.maumau.model.{Player, Deck, Card}
-case class Table(player: List[Player] = List[Player](), tableDecks: List[Deck] = List[Deck](Deck().fillDeck,Deck())) {
+case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Player("P2", Deck())), tableDecks: List[Deck] = List[Deck](Deck().fillDeck,Deck(List[Card](
+  Card(Color.Clubs, Symbol.ASS))))) {
 
 //  override def toString: String = {
 //    println(tableDeck.cards.head)
@@ -11,19 +12,34 @@ case class Table(player: List[Player] = List[Player](), tableDecks: List[Deck] =
 
 
   def addPlayers(table: Table, name: String, playerNumber: Int): Table = {
-    val newPlayer = Player(name, Deck())
-    val newTable = table.copy(player = table.player.updated(playerNumber, newPlayer))
+    val emptyDeck = Deck()
+    val changedDeck = tableDecks(0).throwCards(5, emptyDeck)
+    val newPlayer = Player(name, changedDeck._2)
+    val newDeck = changedDeck._1
+    val newTable = table.copy(player = table.player.updated(playerNumber, newPlayer), tableDecks.updated(0, newDeck))
     newTable
   }
 
   def throwCard(table: Table, playerNumber: Int, cardNumber: Int): Table = {
     val currentPlayer = table.player(playerNumber)
-
-    val newPlayer = Player(currentPlayer.name,currentPlayer.playerDeck.throwOneCard(cardNumber,table.tableDecks(0))._1)
-    val newTable = table.copy(player.updated(0, newPlayer))
+    val changedDeck = currentPlayer.playerDeck.throwOneCard(cardNumber, tableDecks(1))
+    val newPlayer = Player(currentPlayer.name,changedDeck._2)
+    val newTable = table.copy(player.updated(0, newPlayer), tableDecks.updated(1,changedDeck._1))
     newTable
   }
 
+  override def toString: String = {
+    val table = new StringBuilder(" tablecards: ")
+    table.append(tableDecks(1).cards.head.UTFSymbols)
+
+    val hand = new StringBuilder(" playercards: ")
+    hand.append(player(0).playerDeck.cards.map(Card => Card.UTFSymbols).mkString(" "))
+
+    val Statement = new StringBuilder()
+    Statement.append(table + "\n\n")
+    Statement.append(hand)
+    Statement.toString()
+  }
 //  def gamestart(): Unit = {
 //
 //    if (!testPlayeramount(playerAmount)) return

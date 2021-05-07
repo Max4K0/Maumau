@@ -10,13 +10,16 @@ case class TUI(controller: Controller) extends Observer {
   controller.add(this)
 
   def welcome():Unit= {
-    val playerAmount: Int = readLine(
-      """|•♦♣♠♥•Welcome to MauMau!•♥♠♣♦•
-         |   Type a player number between 2-4: """.stripMargin).toInt
-
-    val playrr:Unit = List.tabulate(playerAmount) {
-      n => controller.addPlayer(readLine(s"Player ${n + 1}, type your name: "), n)
-      }
+    println("""|•♦♣♠♥•Welcome to MauMau!•♥♠♣♦•
+               |   Type a player number between 2-4: """.stripMargin)
+    controller.addPlayer("P1", 0)
+//    val playerAmount: Int = readLine(
+//      """|•♦♣♠♥•Welcome to MauMau!•♥♠♣♦•
+//         |   Type a player number between 2-4: """.stripMargin).toInt
+//
+//    val playrr:Unit = List.tabulate(playerAmount) {
+//      n => controller.addPlayer(readLine(s"Player ${n + 1}, type your name: "), n)
+//      }
 
 
   }
@@ -25,10 +28,10 @@ case class TUI(controller: Controller) extends Observer {
   def processInputLine(input: String):Unit = {
     input match {
       case "help" =>
-        println("throw Card")
-        println("take Card")
+        println("throw card")
+        println("take card")
         println("q = quit Game")
-      case "throw Card" => println("wich Card?")
+      case "throw card" => println("wich card?")
         val cardNumber = readLine().toInt
         controller.throwCard(cardNumber)
     }
