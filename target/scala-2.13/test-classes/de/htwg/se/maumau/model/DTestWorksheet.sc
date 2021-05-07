@@ -1,32 +1,45 @@
 //package test
-import de.htwg.se.maumau.model.{Card, Color, Deck, Symbol}
+import de.htwg.se.maumau.model.{Card, Color, Deck, Player, Symbol}
 import de.htwg.se.maumau.model
 import org.scalatest.wordspec._
 import org.scalatest.matchers.should.Matchers._
 import org.scalatest.matchers.should._
 
-import scala.collection.mutable.ListBuffer
-import scala.collection.mutable.ListBuffer._
 import scala.util.Random
 
+val cardd = Card(Color.Clubs, Symbol.Ten)
+val emptyLB = List[Card]()
 
-val emptyLB = ListBuffer[Card]()
-
-val deck1 = model.Deck(ListBuffer[Card]())
+val deck1 = Deck(List[Card]()).fillDeck.shuffleDeck(new Random(3))
 print(deck1)
-deck1.fillDeck
+val playerDeck = Deck(List[Card]()).fillDeck
+
+
+val player = Player("joe", playerDeck)
+var playerCardNr = 1
+player.playerDeck.cards.lift(playerCardNr-1).get.color
+Color.Hearts
+
+
 print(deck1)
 deck1.throwDeck
 deck1
-deck1.fillDeck
-deck1.shuffleDeck
-val deck3 = Deck()
-deck1.throwCard(deck3)
-print(deck3)
-deck1.throwCard(deck3)
-print(deck3)
-print(deck1)
-//deck1.getCard
+val deck2 = deck1.fillDeck
+print(deck2)
+val deck4 = Deck(List[Card]())
+val dropNumber = 2
+val deck6 = deck2.shuffleDeck(new Random(2))
+val deck3 = deck2.throwCards(dropNumber, deck4)._2
+val deck5 = deck2.throwCards(dropNumber, deck4)
+val deck7 = deck2.throwOneCard(3, deck4)._1
+
+//val deck3 = deck2.shuffleDeck
+//deck3
+
+
+
+
+
 
 
 
@@ -36,7 +49,7 @@ print(deck1)
 
 
 
-//deck2.copy(cards = ListBuffer[Card](
+//deck2.copy(cards = List[Card](
 //  Card(Color.Clubs, Symbol.ASS),
 //  Card(Color.Clubs, Symbol.Two),
 //  Card(Color.Clubs, Symbol.Three),
