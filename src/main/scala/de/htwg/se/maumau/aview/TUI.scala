@@ -1,15 +1,11 @@
 package de.htwg.se.maumau.aview
+
 import de.htwg.se.maumau.controller.Controller
-
 import de.htwg.se.maumau.util.Observer
-
-import scala.util.Random
 import scala.io.StdIn.readLine
 
 case class TUI(controller: Controller) extends Observer {
   controller.add(this)
-
-
 
 
   def processInputLine(input: String):String = {
@@ -17,9 +13,7 @@ case class TUI(controller: Controller) extends Observer {
       case "help" => println("throw card \n take card \n q = quit Game \n")
         "valid input"
       case "throw card" => println("wich card?")
-        "valid input"
-      case "1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"10"|"11"|"12" => println("throwed " + input + "card")
-        val cardNumber = input.toInt
+        val cardNumber = readLine().toInt
         controller.throwCard(cardNumber)
         "valid input"
       case "q" =>println("gg")
@@ -27,6 +21,13 @@ case class TUI(controller: Controller) extends Observer {
       case _ => println("invalid input")
         println("try again")
         "invalid input"
+
+      /*case "throw card" => println("wich card?")
+      "valid input"*/
+      /*case "1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"10"|"11"|"12" => println("throwed " + input + "card")
+        val cardNumber = input.toInt
+        controller.throwCard(cardNumber)
+        "valid input"*/
     }
   }
 //  def gamestart(): Unit = {
