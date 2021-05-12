@@ -10,7 +10,7 @@ class CardSpec extends AnyWordSpec with Matchers {
 
   "Card" when {
     "new" should {
-      val fullDeck = Deck()
+      val fullDeck = Deck().fillDeck
       val card = model.Card(Color.Clubs, Symbol.ASS)
       val card2 = model.Card(Color.Diamonds, Symbol.King)
       "Symbol of card should" in {
@@ -44,7 +44,7 @@ class CardSpec extends AnyWordSpec with Matchers {
         fullDeck.cards.toString() should be(fullDeck.cards.toString())
       }
       "UTF8 of all cards should look like" in {
-        fullDeck.cards.map(Card => Card.UTFSymbols).mkString(" ") should be(fullDeck.cards.map(Card => Card.UTFSymbols).mkString(" "))
+        fullDeck.cards.map(Card => Card.UTFSymbols) should be(fullDeck.cards.map(Card => Card.UTFSymbols))
       }
 //      "UTF 8 View of card2 should look like" in {
 //        card2.UTFSymbols should be("\u001B[30m\uD83C\uDCCE")
