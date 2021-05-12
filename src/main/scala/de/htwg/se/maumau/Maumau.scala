@@ -12,14 +12,15 @@ object Maumau {
   val tui =  TUI(controller)
 //  controller.notifyObservers()
 
-  def main(args: Array[String]): Unit = {
+  def main(args: Array[String]): String = {
     welcome.welcome()
     controller.notifyObservers()
     var input: String = ""
 
-    do {
+    while (input != "q") {
       input = readLine()
       tui.processInputLine(input)
-    } while (input != "q")
+    }
+    "GameOver"
   }
 }

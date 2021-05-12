@@ -12,15 +12,21 @@ case class TUI(controller: Controller) extends Observer {
 
 
 
-  def processInputLine(input: String):Unit = {
-    input match {
-      case "help" =>
-        println("throw card")
-        println("take card")
-        println("q = quit Game")
+  def processInputLine(input: String):String = {
+    input.toString match {
+      case "help" => println("throw card \n take card \n q = quit Game \n")
+        "valid input"
       case "throw card" => println("wich card?")
-        val cardNumber = readLine().toInt
+        "valid input"
+      case "1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"10"|"11"|"12" => println("throwed " + input + "card")
+        val cardNumber = input.toInt
         controller.throwCard(cardNumber)
+        "valid input"
+      case "q" =>println("gg")
+        "valid exit"
+      case _ => println("invalid input")
+        println("try again")
+        "invalid input"
     }
   }
 //  def gamestart(): Unit = {
@@ -39,13 +45,6 @@ case class TUI(controller: Controller) extends Observer {
 //    }
 //
 //  }
-
-
-
-
-
-
-
 
   override def update: Unit = println(controller)
 }

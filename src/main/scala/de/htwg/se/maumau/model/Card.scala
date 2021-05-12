@@ -10,7 +10,6 @@ case class Card(color: Color, symbol: Symbols) {
    */
   val red = "\u001B[31m"
   val black = "\u001B[30m"
-
   val HA = red + "\uD83C\uDCB1"
   val H2 = red + "\uD83C\uDCB2"
   val H3 = red + "\uD83C\uDCB3"
@@ -87,9 +86,6 @@ case class Card(color: Color, symbol: Symbols) {
 
   def UTFSymbols: String = {
     symbol match {
-
-      //  override def toString:String = {
-      //    symbol match {
       case Symbol.ASS if (color == Hearts) => HA
       case Symbol.Two if (color == Hearts) => H2
       case Symbol.Three if (color == Hearts) => H3
