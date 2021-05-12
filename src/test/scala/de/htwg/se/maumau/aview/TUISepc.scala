@@ -23,7 +23,7 @@ class TUISepc extends AnyWordSpec with Matchers {
         tui.processInputLine(input = "fdf") should be("invalid input")
       }
       "tui help input should be" in {
-        tui.processInputLine(input = "help") should be("val id input")
+        tui.processInputLine(input = "help") should be("valid input")
       }
       /*"tui throw card input should be" in {
         tui.processInputLine(input = "throw card") should be("valid input")
