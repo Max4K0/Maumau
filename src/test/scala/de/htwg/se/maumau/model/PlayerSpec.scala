@@ -1,20 +1,19 @@
 package de.htwg.se.maumau.model
 
-import de.htwg.se.maumau.model._
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
-import  org.scalatest.matchers.should.Matchers._
+
 
 class PlayerSpec extends AnyWordSpec with Matchers {
 
-  "scala.Player" when {
+  "Player" when {
     "new" should {
-      val player = Player("scala.Player Name")
+      val player = Player("PlayerName")
       "name should" in {
-        player.name should be("scala.Player Name")
+        player.name should be("PlayerName")
       }
       "String representation" in {
-        player.toString should be("scala.Player Name")
+        player.toString should be("PlayerName")
       }
     }
   }
