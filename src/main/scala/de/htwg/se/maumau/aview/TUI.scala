@@ -20,8 +20,7 @@ case class TUI(controller: Controller) extends Observer {
         } else {
           State.handle(invalidThrowEvent()).toString
         }
-
-      case "take card" => println("")
+      case "take card" =>
         if (controller.checkDeck()) {
           State.handle(invalidPullEvent()).toString
         }
@@ -29,17 +28,10 @@ case class TUI(controller: Controller) extends Observer {
           controller.takeCard()
           State.handle(nextPlayerEvent()).toString
         }
-
-      case "q" =>println("gg")
-        State.handle(winEvent()).toString
-      case _ => println("invalid input")
-        println("try again")
-        State.handle(unknownCommandEvent()).toString
-
+      case "q" => State.handle(winEvent()).toString
+      case _ => State.handle(unknownCommandEvent()).toString
     }
   }
-
-
   override def update: Unit = println(controller)
 }
 

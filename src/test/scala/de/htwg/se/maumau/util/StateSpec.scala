@@ -3,7 +3,7 @@ package de.htwg.se.maumau.util
 import de.htwg.se.maumau.aview.{TUI, Welcome}
 import de.htwg.se.maumau.controller.Controller
 import de.htwg.se.maumau.model.{Card, Deck, Player, Table}
-import de.htwg.se.maumau.util.State.nextPlayer
+import de.htwg.se.maumau.util.State
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import de.htwg.se.maumau.util.{Observer, State, invalidThrowEvent, nextPlayerEvent, winEvent}
@@ -31,7 +31,7 @@ class StateSpec extends AnyWordSpec with Matchers{
       }
       "state after wrong Input should be" in {
         tui.processInputLine("wdadwa")
-        State.unknownCommand should be(State.unknownCommand )
+        State should be(State)
       }
      "state after invalid Throw should be" in {
        val in = new ByteArrayInputStream("1".getBytes)
