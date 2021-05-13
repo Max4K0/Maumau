@@ -7,7 +7,6 @@ import scala.io.StdIn.readLine
 case class TUI(controller: Controller) extends Observer {
   controller.add(this)
 
-
   def processInputLine(input: String):String = {
     input.toString match {
       case "help" => println("throw card \n take card \n q = quit Game \n")
