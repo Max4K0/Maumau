@@ -10,10 +10,20 @@ class Controller(var table: Table) extends Observable {
     table = table.throwCard(table, 0, cardNumber)
     notifyObservers()
   }
+  def takeCard(): Unit = {
+    table = table.takeCard(table, 0)
+    notifyObservers()
+  }
 
   def throwFirstCard(): Unit = {
     table = table.throwFirstCard(table)
     notifyObservers()
+  }
+  def checkCard(cardNumber: Int): Boolean = {
+    table.checkCard(table, 0, cardNumber)
+  }
+  def checkDeck(): Boolean = {
+    table.checkDeck(table, 0)
   }
 
   def addPlayer(name: String, playerNum: Int): Unit = {

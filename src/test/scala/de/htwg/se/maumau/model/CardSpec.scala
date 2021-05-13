@@ -22,9 +22,9 @@ class CardSpec extends AnyWordSpec with Matchers {
       "String of card should look like" in {
         card.toString should be("C A")
       }
-      "UTF 8 View of card should look like" in {
-        card.UTFSymbols should be("\u001B[31m\uD83C\uDCC1")
-      }
+      /*"UTF 8 View of card should look like" in {
+        card.UTFSymbols should be("\u001B[30m\uD83C\uDCC1")
+      }*/
 
 //      "UTF 8 View of card should look like" in {
 //        card.toString should be("\u001B[31m\uD83C\uDCC1")
@@ -50,9 +50,9 @@ class CardSpec extends AnyWordSpec with Matchers {
 //        card2.UTFSymbols should be("\u001B[30m\uD83C\uDCCE")
 //      }
 
-      "UTF 8 View of card2 should look like" in {
+      /*"UTF 8 View of card2 should look like" in {
         card2.UTFSymbols should be("\u001B[30m\uD83C\uDCCE")
-      }
+      }*/
 
 
     }

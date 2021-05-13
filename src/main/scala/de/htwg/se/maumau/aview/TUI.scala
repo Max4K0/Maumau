@@ -1,7 +1,7 @@
 package de.htwg.se.maumau.aview
 
 import de.htwg.se.maumau.controller.Controller
-import de.htwg.se.maumau.util.Observer
+import de.htwg.se.maumau.util.{Observer, State, invalidPullEvent, invalidThrowEvent, nextPlayerEvent, unknownCommandEvent, winEvent}
 import scala.io.StdIn.readLine
 
 case class TUI(controller: Controller) extends Observer {
@@ -14,38 +14,31 @@ case class TUI(controller: Controller) extends Observer {
         "valid input"
       case "throw card" => println("wich card?")
         val cardNumber = readLine().toInt
-        controller.throwCard(cardNumber)
-        "valid input"
+        if (controller.checkCard(cardNumber)) {
+          controller.throwCard(cardNumber)
+          State.handle(nextPlayerEvent()).toString
+        } else {
+          State.handle(invalidThrowEvent()).toString
+        }
+
+      case "take card" => println("")
+        if (controller.checkDeck()) {
+          State.handle(invalidPullEvent()).toString
+        }
+        else {
+          controller.takeCard()
+          State.handle(nextPlayerEvent()).toString
+        }
+
       case "q" =>println("gg")
-        "valid exit"
+        State.handle(winEvent()).toString
       case _ => println("invalid input")
         println("try again")
-        "invalid input"
+        State.handle(unknownCommandEvent()).toString
 
-      /*case "throw card" => println("wich card?")
-      "valid input"*/
-      /*case "1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"10"|"11"|"12" => println("throwed " + input + "card")
-        val cardNumber = input.toInt
-        controller.throwCard(cardNumber)
-        "valid input"*/
     }
   }
-//  def gamestart(): Unit = {
-//
-//    if (!testPlayeramount(playerAmount)) return
-//
-//    def testPlayeramount(amount: Int): Boolean = {
-//      amount match {
-//        case 2 | 3 | 4 => true
-//        case _ => false
-//      }
-//    }
-//
-//    val player: List[Player] = List.tabulate(playerAmount) {
-//      n => Player(readLine(s"Player ${n + 1}, type your name: "), Deck(List[Card]()))
-//    }
-//
-//  }
+
 
   override def update: Unit = println(controller)
 }

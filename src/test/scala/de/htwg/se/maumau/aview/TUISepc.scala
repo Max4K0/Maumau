@@ -4,6 +4,7 @@ import de.htwg.se.maumau.Maumau
 import de.htwg.se.maumau.Maumau.{controller, welcome}
 import de.htwg.se.maumau.model.Table
 import de.htwg.se.maumau.controller.Controller
+import de.htwg.se.maumau.util.winEvent
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
@@ -20,7 +21,7 @@ class TUISepc extends AnyWordSpec with Matchers {
       welcome.welcome()
 
       "tui invalid input should be" in {
-        tui.processInputLine(input = "fdf") should be("invalid input")
+        tui.processInputLine(input = "fdf") should be("()")
       }
       "tui help input should be" in {
         tui.processInputLine(input = "help") should be("valid input")
@@ -36,7 +37,7 @@ class TUISepc extends AnyWordSpec with Matchers {
         Console.withIn(in) { tui.processInputLine("throw card") }
       }
       "tui valid game exit should be" in {
-        tui.processInputLine(input = "q") should be("valid exit")
+        tui.processInputLine(input = "q") should be("()")
       }
     }
   }
