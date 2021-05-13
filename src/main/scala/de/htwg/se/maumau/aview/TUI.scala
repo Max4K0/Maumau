@@ -16,20 +16,25 @@ case class TUI(controller: Controller) extends Observer {
         val cardNumber = readLine().toInt
         if (controller.checkCard(cardNumber)) {
           controller.throwCard(cardNumber)
-          State.handle(nextPlayerEvent()).toString
+          State.handle(nextPlayerEvent())
+          println("commands: throw card, take card, q for Quit").toString
         } else {
-          State.handle(invalidThrowEvent()).toString
+          State.handle(invalidThrowEvent())
+          println("you cant throw this card").toString
         }
       case "take card" =>
         if (controller.checkDeck()) {
-          State.handle(invalidPullEvent()).toString
+          State.handle(invalidPullEvent())
+          println("you cant take a card").toString
         }
         else {
           controller.takeCard()
-          State.handle(nextPlayerEvent()).toString
+          State.handle(nextPlayerEvent())
+          println("commands: throw card, take card, q for Quit").toString
         }
       case "q" => State.handle(winEvent()).toString
-      case _ => State.handle(unknownCommandEvent()).toString
+      case _ => State.handle(unknownCommandEvent())
+        println("invalid command\ncommands: throw card, take card, q for Quit").toString
     }
   }
   override def update: Unit = println(controller)
