@@ -6,7 +6,6 @@ import scala.io.StdIn.readLine
 
 case class TUI(controller: Controller) extends Observer {
   controller.add(this)
-
   def processInputLine(input: String):String = {
     input.toString match {
       case "help" => println("throw card \n take card \n q = quit Game \n")
@@ -15,17 +14,18 @@ case class TUI(controller: Controller) extends Observer {
         val cardNumber = readLine().toInt
         if (controller.checkCard(cardNumber)) {
           controller.throwCard(cardNumber)
-          State.handle(nextPlayerEvent())
-          println("commands: throw card, take card, q for Quit")
+          //println("\n\n")
+          //println(controller)
+          print("commands: throw card, take card, q for Quit")
           "valid throw"
         } else {
-          State.handle(invalidThrowEvent())
+          //State.handle(invalidThrowEvent())
           println("you cant throw this card")
           "invalid throw"
         }
       case "take card" =>
         if (controller.checkDeck()) {
-          State.handle(invalidPullEvent())
+          //State.handle(invalidPullEvent())
           println("you cant take a card").toString
           "invalid pull"
         }
@@ -33,12 +33,14 @@ case class TUI(controller: Controller) extends Observer {
           controller.takeCard()
           State.handle(nextPlayerEvent())
           println("commands: throw card, take card, q for Quit").toString
+          println("")
+          println(controller)
           "valid pull"
         }
       case "q" =>
         State.handle(winEvent())
         "valid input"
-      case _ => State.handle(unknownCommandEvent())
+      case _ => //State.handle(unknownCommandEvent())
         println("invalid command\ncommands: throw card, take card, q for Quit")
         "invalid input"
     }

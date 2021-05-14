@@ -1,5 +1,6 @@
 package de.htwg.se.maumau.model
 import de.htwg.se.maumau.model.{Card, Deck, Player}
+import de.htwg.se.maumau.util.{State, nextPlayerEvent, winEvent}
 
 import scala.util.Random
 case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Player("P2", Deck())), tableDecks: List[Deck] = List[Deck](Deck().fillDeck.shuffleDeck(new Random(1)),Deck(List[Card]()))) extends AbstractTable(player: List[Player] , tableDecks: List[Deck]){
@@ -39,7 +40,12 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
     val currentPlayer = table.player(playerNumber)
     val changedDeck = currentPlayer.playerDeck.throwOneCard(cardNumber, tableDecks(1))
     val newPlayer = Player(currentPlayer.name,changedDeck._2)
-    val newTable = table.copy(player.updated(0, newPlayer), tableDecks.updated(1,changedDeck._1))
+    val newTable = table.copy(player.updated(playerNumber, newPlayer), tableDecks.updated(1,changedDeck._1))
+    val result = if (newTable.player(playerNumber).playerDeck.equals(Deck())) {
+      State.handle(winEvent())
+      println(State.state)
+      System.exit(1)
+    } else State.handle(nextPlayerEvent())
     newTable
   }
 
@@ -47,17 +53,18 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
     val currentPlayer = table.player(playerNumber)
     val changedDeck = tableDecks.head.throwCards(1, currentPlayer.playerDeck)
     val newPlayer = Player(currentPlayer.name,changedDeck._1)
-    val newTable = table.copy(player.updated(0, newPlayer), tableDecks.updated(0,changedDeck._2))
+    val newTable = table.copy(player.updated(playerNumber, newPlayer), tableDecks.updated(0,changedDeck._2))
     newTable
   }
 
 
   override def toString(): String = {
+    val playerNumber = if (State.state == "Player1:") 1 else 0
     val table = new StringBuilder("\u001B[48;5;15m" + " tablecards: ")
     table.append(tableDecks(1).cards.last.UTFSymbols)
 
-    val hand = new StringBuilder(" playercards: ")
-    hand.append(player.head.playerDeck.cards.map(Card => Card.UTFSymbols).mkString(" "))
+    val hand = new StringBuilder(" Player" + (playerNumber+1) +": ")
+    hand.append(player(playerNumber).playerDeck.cards.map(Card => Card.UTFSymbols).mkString(" "))
 
     val Statement = new StringBuilder()
     Statement.append(table + "\n\n")

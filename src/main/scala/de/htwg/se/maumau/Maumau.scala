@@ -14,7 +14,7 @@ object Maumau {
 
   def main(args: Array[String]): Unit = {
     welcome.welcome()
-    controller.notifyObservers()
+    //controller.notifyObservers()
     var input: String = ""
 
     while (input != "q") {
