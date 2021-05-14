@@ -21,6 +21,7 @@ class DeckSpec extends AnyWordSpec with Matchers {
         testDeck.fillDeck.cards should be(testDeck.fullDeck)
       }
       "testDeck after shuffle" in {
+        fullDeck.shuffleDeck(new Random(2)) should not be(fullDeck)
         fullDeck.shuffleDeck(new Random(2)) should be(rendDeck)
       }
       "testDeck after throwDeck" in {

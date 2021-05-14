@@ -30,7 +30,7 @@ class Controller(var table: Table) extends Observable {
 
   def addPlayer(name: String, playerNum: Int): Unit = {
     table = table.addPlayers(table, name, playerNum)
-    //table = (new TabelStrictStrategy).addPlayers(table, name, playerNum)
+    table = (new TabelStrictStrategy).addPlayers(table, name, playerNum)
   }
 
   override def toString(): String = {

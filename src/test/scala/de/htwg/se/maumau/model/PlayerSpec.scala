@@ -12,6 +12,9 @@ class PlayerSpec extends AnyWordSpec with Matchers {
       "name should" in {
         player.name should be("PlayerName")
       }
+      "player deck" in {
+        player.playerDeck should be(Deck())
+      }
       "String representation" in {
         player.toString should be("PlayerName")
       }
