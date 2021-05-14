@@ -16,24 +16,31 @@ case class TUI(controller: Controller) extends Observer {
         if (controller.checkCard(cardNumber)) {
           controller.throwCard(cardNumber)
           State.handle(nextPlayerEvent())
-          println("commands: throw card, take card, q for Quit").toString
+          println("commands: throw card, take card, q for Quit")
+          "valid throw"
         } else {
           State.handle(invalidThrowEvent())
-          println("you cant throw this card").toString
+          println("you cant throw this card")
+          "invalid throw"
         }
       case "take card" =>
         if (controller.checkDeck()) {
           State.handle(invalidPullEvent())
           println("you cant take a card").toString
+          "invalid pull"
         }
         else {
           controller.takeCard()
           State.handle(nextPlayerEvent())
           println("commands: throw card, take card, q for Quit").toString
+          "valid pull"
         }
-      case "q" => State.handle(winEvent()).toString
+      case "q" =>
+        State.handle(winEvent())
+        "valid input"
       case _ => State.handle(unknownCommandEvent())
-        println("invalid command\ncommands: throw card, take card, q for Quit").toString
+        println("invalid command\ncommands: throw card, take card, q for Quit")
+        "invalid input"
     }
   }
   override def update: Unit = println(controller)

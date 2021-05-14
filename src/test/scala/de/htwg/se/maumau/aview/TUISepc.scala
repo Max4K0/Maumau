@@ -21,23 +21,17 @@ class TUISepc extends AnyWordSpec with Matchers {
       welcome.welcome()
 
       "tui invalid input should be" in {
-        tui.processInputLine(input = "fdf") should be("()")
+        tui.processInputLine(input = "fdf") should be("invalid input")
       }
       "tui help input should be" in {
         tui.processInputLine(input = "help") should be("valid input")
       }
-      /*"tui throw card input should be" in {
-        tui.processInputLine(input = "throw card") should be("valid input")
-      }
-      "tui card input should be" in {
-        tui.processInputLine(input = "3") should be("valid input")
-      }*/
       "tui throw card input should be" in {
         val in = new ByteArrayInputStream("4".getBytes)
-        Console.withIn(in) { tui.processInputLine("throw card") }
+        Console.withIn(in) { tui.processInputLine("throw card") should be("valid throw")}
       }
       "tui valid game exit should be" in {
-        tui.processInputLine(input = "q") should be("()")
+        tui.processInputLine(input = "q") should be("valid input")
       }
     }
   }

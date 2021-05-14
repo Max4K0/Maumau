@@ -10,7 +10,7 @@ object Maumau {
   val controller = new Controller(table)
   val welcome = new Welcome(controller)
   val tui =  TUI(controller)
-//  controller.notifyObservers()
+  //controller.notifyObservers()
 
   def main(args: Array[String]): Unit = {
     welcome.welcome()

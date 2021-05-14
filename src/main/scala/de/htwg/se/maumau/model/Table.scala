@@ -52,7 +52,7 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
   }
 
 
-  override def toString: String = {
+  override def toString(): String = {
     val table = new StringBuilder("\u001B[48;5;15m" + " tablecards: ")
     table.append(tableDecks(1).cards.last.UTFSymbols)
 
