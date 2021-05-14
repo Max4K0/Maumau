@@ -43,7 +43,10 @@ case class TUI(controller: Controller) extends Observer {
         "invalid input"
     }
   }
-  override def update: Unit = println(controller)
+  override def update: Boolean = {
+    println(controller)
+    true
+  }
 }
 
 
