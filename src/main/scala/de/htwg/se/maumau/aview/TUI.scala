@@ -10,6 +10,8 @@ case class TUI(controller: Controller) extends Observer {
     input.toString match {
       case "help" => println("throw card \n take card \n q = quit Game \n")
         "valid input"
+
+      //case "z" =>
       case "throw card" => println("wich card?")
         val cardNumber = readLine().toInt
         if (controller.checkCard(cardNumber)) {

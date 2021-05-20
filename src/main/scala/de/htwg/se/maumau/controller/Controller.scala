@@ -2,9 +2,11 @@ package de.htwg.se.maumau.controller
 
 
 import de.htwg.se.maumau.model.{Deck, Player, TabelStrictStrategy, Table}
-import de.htwg.se.maumau.util.{Observable, State}
+import de.htwg.se.maumau.util.{Observable, State, UndoManager}
 
 class Controller(var table: Table) extends Observable {
+
+  private val undoManager = new UndoManager
 
   def throwCard(cardNumber: Int): Unit = {
     val playerNumber = if (State.state == "Player1:") 1 else 0
@@ -41,4 +43,12 @@ class Controller(var table: Table) extends Observable {
     table.toString()
   }
 
+  def undo: Unit = {
+    undoManager.undoStep
+    notifyObservers()
+  }
+  def redo: Unit = {
+    undoManager.redoStep
+    notifyObservers()
+  }
 }
