@@ -1,7 +1,7 @@
 package de.htwg.se.maumau.aview
 
 import de.htwg.se.maumau.controller.Controller
-import de.htwg.se.maumau.util.{Observer, State, invalidPullEvent, invalidThrowEvent, nextPlayerEvent, unknownCommandEvent, winEvent}
+import de.htwg.se.maumau.util.{Observer, State,  nextPlayerEvent,  winEvent}
 import scala.io.StdIn.readLine
 
 case class TUI(controller: Controller) extends Observer {
@@ -14,11 +14,23 @@ case class TUI(controller: Controller) extends Observer {
       case "z" =>println("")
         if (State.state.equals("")) {
           println("you cant undo the start")
+          "invalid undo"
         } else {
           println("|-----Undooooooo!-----|")
           controller.undo
+          "valid undo"
         }
-        ""
+
+      case "r" =>println("")
+        if (State.state.equals("")) {
+          println("you cant redo the start")
+          "invalid redo"
+        } else {
+          println("|-----reedoo!-----|")
+          controller.redo
+          "valid redo"
+        }
+
       case "throw card" => println("wich card?")
         val cardNumber = readLine().toInt
         if (controller.checkCard(cardNumber)) {

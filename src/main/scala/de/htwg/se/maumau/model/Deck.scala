@@ -63,7 +63,6 @@ case class Deck(cards : List[Card] = List[Card]()) {
   def throwDeck: Deck = copy(cards = cards.drop(cards.size))
 
   def fillDeck: Deck = copy(cards = cards.appendedAll(fullDeck))
-
 //  def takeOneCard(cardNumber: Integer = 1, deck1: Deck): (Deck, Deck) = (copy(deck1.cards.appendedAll(cards.slice(cardNumber-1, cardNumber))), copy(cards.patch(cardNumber-1, Nil, 1)))
   def shuffleDeck(random: Random): Deck = copy(cards = random.shuffle(cards))
 

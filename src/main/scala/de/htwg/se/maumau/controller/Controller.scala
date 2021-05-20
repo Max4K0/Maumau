@@ -10,6 +10,7 @@ class Controller(var table: Table) extends Observable {
   private val undoManager = new UndoManager
   var tables = Stack[Table]()
   var states = Stack[String]("")
+ //var commands = Stack[Comma]()
 
   def throwCard(cardNumber: Int): Unit = {
     tables.push(table)
@@ -17,12 +18,15 @@ class Controller(var table: Table) extends Observable {
     val playerNumber = if (State.state == "Player1:") 1 else 0
     //table = table.throwCard(table, playerNumber, cardNumber)
     undoManager.doStep(new ThrowCommand(playerNumber, cardNumber, this))
-      notifyObservers()
+    notifyObservers()
   }
   def takeCard(): Unit = {
+    tables.push(table)
+    states.push(State.state)
     val playerNumber = if (State.state == "Player1:") 1 else 0
     //table = table.takeCard(table, playerNumber)
     undoManager.doStep(new PullCommand(playerNumber, this))
+    //commands.push(playerNumber, this)
     notifyObservers()
   }
 
@@ -53,6 +57,11 @@ class Controller(var table: Table) extends Observable {
     // table = (new TabelStrictStrategy).addPlayers(table, name, playerNum)
   }
 
+  def redoStep(): Unit = {
+    //commands.pop()
+    // table = (new TabelStrictStrategy).addPlayers(table, name, playerNum)
+    ""
+  }
   override def toString(): String = {
     table.toString()
   }
