@@ -11,7 +11,14 @@ case class TUI(controller: Controller) extends Observer {
       case "help" => println("throw card \n take card \n q = quit Game \n")
         "valid input"
 
-      //case "z" =>
+      case "z" =>println("")
+        if (State.state.equals("")) {
+          println("you cant undo the start")
+        } else {
+          println("|-----Undooooooo!-----|")
+          controller.undo
+        }
+        ""
       case "throw card" => println("wich card?")
         val cardNumber = readLine().toInt
         if (controller.checkCard(cardNumber)) {
