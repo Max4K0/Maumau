@@ -16,6 +16,7 @@ class StateSpec extends AnyWordSpec with Matchers{
   "State" when {
     "Game starts" should {
       "state after start should be" in {
+        State.state= ""
         State.state should be("")
       }
 //      "state after invalid throw should be" in {
