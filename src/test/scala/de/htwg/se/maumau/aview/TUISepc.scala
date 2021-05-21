@@ -32,7 +32,9 @@ class TUISepc extends AnyWordSpec with Matchers {
      "tui valid throw card input should be" in {
        val in = new ByteArrayInputStream("3".getBytes)
        Console.withIn(in) { tui.processInputLine("throw card") should be("valid throw")
+         State.state should be("Player1:")
          tui.processInputLine("r") should be("valid redo")
+         State.state should be("Player1:")
          tui.processInputLine("z") should be("valid undo")
        }
      }
