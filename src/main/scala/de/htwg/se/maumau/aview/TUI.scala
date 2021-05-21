@@ -1,7 +1,8 @@
 package de.htwg.se.maumau.aview
 
 import de.htwg.se.maumau.controller.Controller
-import de.htwg.se.maumau.util.{Observer, State,  nextPlayerEvent,  winEvent}
+import de.htwg.se.maumau.util.{Observer, State, nextPlayerEvent, winEvent}
+import scala.util.{Failure, Success, Try}
 import scala.io.StdIn.readLine
 
 case class TUI(controller: Controller) extends Observer {
@@ -37,11 +38,16 @@ case class TUI(controller: Controller) extends Observer {
       case "throw card" => println("wich card?")
         val cardNumber = readLine().toInt
         if (controller.checkCard(cardNumber)) {
-          controller.throwCard(cardNumber)
+          Try {controller.throwCard(cardNumber)} match {
+            case Failure(e) => println(e.getMessage)
+              "invalid try"
+            case Success(e) => print("commands: throw card, take card, q for Quit")
+              "valid throw"
+          }
           //println("\n\n")
           //println(controller)
-          print("commands: throw card, take card, q for Quit")
-          "valid throw"
+
+
         } else {
           //State.handle(invalidThrowEvent())
           println("you cant throw this card")
@@ -54,12 +60,16 @@ case class TUI(controller: Controller) extends Observer {
           "invalid pull"
         }
         else {
-          controller.takeCard()
-          State.handle(nextPlayerEvent())
-          println("commands: throw card, take card, q for Quit").toString
-          println("")
-          println(controller)
-          "valid pull"
+          Try {controller.takeCard()} match {
+            case Failure(e) => println(e.getMessage)
+              "invalid try"
+            case Success(e) => println("commands: throw card, take card, q for Quit")
+              State.handle(nextPlayerEvent())
+              println("")
+              println(controller)
+              "valid pull"
+          }
+
         }
       case "q" =>
         State.handle(winEvent())

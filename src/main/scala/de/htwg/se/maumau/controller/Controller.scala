@@ -36,13 +36,16 @@ class Controller(var table: Table) extends Observable {
   }
   def checkCard(cardNumber: Int): Boolean = {
     val playerNumber = if (State.state == "Player1:") 1 else 0
-    //(new TabelStrictStrategy).checkCard(table, playerNumber, cardNumber)
-    table.checkCard(table, playerNumber, cardNumber)
+
+
+    (new TabelStrictStrategy).checkCard(table, playerNumber, cardNumber)
+   // table.checkCard(table, playerNumber, cardNumber)
   }
   def checkDeck(): Boolean = {
     val playerNumber = if (State.state == "Player1:") 1 else 0
-   (new TabelStrictStrategy).checkDeck(table, playerNumber)
-   //table.checkDeck(table, playerNumber)
+
+    //(new TabelStrictStrategy).checkDeck(table, playerNumber)
+    table.checkDeck(table, playerNumber)
   }
 
   def addPlayer(name: String, playerNum: Int): Unit = {
