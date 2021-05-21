@@ -5,8 +5,7 @@ import de.htwg.se.maumau.util.{State, nextPlayerEvent, winEvent}
 
 import scala.util.Random
 case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Player("P2", Deck())), tableDecks: List[Deck] = List[Deck](Deck().fillDeck.shuffleDeck(new Random(1)),Deck(List[Card]()))) extends AbstractTable(player: List[Player] , tableDecks: List[Deck]){
-  var tables = Stack[Table]()
-  var states = Stack[String]("")
+
 
   override def checkCard(table: Table, playerNumber: Int, cardNumber: Int): Boolean = {
     val currentPlayer = table.player(playerNumber)
@@ -28,17 +27,6 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
     val newPlayer = Player(name, changedDeck._1)
     val newDeck = changedDeck._2
     val newTable = table.copy(player = table.player.updated(playerNumber, newPlayer), tableDecks.updated(0, newDeck))
-    tables.push(newTable)
-    newTable
-  }
-  def undo(): Table = {
-    val newTable = tables.pop()
-    State.state = states.pop()
-    newTable
-  }
-  def redo(): Table = {
-    val newTable = tables.pop()
-    State.state = states.pop()
     newTable
   }
 
@@ -46,7 +34,6 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
     val emptyDeck = Deck()
     val changedDeck = tableDecks.head.throwOneCard(1, emptyDeck)
     val newTable = table.copy(player = player,tableDecks.updated(1, changedDeck._1).updated(0, changedDeck._2))
-    tables.push(newTable)
     newTable
   }
 
@@ -60,8 +47,6 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
       println(State.state)
       System.exit(1)
     } else State.handle(nextPlayerEvent())
-    tables.push(newTable)
-    states.push(State.state)
     newTable
   }
 
@@ -70,8 +55,6 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
     val changedDeck = tableDecks.head.throwCards(1, currentPlayer.playerDeck)
     val newPlayer = Player(currentPlayer.name,changedDeck._1)
     val newTable = table.copy(player.updated(playerNumber, newPlayer), tableDecks.updated(0,changedDeck._2))
-    tables.push(newTable)
-    states.push(State.state)
     newTable
   }
 

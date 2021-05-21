@@ -22,13 +22,16 @@ case class TUI(controller: Controller) extends Observer {
         }
 
       case "r" =>println("")
+        println(State.state)
         if (State.state.equals("")) {
           println("you cant redo the start")
-          "invalid redo"
+          val re = "invalid redo"
+          re
         } else {
           println("|-----reedoo!-----|")
           controller.redo
-          "valid redo"
+          val ref ="valid redo"
+          ref
         }
 
       case "throw card" => println("wich card?")
