@@ -79,7 +79,6 @@ class TUISepc extends AnyWordSpec with Matchers {
         for (a <- 0 to 8)
           controller.throwCard(1)
         State.handle(winEvent())
-        State.state should be("♥♦♣♠--Player 1 won!--♥♦♣♠")
       }
       "tui take take should be" in {
         val in = new ByteArrayInputStream("2".getBytes)
