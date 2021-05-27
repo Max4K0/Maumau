@@ -80,7 +80,18 @@ class TUISepc extends AnyWordSpec with Matchers {
           controller.throwCard(1)
         State.state should be("♥♦♣♠--Player 1 won!--♥♦♣♠")
       }
-
+      "tui take take should be" in {
+        val in = new ByteArrayInputStream("2".getBytes)
+        Console.withIn(in) { tui.processInputLine("change strat") should be("valid strategy")}
+        tui.processInputLine(input = "take card")
+        tui.processInputLine(input = "take card")
+        tui.processInputLine(input = "take card")
+        controller.checkDeck()
+      }
+      "tui throw Jack card input should be" in {
+        val in = new ByteArrayInputStream("4".getBytes)
+        Console.withIn(in) {tui.processInputLine("throw card")should be("valid throw")}
+      }
     }
   }
  //"TUI 2" when {
