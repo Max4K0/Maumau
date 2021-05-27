@@ -10,6 +10,7 @@ class Controller(var table: Table) extends Observable {
   private val undoManager = new UndoManager
   var tables = Stack[Table]()
   var states = Stack[String]("")
+  var strategy = 1
  //var commands = Stack[Comma]()
 
   def throwCard(cardNumber: Int): Unit = {
@@ -36,16 +37,18 @@ class Controller(var table: Table) extends Observable {
   }
   def checkCard(cardNumber: Int): Boolean = {
     val playerNumber = if (State.state == "Player1:") 1 else 0
-
-
-    (new TabelStrictStrategy).checkCard(table, playerNumber, cardNumber)
-   // table.checkCard(table, playerNumber, cardNumber)
+    strategy match {
+      case 1 => table.checkCard(table, playerNumber, cardNumber)
+      case 2 => (new TabelStrictStrategy).checkCard(table, playerNumber, cardNumber)
+    }
   }
+
   def checkDeck(): Boolean = {
     val playerNumber = if (State.state == "Player1:") 1 else 0
-
-    //(new TabelStrictStrategy).checkDeck(table, playerNumber)
-    table.checkDeck(table, playerNumber)
+    strategy match {
+      case 1 => table.checkDeck(table, playerNumber)
+      case 2 => (new TabelStrictStrategy).checkDeck(table, playerNumber)
+    }
   }
 
   def addPlayer(name: String, playerNum: Int): Unit = {
@@ -60,11 +63,6 @@ class Controller(var table: Table) extends Observable {
     // table = (new TabelStrictStrategy).addPlayers(table, name, playerNum)
   }
 
-  def redoStep(): Unit = {
-    //commands.pop()
-    // table = (new TabelStrictStrategy).addPlayers(table, name, playerNum)
-    ""
-  }
   override def toString(): String = {
     table.toString()
   }

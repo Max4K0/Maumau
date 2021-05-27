@@ -10,12 +10,12 @@ class TabelStrictStrategy extends TabelStrategyTemplate{
     false
   }
 
-  def addPlayers(table: Table, name: String, playerNumber: Int): Table = {
-    val emptyDeck = Deck()
-    val changedDeck = table.tableDecks.head.throwCards(10, emptyDeck)
-    val newPlayer = Player(name, changedDeck._1)
-    val newDeck = changedDeck._2
-    val newTable = table.copy(player = table.player.updated(playerNumber, newPlayer), table.tableDecks.updated(0, newDeck))
-    newTable
-  }
+//  def addPlayers(table: Table, name: String, playerNumber: Int): Table = {
+//    val emptyDeck = Deck()
+//    val changedDeck = table.tableDecks.head.throwCards(10, emptyDeck)
+//    val newPlayer = Player(name, changedDeck._1)
+//    val newDeck = changedDeck._2
+//    val newTable = table.copy(player = table.player.updated(playerNumber, newPlayer), table.tableDecks.updated(0, newDeck))
+//    newTable
+//  }
 }

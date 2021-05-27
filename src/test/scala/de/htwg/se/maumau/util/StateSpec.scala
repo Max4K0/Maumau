@@ -29,6 +29,16 @@ class StateSpec extends AnyWordSpec with Matchers{
         State.handle(nextPlayerEvent())
         State.state should be("Player2:")
       }
+      "state a Player 1 win should be" in {
+        State.state= "Player2:"
+        State.handle(winEvent())
+        State.state should be("♥♦♣♠--Player 1 won!--♥♦♣♠")
+      }
+      "state a Player 2 win should be" in {
+        State.state= "Player1:"
+        State.handle(winEvent())
+        State.state should be("♥♦♣♠--Player 2 won!--♥♦♣♠")
+      }
       //"state after invalid pull event should be" in {
       //  State.handle(invalidPullEvent())
       //  State.state should be("you cant pull a card, cause you can throw one")

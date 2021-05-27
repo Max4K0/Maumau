@@ -2,13 +2,14 @@ package de.htwg.se.maumau.aview
 
 import de.htwg.se.maumau.Maumau
 import de.htwg.se.maumau.Maumau.{controller, welcome}
-import de.htwg.se.maumau.model.Table
+import de.htwg.se.maumau.model.{Card, Color, Deck, Player, Symbol, Table}
 import de.htwg.se.maumau.controller.Controller
 import de.htwg.se.maumau.util.{State, winEvent}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
 import java.io.ByteArrayInputStream
+import scala.util.Random
 
 class TUISepc extends AnyWordSpec with Matchers {
 
@@ -19,6 +20,7 @@ class TUISepc extends AnyWordSpec with Matchers {
       val welcome = new Welcome(controller)
       val tui = TUI(controller)
       welcome.welcome()
+
 
       "tui invalid input should be" in {
         State.state = ""
@@ -38,18 +40,62 @@ class TUISepc extends AnyWordSpec with Matchers {
          tui.processInputLine("z") should be("valid undo")
        }
      }
-      "tui invalid throw card input should be" in {
+      "tui invalid throw card input with strategy 1 should be" in {
         val in = new ByteArrayInputStream("1".getBytes)
         Console.withIn(in) { tui.processInputLine("throw card") should be("invalid throw")}
+      }
+      "tui valid throw card input with strategy 2 should be" in {
+        val in = new ByteArrayInputStream("2".getBytes)
+        Console.withIn(in) { tui.processInputLine("change strat") should be("valid strategy")}
+        val in2 = new ByteArrayInputStream("1".getBytes)
+        Console.withIn(in2) { tui.processInputLine("throw card") should be("valid throw")}
       }
      "tui valid game exit should be" in {
        tui.processInputLine(input = "q") should be("valid input")
      }
-      "tui valid game take card should be" in {
+      "tui valid take card should be" in {
+        val in = new ByteArrayInputStream("2".getBytes)
+        Console.withIn(in) { tui.processInputLine("change strat") should be("valid strategy")}
         tui.processInputLine(input = "take card") should be("valid pull")
         tui.processInputLine("r") should be("valid redo")
         tui.processInputLine("z") should be("valid undo")
       }
+      "tui invalid take card should be" in {
+        val in = new ByteArrayInputStream("1".getBytes)
+        Console.withIn(in) { tui.processInputLine("change strat") should be("valid strategy")}
+        tui.processInputLine(input = "take card") should be("invalid pull")
+        tui.processInputLine("r") should be("valid redo")
+        tui.processInputLine("z") should be("valid undo")
+      }
+      "tui invalid strategy should be" in {
+        val in = new ByteArrayInputStream("9".getBytes)
+        Console.withIn(in) { tui.processInputLine("change strat") should be("invalid strategy")}
+      }
+      "tui win should be" in {
+        val in = new ByteArrayInputStream("2".getBytes)
+        Console.withIn(in) { tui.processInputLine("change strat") should be("valid strategy")}
+        val in2 = new ByteArrayInputStream("1".getBytes)
+        var a = 0
+        for (a <- 0 to 8)
+          controller.throwCard(1)
+        State.state should be("♥♦♣♠--Player 1 won!--♥♦♣♠")
+      }
+
     }
   }
+ //"TUI 2" when {
+ //  "new 2" should {
+ //    var table2 = Table()
+ //    val controller2 = new Controller(table2)
+ //    val welcome2 = new Welcome(controller2)
+ //    val tui2 = TUI(controller2)
+ //    welcome2.welcome()
+
+ //    "tui2 invalid take card should be" in {
+ //      table2 = Table()
+ //      tui2.processInputLine("r") should be("invalid redo")
+ //      tui2.processInputLine("z") should be("invalid undo")
+ //    }
+ //  }
+  //}
 }

@@ -26,21 +26,19 @@ case class TUI(controller: Controller) extends Observer {
         println(State.state)
         if (State.state.equals("")) {
           println("you cant redo the start")
-          val re = "invalid redo"
-          re
+          "invalid redo"
         } else {
           println("|-----reedoo!-----|")
           controller.redo
-          val ref ="valid redo"
-          ref
+          "valid redo"
         }
 
       case "throw card" => println("wich card?")
         val cardNumber = readLine().toInt
         if (controller.checkCard(cardNumber)) {
           Try {controller.throwCard(cardNumber)} match {
-            case Failure(e) => println(e.getMessage)
-              "invalid try"
+//          case Failure(e) => println(e.getMessage)
+//            "invalid throw"
             case Success(e) => print("commands: throw card, take card, q for Quit")
               "valid throw"
           }
@@ -53,6 +51,23 @@ case class TUI(controller: Controller) extends Observer {
           println("you cant throw this card")
           "invalid throw"
         }
+
+      case "change strat" => println("select strat")
+        println("standard:  1")
+        println("special:   2")
+        val stratNumber = readLine().toInt
+
+        stratNumber match {
+            case 1 => print("you choose normal")
+              controller.strategy = 1
+              "valid strategy"
+            case 2 => print("you choose special")
+              controller.strategy = 2
+              "valid strategy"
+            case _ => print("no valid strategy")
+              "invalid strategy"
+          }
+
       case "take card" =>
         if (controller.checkDeck()) {
           //State.handle(invalidPullEvent())
@@ -61,8 +76,8 @@ case class TUI(controller: Controller) extends Observer {
         }
         else {
           Try {controller.takeCard()} match {
-            case Failure(e) => println(e.getMessage)
-              "invalid try"
+//            case Failure(e) => println(e.getMessage)
+//              "invalid try"
             case Success(e) => println("commands: throw card, take card, q for Quit")
               State.handle(nextPlayerEvent())
               println("")

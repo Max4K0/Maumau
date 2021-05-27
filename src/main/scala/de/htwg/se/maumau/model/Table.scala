@@ -45,7 +45,8 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
     val result = if (newTable.player(playerNumber).playerDeck.equals(Deck())) {
       State.handle(winEvent())
       println(State.state)
-      System.exit(1)
+      //System.exit(1)
+      table
     } else State.handle(nextPlayerEvent())
     newTable
   }
