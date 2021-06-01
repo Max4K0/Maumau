@@ -12,6 +12,12 @@ object Maumau {
   val gui = new GUIApp(controller)
   //controller.notifyObservers()
 
+
+  //
+  //Music By: Benjamin Tissot (also known as Bensound)
+  //www.bensound.com
+  //
+
   def main(args: Array[String]): Unit = {
     welcome.welcome()
     //controller.notifyObservers()

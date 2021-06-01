@@ -38,6 +38,7 @@ case class GUI (guiApp: GUIApp, val controller: Controller) extends JFXApp {
                   radius = 15
                   spread = 0.25
                 }
+
               }
             )
           }

@@ -8,6 +8,7 @@ import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.effect.DropShadow
 import scalafx.scene.layout.HBox
+import scalafx.scene.media.AudioClip
 import scalafx.scene.paint.Color._
 import scalafx.scene.paint._
 import scalafx.scene.text.Text
@@ -18,12 +19,18 @@ case class GUIApp( val controller:Controller ) extends Observer {
   val gui: GUI = new GUI( this, controller)
   val thread: Thread = new Thread {
     override def run(): Unit = {
+
       gui.main(Array())
     }
   }
+  //new AudioClip("/../util/sound/bensound-jazzyfrenchy.mp3")
   thread.start()
   controller.add( this )
   def exit( ):Unit = gui.stopApp()
 
-  override def update: Boolean = true
+
+  override def update: Boolean = {
+
+    true
+  }
 }
