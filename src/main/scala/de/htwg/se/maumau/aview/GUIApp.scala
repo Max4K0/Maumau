@@ -5,7 +5,7 @@ import de.htwg.se.maumau.util.Observer
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Insets
-import scalafx.scene.Scene
+import scalafx.scene.media._
 import scalafx.scene.effect.DropShadow
 import scalafx.scene.layout.HBox
 import scalafx.scene.media.AudioClip
@@ -17,13 +17,27 @@ import scalafx.scene.text.Text
 
 case class GUIApp( val controller:Controller ) extends Observer {
   val gui: GUI = new GUI( this, controller)
-  val thread: Thread = new Thread {
-    override def run(): Unit = {
 
+
+
+  val thread: Thread = new Thread {
+
+    override def run(): Unit = {
+      import javafx.embed.swing.JFXPanel
+      new JFXPanel
+      val music = new Media("FILE:///bensound-jazzyfrenchy.mp3")
+      //val music = new Media("https://www.bensound.com/royalty-free-music/track/jazzy-frenchy/bensound-jazzyfrenchy.mp3")
+      //val music = new Media(getClass().getClassLoader().getResource("/bensound-jazzyfrenchy.mp3").toString())
+      val medplay =  new MediaPlayer(music)
+      medplay.volume = 0.1
+      medplay.setAutoPlay(true)
       gui.main(Array())
     }
   }
-  //new AudioClip("/../util/sound/bensound-jazzyfrenchy.mp3")
+
+
+
+
   thread.start()
   controller.add( this )
   def exit( ):Unit = gui.stopApp()

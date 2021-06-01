@@ -15,6 +15,7 @@ import scalafx.scene.text.Text
 
 case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
       stage = new PrimaryStage {
+
         title = "Card Test"
         scene = new Scene(500,750) {
           val img = new Image(controller.table.player(1).playerDeck.cards.head.imgPath)
