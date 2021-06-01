@@ -1,6 +1,4 @@
 package de.htwg.se.maumau.model
-import de.htwg.se.maumau.model.{Card, Deck, Player}
-import scala.collection.mutable.Stack
 import de.htwg.se.maumau.util.{State, nextPlayerEvent, winEvent}
 
 import scala.util.Random

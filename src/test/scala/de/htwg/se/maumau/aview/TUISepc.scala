@@ -50,6 +50,10 @@ class TUISepc extends AnyWordSpec with Matchers {
         val in2 = new ByteArrayInputStream("1".getBytes)
         Console.withIn(in2) { tui.processInputLine("throw card") should be("valid throw")}
       }
+
+
+
+
      "tui valid game exit should be" in {
        tui.processInputLine(input = "q") should be("valid input")
      }
@@ -92,6 +96,12 @@ class TUISepc extends AnyWordSpec with Matchers {
         val in = new ByteArrayInputStream("4".getBytes)
         Console.withIn(in) {tui.processInputLine("throw card")should be("valid throw")}
       }
+
+     // "tui valid game take card should be" in {
+     //   tui.processInputLine(input = "take card") should not be("invalid pull")
+     // }
+
+
     }
   }
  //"TUI 2" when {
