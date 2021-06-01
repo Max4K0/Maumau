@@ -11,7 +11,7 @@ import scalafx.scene.paint.Color.{DarkGray, DarkRed, Red, White}
 import scalafx.scene.paint.{Color, LinearGradient, Stops}
 import scalafx.scene.text.Text
 
-class GUI (guiApp: GUIApp, val controller: Controller) extends JFXApp {
+case class GUI (guiApp: GUIApp, val controller: Controller) extends JFXApp {
       stage = new PrimaryStage {
         title = "ScalaFX Hello World"
         scene = new Scene {
