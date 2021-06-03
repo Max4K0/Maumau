@@ -1,6 +1,6 @@
 package de.htwg.se.maumau
 
-import de.htwg.se.maumau.aview.{GUI, GUIApp, TUI, Welcome}
+import de.htwg.se.maumau.aview.{GUIApp, TUI, Welcome}
 import de.htwg.se.maumau.controller.Controller
 import de.htwg.se.maumau.model._
 
@@ -20,6 +20,7 @@ object Maumau {
 
   def main(args: Array[String]): Unit = {
     welcome.welcome()
+
     //controller.notifyObservers()
 
     "GameOver"
