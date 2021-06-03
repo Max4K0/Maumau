@@ -13,6 +13,8 @@ import scalafx.scene.paint.Color._
 import scalafx.scene.paint._
 import scalafx.scene.text.Text
 
+import scala.reflect.io.File
+
 
 
 case class GUIApp( val controller:Controller ) extends Observer {
@@ -26,11 +28,16 @@ case class GUIApp( val controller:Controller ) extends Observer {
       import javafx.embed.swing.JFXPanel
       new JFXPanel
       val music = new Media("FILE:///bensound-jazzyfrenchy.mp3")
-      //val music = new Media("https://www.bensound.com/royalty-free-music/track/jazzy-frenchy/bensound-jazzyfrenchy.mp3")
-      //val music = new Media(getClass().getClassLoader().getResource("/bensound-jazzyfrenchy.mp3").toString())
       val medplay =  new MediaPlayer(music)
       medplay.volume = 0.1
-      medplay.setAutoPlay(true)
+      //medplay.autoPlay = (true)
+      //medplay.onRepeat()
+     // medplay.setAutoPlay(true)
+
+
+      //val music = new Media("https://www.bensound.com/royalty-free-music/track/jazzy-frenchy/bensound-jazzyfrenchy.mp3")
+      //val music = new Media(getClass().getClassLoader().getResource("//bensound-jazzyfrenchy.mp3").toString())
+
       gui.main(Array())
     }
   }
