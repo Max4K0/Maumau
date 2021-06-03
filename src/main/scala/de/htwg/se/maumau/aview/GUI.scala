@@ -7,6 +7,7 @@ import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
+import scalafx.Includes._
 import scalafx.scene.control.Button
 import scalafx.scene.effect.Lighting
 import scalafx.scene.image._
@@ -84,6 +85,7 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
                  effect = new Lighting
                  this.visible = true
                  val cardNumber = x
+                 onAction = () => (controller.throwCard(x + 1), guiApp.update ,println(controller.table.player(playerNumber).playerDeck.cards.size))
                }
 
            )
@@ -101,11 +103,13 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
                effect = new Lighting
                this.visible = true
                val cardNumber = x
+
              }
 
            )
          }
-
+         println(content(1).->(getChildren)._1)
+         println(content(1).->(getChildren)._2(3))
        }
      }
    }
