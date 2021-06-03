@@ -2,6 +2,7 @@ package de.htwg.se.maumau.aview
 
 import de.htwg.se.maumau.controller.Controller
 import de.htwg.se.maumau.model.Card
+import de.htwg.se.maumau.util.State
 import scalafx.Includes.observableList2ObservableBuffer
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
@@ -28,7 +29,7 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
        val cardRatio = 0.5
        val cardSizeX = 500 * cardRatio
        val cardSizeY = 726 * cardRatio
-       val img = new Image(controller.table.player(1).playerDeck.cards.head.imgPath, cardSizeX, cardSizeY, true, false)
+       val img = new Image(controller.table.tableDecks(1).cards.last.imgPath, cardSizeX, cardSizeY, true, false)
        val view = new ImageView(img)
        content += new HBox {
 
@@ -44,7 +45,7 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
          },
 
          new Button() {
-           this.setGraphic(new ImageView(new Image(controller.table.player(1).playerDeck.cards.last.imgPath, cardSizeX, cardSizeY, true, false)))
+           this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX, cardSizeY, true, false)))
            this.setStyle("-fx-background-color: transparent")
            effect = new Lighting
            this.visible = true
@@ -74,20 +75,23 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
 
          )
        }
-       for (x <- 0 to 1)
+       for (x <- 0 to 4) {
          content += new HBox {
-           padding = Insets(500 * x , 0, 0, 0)
+           padding = Insets(500 , 0, 0, 200 * x)
              children = Seq(
                new Button() {
-                 this.setGraphic(new ImageView(new Image(controller.table.player(0).playerDeck.cards.head.imgPath, cardSizeX, cardSizeY, true, false)))
+                 val playerNuber = if (State.state=="Player1:") 1 else 0
+                 this.setGraphic(new ImageView(new Image(controller.table.player(playerNuber).playerDeck.cards(x).imgPath, cardSizeX, cardSizeY, true, false)))
                  this.setStyle("-fx-background-color: transparent")
                  effect = new Lighting
                  this.visible = true
-
+                 val cardNumber = x
                }
 
            )
          }
+
+       }
      }
    }
 
