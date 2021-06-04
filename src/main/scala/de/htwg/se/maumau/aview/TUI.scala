@@ -1,7 +1,9 @@
 package de.htwg.se.maumau.aview
 
+import de.htwg.se.maumau.Maumau.gui
 import de.htwg.se.maumau.controller.Controller
 import de.htwg.se.maumau.util.{Observer, State, nextPlayerEvent, winEvent}
+
 import scala.util.{Failure, Success, Try}
 import scala.io.StdIn.readLine
 
@@ -95,6 +97,7 @@ case class TUI(controller: Controller) extends Observer {
     }
   }
   override def update: Boolean = {
+
     println(controller)
     true
   }

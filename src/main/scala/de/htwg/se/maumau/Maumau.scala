@@ -3,6 +3,7 @@ package de.htwg.se.maumau
 import de.htwg.se.maumau.aview.{GUIApp, TUI, Welcome}
 import de.htwg.se.maumau.controller.Controller
 import de.htwg.se.maumau.model._
+import scala.io.StdIn.readLine
 
 object Maumau {
   val table = Table()
@@ -20,9 +21,12 @@ object Maumau {
 
   def main(args: Array[String]): Unit = {
     welcome.welcome()
+    var input: String = ""
 
-    //controller.notifyObservers()
-
-    "GameOver"
+    while (input != "q") {
+      input = readLine()
+      tui.processInputLine(input)
+//      gui.gui.stage.scene.r
+    }
   }
 }

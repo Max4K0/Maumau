@@ -57,12 +57,19 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
               this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
               this.setStyle("-fx-background-color: transparent")
 
+
               this.onMouseEntered = (MouseEvent) => {
                 this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX * 1.1, cardSizeY * 1.1, true, true)))
 
               }
+              this.onMouseExited = (MouseEvent) => {
+                this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
+              }
+
 
               this.onMouseClicked = (MouseEvent) => {
+                this.onMouseExited = (MouseEvent) => {
+                }
                 controller.takeCard()
                 reprint()
                 //guiApp.update
@@ -123,21 +130,22 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
             this.setGraphic(new ImageView(new Image(controller.table.player(playerNumber).playerDeck.cards(x).imgPath, cardSizeX * 1.1, cardSizeY * 1.1, true, true)))
 
           }
-          /*this.onMouseExited = (MouseEvent) => {
+          this.onMouseExited = (MouseEvent) => {
                   this.setGraphic(new ImageView(new Image(controller.table.player(playerNumber).playerDeck.cards(x).imgPath, cardSizeX, cardSizeY, true, true)))
-                }*/
+                }
 
           this.onMouseClicked = (MouseEvent) => {
-            //this.setGraphic(new ImageView(new Image(controller.table.player(playerNumber).playerDeck.cards(x).imgPath, cardSizeX, cardSizeY, true, true)))
+            this.onMouseExited = (MouseEvent) => {
 
+            }
             controller.throwCard(cardNumber + 1)
             reprint()
             println("test")
-            //guiApp.update
-            //println(controller.table.player(playerNumber).playerDeck.cards.size)
           }
 
         }
+
+
 
       )
     }
