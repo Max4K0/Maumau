@@ -2,7 +2,6 @@ package de.htwg.se.maumau.aview
 
 import de.htwg.se.maumau.controller.Controller
 import de.htwg.se.maumau.util.State
-import javafx.scene.effect.{Bloom, Light}
 import scalafx.Includes.observableList2ObservableBuffer
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
@@ -73,7 +72,6 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
                 controller.takeCard()
                 reprint()
                 //guiApp.update
-                println(controller.takeCard())
               }
               effect = new Lighting
               this.visible = true
