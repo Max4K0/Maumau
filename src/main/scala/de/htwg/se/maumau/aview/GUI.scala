@@ -2,12 +2,13 @@ package de.htwg.se.maumau.aview
 
 import de.htwg.se.maumau.controller.Controller
 import de.htwg.se.maumau.util.State
+import javafx.scene.effect.{Bloom, Light}
 import scalafx.Includes.observableList2ObservableBuffer
 import scalafx.application.JFXApp
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
-import scalafx.scene.control.Label
+import scalafx.scene.control.{Button, Label}
 import scalafx.scene.effect.Lighting
 import scalafx.scene.image._
 import scalafx.scene.layout.HBox
@@ -28,9 +29,14 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
         val cardSizeY = 726 * cardRatio
         val table = new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/Table.png", 1000, 1000, false, false)
         val img = new Image(controller.table.tableDecks(1).cards.last.imgPath, cardSizeX - 10, cardSizeY - 10, true, false)
+
         val view = new ImageView(img)
         val view2 = new ImageView(table)
+
         content += view2
+        reprint()
+        def reprint() {
+          content = view2
         content += new HBox {
 
 
@@ -38,9 +44,10 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
           children = Seq(
 
             new Label() {
-              this.setGraphic(view)
+              this.setGraphic(new ImageView(new Image(controller.table.tableDecks(1).cards.last.imgPath,cardSizeX - 10, cardSizeY - 10, true, false)))
               this.setStyle("-fx-background-color: transparent")
               effect = new Lighting
+             // effect +=
               this.visible = true
               this.setLayoutX(0)
 
@@ -49,9 +56,16 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
             new Label() {
               this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
               this.setStyle("-fx-background-color: transparent")
+
+              this.onMouseEntered = (MouseEvent) => {
+                this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX * 1.1, cardSizeY * 1.1, true, true)))
+
+              }
+
               this.onMouseClicked = (MouseEvent) => {
                 controller.takeCard()
-                guiApp.update
+                reprint()
+                //guiApp.update
                 println(controller.takeCard())
               }
               effect = new Lighting
@@ -61,6 +75,7 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
             }
           )
         }
+
         /*
        content += new HBox {
          padding = Insets(500, 0, 0, 0)
@@ -86,48 +101,60 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
        }
        */
 
-        val playerNumber = if (State.state == "Player1:") 1 else 0
-        for (x <- 0 to controller.table.player(playerNumber).playerDeck.cards.size - 1) {
+        /*
+        * Player 1 Cards
+        * */
 
-          content += new HBox {
+  val playerNumber = if (State.state == "Player1:") 1 else 0
+  for (x <- 0 to controller.table.player(playerNumber).playerDeck.cards.size - 1) {
 
-            padding = Insets(700, 0, 0, 350 + x * 120)
-            children = Seq(
-              new Label() {
+    content += new HBox {
 
-                this.setGraphic(new ImageView(new Image(controller.table.player(playerNumber).playerDeck.cards(x).imgPath, cardSizeX, cardSizeY, true, true)))
-                this.setStyle("-fx-background-color: transparent")
-                effect = new Lighting
+      padding = Insets(700, 0, 0, 350 + x * 120)
+      children = Seq(
+        new Button() {
 
-                val cardNumber = x
-                this.onMouseEntered = (MouseEvent) => {
-                  this.setGraphic(new ImageView(new Image(controller.table.player(playerNumber).playerDeck.cards(x).imgPath, cardSizeX, cardSizeY - 10, true, true)))
+          this.setGraphic(new ImageView(new Image(controller.table.player(playerNumber).playerDeck.cards(x).imgPath, cardSizeX, cardSizeY, true, true)))
+          this.setStyle("-fx-background-color: transparent")
+          effect = new Lighting
 
-                }
-                this.onMouseExited = (MouseEvent) => {
+          val cardNumber = x
+          this.onMouseEntered = (MouseEvent) => {
+            this.setGraphic(new ImageView(new Image(controller.table.player(playerNumber).playerDeck.cards(x).imgPath, cardSizeX * 1.1, cardSizeY * 1.1, true, true)))
+
+          }
+          /*this.onMouseExited = (MouseEvent) => {
                   this.setGraphic(new ImageView(new Image(controller.table.player(playerNumber).playerDeck.cards(x).imgPath, cardSizeX, cardSizeY, true, true)))
+                }*/
 
-                }
-                this.onMouseClicked = (MouseEvent) => {
-                  controller.throwCard(cardNumber + 1)
-                  guiApp.update
-                  println(controller.table.player(playerNumber).playerDeck.cards.size)
-                }
+          this.onMouseClicked = (MouseEvent) => {
+            //this.setGraphic(new ImageView(new Image(controller.table.player(playerNumber).playerDeck.cards(x).imgPath, cardSizeX, cardSizeY, true, true)))
 
-              }
-
-            )
+            controller.throwCard(cardNumber + 1)
+            reprint()
+            println("test")
+            //guiApp.update
+            //println(controller.table.player(playerNumber).playerDeck.cards.size)
           }
 
         }
 
+      )
+    }
+    //  println(content(1).->(getChildren)._1.getEffect)
+  }
+
+        /*
+        * Player 2 Cards
+        * */
 
         for (x <- 0 to controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size - 1) {
           content += new HBox {
             padding = Insets(50, 0, 0, 455 + x * 80)
             children = Seq(
               new Label() {
-                this.setGraphic(new ImageView(new Image(controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards(x).imgPath, cardSizeX - 50, cardSizeY - 50, true, true)))
+                //this.setGraphic(new ImageView(new Image(controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards(x).imgPath, cardSizeX - 50, cardSizeY - 50, true, true)))
+                this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
                 this.setStyle("-fx-background-color: transparent")
                 effect = new Lighting
                 this.visible = true
@@ -135,6 +162,7 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
               }
             )
           }
+        }
         }
 
       }
