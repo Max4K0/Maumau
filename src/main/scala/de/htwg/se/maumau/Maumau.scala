@@ -26,7 +26,6 @@ object Maumau {
     while (input != "q") {
       input = readLine()
       tui.processInputLine(input)
-//      gui.gui.stage.scene.r
     }
   }
 }
