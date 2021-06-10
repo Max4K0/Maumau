@@ -1,8 +1,9 @@
 package de.htwg.se.maumau.controller
 
 
-import de.htwg.se.maumau.model.{Deck, Player, TabelStrictStrategy, Table}
+import de.htwg.se.maumau.model.{TabelStrictStrategy, Table}
 import de.htwg.se.maumau.util.{Observable, State, UndoManager}
+
 import scala.collection.mutable.Stack
 
 class Controller(var table: Table) extends Observable {
@@ -11,6 +12,7 @@ class Controller(var table: Table) extends Observable {
   var tables = Stack[Table]()
   var states = Stack[String]("")
   var strategy = 1
+  var shouldUpdate = true
  //var commands = Stack[Comma]()
 
   def throwCard(cardNumber: Int): Unit = {
@@ -20,6 +22,7 @@ class Controller(var table: Table) extends Observable {
     //table = table.throwCard(table, playerNumber, cardNumber)
     undoManager.doStep(new ThrowCommand(playerNumber, cardNumber, this))
     notifyObservers()
+    shouldUpdate = true
   }
   def takeCard(): Unit = {
     tables.push(table)
@@ -29,6 +32,7 @@ class Controller(var table: Table) extends Observable {
     undoManager.doStep(new PullCommand(playerNumber, this))
     //commands.push(playerNumber, this)
     notifyObservers()
+    shouldUpdate = true
   }
 
   def throwFirstCard(): Unit = {
@@ -70,9 +74,11 @@ class Controller(var table: Table) extends Observable {
   def undo: Unit = {
     undoManager.undoStep
     notifyObservers()
+    shouldUpdate = true
   }
   def redo: Unit = {
     undoManager.redoStep
     notifyObservers()
+    shouldUpdate = true
   }
 }

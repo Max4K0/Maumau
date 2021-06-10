@@ -27,5 +27,6 @@ object Maumau {
       input = readLine()
       tui.processInputLine(input)
     }
+    System.exit(0)
   }
 }

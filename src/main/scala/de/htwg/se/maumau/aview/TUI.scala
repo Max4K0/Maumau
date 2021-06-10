@@ -1,11 +1,10 @@
 package de.htwg.se.maumau.aview
 
-import de.htwg.se.maumau.Maumau.gui
 import de.htwg.se.maumau.controller.Controller
 import de.htwg.se.maumau.util.{Observer, State, nextPlayerEvent, winEvent}
 
-import scala.util.{Failure, Success, Try}
 import scala.io.StdIn.readLine
+import scala.util.{Success, Try}
 
 case class TUI(controller: Controller) extends Observer {
   controller.add(this)
@@ -21,6 +20,7 @@ case class TUI(controller: Controller) extends Observer {
         } else {
           println("|-----Undooooooo!-----|")
           controller.undo
+
           "valid undo"
         }
 
@@ -90,15 +90,20 @@ case class TUI(controller: Controller) extends Observer {
         }
       case "q" =>
         State.handle(winEvent())
+
         "valid input"
       case _ => //State.handle(unknownCommandEvent())
         println("invalid command\ncommands: throw card, take card, q for Quit")
+
         "invalid input"
     }
   }
+
+
   override def update: Boolean = {
 
     println(controller)
+
     true
   }
 }
