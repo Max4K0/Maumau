@@ -11,6 +11,8 @@ import scalafx.scene.control.{Button, Label}
 import scalafx.scene.effect.Lighting
 import scalafx.scene.image._
 import scalafx.scene.layout.HBox
+
+import scala.util.{Success, Try}
 case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
 
   loop()
@@ -27,7 +29,6 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
 
           scene = new Scene(1320, 900) {
 
-
             val cardRatio = 0.25
             val cardSizeX = 500 * cardRatio
             val cardSizeY = 726 * cardRatio
@@ -37,36 +38,8 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
             val view = new ImageView(img)
             val view2 = new ImageView(table)
 
-            content += view2
-
             content = view2
 
-
-
-            /*
-       content += new HBox {
-         padding = Insets(500, 0, 0, 0)
-         children = Seq(
-
-           new Button() {
-             this.setGraphic(new ImageView(new Image(controller.table.player(0).playerDeck.cards.head.imgPath, cardSizeX, cardSizeY, true, false)))
-             this.setStyle("-fx-background-color: transparent")
-             effect = new Lighting
-             this.visible = true
-             //this.setLayoutX(0)
-           },
-
-           new Button() {
-             this.setGraphic(new ImageView(new Image(controller.table.player(0).playerDeck.cards.last.imgPath, cardSizeX, cardSizeY, true, false)))
-             this.setStyle("-fx-background-color: transparent")
-             effect = new Lighting
-             this.visible = true
-             //this.setLayoutX(0)
-           }
-
-         )
-       }
-       */
 
             /*
         * Player 1 Cards
@@ -104,18 +77,25 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
                     this.onMouseExited = (MouseEvent) => {
                       //
                     }
-                    controller.throwCard(x + 1)
+                    if (controller.checkCard(x +1)) {
+                      Try {controller.throwCard(x +1)} match {
+                        case Success(e) => print("commands: throw card, take card, q for Quit")
+                      }
+                    } else {
+                      /*
+                      Invalid Card push Message
+                       */
+
+                      controller.checkCardLable = true
+                      println("you cant throw this card")
+                    }
+                    //controller.throwCard(+ 1)
                     reprint()
                     println(x + 1)
                   }
                 })
-                //
               }
             }
-            //}
-            //  println(content(1).->(getChildren)._1.getEffect)
-
-
             /*
         * Player 2 Cards
         * */

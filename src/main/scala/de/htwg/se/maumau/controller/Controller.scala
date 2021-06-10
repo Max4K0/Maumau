@@ -13,6 +13,7 @@ class Controller(var table: Table) extends Observable {
   var states = Stack[String]("")
   var strategy = 1
   var shouldUpdate = true
+  var checkCardLable = false
  //var commands = Stack[Comma]()
 
   def throwCard(cardNumber: Int): Unit = {
@@ -50,8 +51,8 @@ class Controller(var table: Table) extends Observable {
   def checkDeck(): Boolean = {
     val playerNumber = if (State.state == "Player1:") 1 else 0
     strategy match {
-      case 1 => table.checkDeck(table, playerNumber)
-      case 2 => (new TabelStrictStrategy).checkDeck(table, playerNumber)
+      case 2 => table.checkDeck(table, playerNumber)
+      case 1 => (new TabelStrictStrategy).checkDeck(table, playerNumber)
     }
   }
 
