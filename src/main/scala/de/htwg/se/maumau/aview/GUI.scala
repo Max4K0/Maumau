@@ -4,7 +4,7 @@ import de.htwg.se.maumau.controller.Controller
 import de.htwg.se.maumau.util.State
 import javafx.scene.effect.{Bloom, Light}
 import scalafx.Includes.observableList2ObservableBuffer
-import scalafx.application.JFXApp
+import scalafx.application.{JFXApp, Platform}
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
@@ -15,8 +15,9 @@ import scalafx.scene.layout.{HBox, VBox}
 
 case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
 
-
-
+  reprint()
+  def reprint() {
+    Platform.runLater(new Runnable(){
     stage = new PrimaryStage {
 
       title = "MauMau"
@@ -32,10 +33,9 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
         val view2 = new ImageView(table)
 
         content += view2
-        reprint()
 
-        def reprint() {
           content = view2
+
           content += new HBox {
 
 
@@ -173,7 +173,11 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
 
       }
 
-
+      override def run(): Unit = {
+      //reprint()
+         //Thread.sleep(10)
+      }
+    });
     }
 
 }

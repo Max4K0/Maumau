@@ -39,7 +39,6 @@ case class GUIApp( val controller:Controller ) extends Observer {
 
 
   override def update: Boolean = {
-
     true
   }
 }
