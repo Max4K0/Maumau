@@ -3,16 +3,14 @@ package de.htwg.se.maumau.aview
 import de.htwg.se.maumau.controller.Controller
 import de.htwg.se.maumau.util.State
 import scalafx.Includes.observableList2ObservableBuffer
-import scalafx.application.{JFXApp, Platform}
 import scalafx.application.JFXApp.PrimaryStage
+import scalafx.application.{JFXApp, Platform}
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.{Button, Label}
 import scalafx.scene.effect.Lighting
 import scalafx.scene.image._
 import scalafx.scene.layout.HBox
-import scalafx.event.EventHandler
-import scalafx.stage.WindowEvent
 case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
 
   loop()
@@ -43,46 +41,7 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
 
             content = view2
 
-            content += new HBox {
 
-
-              this.padding = Insets(300, 0, 0, 532)
-              children = Seq(
-
-                new Label() {
-                  this.setGraphic(new ImageView(new Image(controller.table.tableDecks(1).cards.last.imgPath, cardSizeX - 10, cardSizeY - 10, true, true)))
-                  this.setStyle("-fx-background-color: transparent")
-                  effect = new Lighting
-                  this.visible = true
-
-                },
-
-                new Label() {
-                  this.padding = Insets(0, 0, 0, 20)
-                  this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
-                  this.setStyle("-fx-background-color: transparent")
-
-                  this.onMouseEntered = (MouseEvent) => {
-                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX * 1.1, cardSizeY * 1.1, true, true)))
-
-                  }
-                  this.onMouseExited = (MouseEvent) => {
-                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
-                  }
-
-                  this.onMouseClicked = (MouseEvent) => {
-                    this.onMouseExited = (MouseEvent) => {
-                    }
-                    controller.takeCard()
-                    State.state = if (State.state == "Player1:") "Player2:" else "Player1:"
-                    reprint()
-                  }
-                  effect = new Lighting
-                  this.visible = true
-
-                }
-              )
-            }
 
             /*
        content += new HBox {
@@ -175,6 +134,46 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
                   }
                 )
               }
+            }
+            content += new HBox {
+
+
+              this.padding = Insets(300, 0, 0, 532)
+              children = Seq(
+
+                new Label() {
+                  this.setGraphic(new ImageView(new Image(controller.table.tableDecks(1).cards.last.imgPath, cardSizeX - 10, cardSizeY - 10, true, true)))
+                  this.setStyle("-fx-background-color: transparent")
+                  effect = new Lighting
+                  this.visible = true
+
+                },
+
+                new Label() {
+                  this.padding = Insets(0, 0, 0, 20)
+                  this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
+                  this.setStyle("-fx-background-color: transparent")
+
+                  this.onMouseEntered = (MouseEvent) => {
+                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX * 1.1, cardSizeY * 1.1, true, true)))
+
+                  }
+                  this.onMouseExited = (MouseEvent) => {
+                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
+                  }
+
+                  this.onMouseClicked = (MouseEvent) => {
+                    this.onMouseExited = (MouseEvent) => {
+                    }
+                    controller.takeCard()
+                    State.state = if (State.state == "Player1:") "Player2:" else "Player1:"
+                    reprint()
+                  }
+                  effect = new Lighting
+                  this.visible = true
+
+                }
+              )
             }
           }
 
