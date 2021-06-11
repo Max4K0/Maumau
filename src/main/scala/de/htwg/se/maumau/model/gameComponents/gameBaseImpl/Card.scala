@@ -3,7 +3,7 @@ package de.htwg.se.maumau.model.gameComponents.gameBaseImpl
 import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.Color._
 import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.Symbol._
 
-case class Card(color: Color, symbol: Symbols) {
+case class Card(color: Option[Color] , symbol: Option[Symbols]) {
   /**
    * UTF 8 Symbols and Colors for the Cards
    */
@@ -69,139 +69,150 @@ case class Card(color: Color, symbol: Symbols) {
 
   override def toString: String = {
     symbol match {
-      case Symbol.ASS => color.toString.charAt(0) + " A"
-      case Symbol.Two => color.toString.charAt(0) + " 2"
-      case Symbol.Three => color.toString.charAt(0) + " 3"
-      case Symbol.Four => color.toString.charAt(0) + " 4"
-      case Symbol.Five => color.toString.charAt(0) + " 5"
-      case Symbol.Six => color.toString.charAt(0) + " 6"
-      case Symbol.Seven => color.toString.charAt(0) + " 7"
-      case Symbol.Eight => color.toString.charAt(0) + " 8"
-      case Symbol.Nine => color.toString.charAt(0) + " 9"
-      case Symbol.Ten => color.toString.charAt(0) + " 10"
-      case Symbol.Jack => color.toString.charAt(0) + " J"
-      case Symbol.Lady => color.toString.charAt(0) + " L"
-      case Symbol.King => color.toString.charAt(0) + " K"
+      case Some(c: Symbol.Value) => color match {
+        case Some(color: Color.Value) => c match {
+          case Symbol.ASS => color.toString.charAt(0) + " A"
+          case Symbol.Two => color.toString.charAt(0) + " 2"
+          case Symbol.Three => color.toString.charAt(0) + " 3"
+          case Symbol.Four => color.toString.charAt(0) + " 4"
+          case Symbol.Five => color.toString.charAt(0) + " 5"
+          case Symbol.Six => color.toString.charAt(0) + " 6"
+          case Symbol.Seven => color.toString.charAt(0) + " 7"
+          case Symbol.Eight => color.toString.charAt(0) + " 8"
+          case Symbol.Nine => color.toString.charAt(0) + " 9"
+          case Symbol.Ten => color.toString.charAt(0) + " 10"
+          case Symbol.Jack => color.toString.charAt(0) + " J"
+          case Symbol.Lady => color.toString.charAt(0) + " L"
+          case Symbol.King => color.toString.charAt(0) + " K"
+        }
+      }
     }
   }
-
   def UTFSymbols: String = {
     symbol match {
-      case Symbol.ASS if (color == Hearts) => HA
-      case Symbol.Two if (color == Hearts) => H2
-      case Symbol.Three if (color == Hearts) => H3
-      case Symbol.Four if (color == Hearts) => H4
-      case Symbol.Five if (color == Hearts) => H5
-      case Symbol.Six if (color == Hearts) => H6
-      case Symbol.Seven if (color == Hearts) => H7
-      case Symbol.Eight if (color == Hearts) => H8
-      case Symbol.Nine if (color == Hearts) => H9
-      case Symbol.Ten if (color == Hearts) => H10
-      case Symbol.Jack if (color == Hearts) => HJ
-      case Symbol.Lady if (color == Hearts) => HL
-      case Symbol.King if (color == Hearts) => HK
+      case Some(c: Symbol.Value) => color match {
+        case Some(color: Color.Value) => c match {
+          case Symbol.ASS if (color == Hearts) => HA
+          case Symbol.Two if (color == Hearts) => H2
+          case Symbol.Three if (color == Hearts) => H3
+          case Symbol.Four if (color == Hearts) => H4
+          case Symbol.Five if (color == Hearts) => H5
+          case Symbol.Six if (color == Hearts) => H6
+          case Symbol.Seven if (color == Hearts) => H7
+          case Symbol.Eight if (color == Hearts) => H8
+          case Symbol.Nine if (color == Hearts) => H9
+          case Symbol.Ten if (color == Hearts) => H10
+          case Symbol.Jack if (color == Hearts) => HJ
+          case Symbol.Lady if (color == Hearts) => HL
+          case Symbol.King if (color == Hearts) => HK
 
-      case Symbol.ASS if (color == Spades) => SA
-      case Symbol.Two if (color == Spades) => S2
-      case Symbol.Three if (color == Spades) => S3
-      case Symbol.Four if (color == Spades) => S4
-      case Symbol.Five if (color == Spades) => S5
-      case Symbol.Six if (color == Spades) => S6
-      case Symbol.Seven if (color == Spades) => S7
-      case Symbol.Eight if (color == Spades) => S8
-      case Symbol.Nine if (color == Spades) => S9
-      case Symbol.Ten if (color == Spades) => S10
-      case Symbol.Jack if (color == Spades) => SJ
-      case Symbol.Lady if (color == Spades) => SL
-      case Symbol.King if (color == Spades) => SK
+          case Symbol.ASS if (color == Spades) => SA
+          case Symbol.Two if (color == Spades) => S2
+          case Symbol.Three if (color == Spades) => S3
+          case Symbol.Four if (color == Spades) => S4
+          case Symbol.Five if (color == Spades) => S5
+          case Symbol.Six if (color == Spades) => S6
+          case Symbol.Seven if (color == Spades) => S7
+          case Symbol.Eight if (color == Spades) => S8
+          case Symbol.Nine if (color == Spades) => S9
+          case Symbol.Ten if (color == Spades) => S10
+          case Symbol.Jack if (color == Spades) => SJ
+          case Symbol.Lady if (color == Spades) => SL
+          case Symbol.King if (color == Spades) => SK
 
-      case Symbol.ASS if (color == Clubs) => CA
-      case Symbol.Two if (color == Clubs) => C2
-      case Symbol.Three if (color == Clubs) => C3
-      case Symbol.Four if (color == Clubs) => C4
-      case Symbol.Five if (color == Clubs) => C5
-      case Symbol.Six if (color == Clubs) => C6
-      case Symbol.Seven if (color == Clubs) => C7
-      case Symbol.Eight if (color == Clubs) => C8
-      case Symbol.Nine if (color == Clubs) => C9
-      case Symbol.Ten if (color == Clubs) => C10
-      case Symbol.Jack if (color == Clubs) => CJ
-      case Symbol.Lady if (color == Clubs) => CL
-      case Symbol.King if (color == Clubs) => CK
+          case Symbol.ASS if (color == Clubs) => CA
+          case Symbol.Two if (color == Clubs) => C2
+          case Symbol.Three if (color == Clubs) => C3
+          case Symbol.Four if (color == Clubs) => C4
+          case Symbol.Five if (color == Clubs) => C5
+          case Symbol.Six if (color == Clubs) => C6
+          case Symbol.Seven if (color == Clubs) => C7
+          case Symbol.Eight if (color == Clubs) => C8
+          case Symbol.Nine if (color == Clubs) => C9
+          case Symbol.Ten if (color == Clubs) => C10
+          case Symbol.Jack if (color == Clubs) => CJ
+          case Symbol.Lady if (color == Clubs) => CL
+          case Symbol.King if (color == Clubs) => CK
 
-      case Symbol.ASS if (color == Diamonds) => DA
-      case Symbol.Two if (color == Diamonds) => D2
-      case Symbol.Three if (color == Diamonds) => D3
-      case Symbol.Four if (color == Diamonds) => D4
-      case Symbol.Five if (color == Diamonds) => D5
-      case Symbol.Six if (color == Diamonds) => D6
-      case Symbol.Seven if (color == Diamonds) => D7
-      case Symbol.Eight if (color == Diamonds) => D8
-      case Symbol.Nine if (color == Diamonds) => D9
-      case Symbol.Ten if (color == Diamonds) => D10
-      case Symbol.Jack if (color == Diamonds) => DJ
-      case Symbol.Lady if (color == Diamonds) => DL
-      case Symbol.King if (color == Diamonds) => DK
+          case Symbol.ASS if (color == Diamonds) => DA
+          case Symbol.Two if (color == Diamonds) => D2
+          case Symbol.Three if (color == Diamonds) => D3
+          case Symbol.Four if (color == Diamonds) => D4
+          case Symbol.Five if (color == Diamonds) => D5
+          case Symbol.Six if (color == Diamonds) => D6
+          case Symbol.Seven if (color == Diamonds) => D7
+          case Symbol.Eight if (color == Diamonds) => D8
+          case Symbol.Nine if (color == Diamonds) => D9
+          case Symbol.Ten if (color == Diamonds) => D10
+          case Symbol.Jack if (color == Diamonds) => DJ
+          case Symbol.Lady if (color == Diamonds) => DL
+          case Symbol.King if (color == Diamonds) => DK
+        }
+      }
     }
   }
 
   def imgPath: String = {
     symbol match {
-      case Symbol.ASS if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/ace_of_hearts.png"
-      case Symbol.Two if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/2_of_hearts.png"
-      case Symbol.Three if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/3_of_hearts.png"
-      case Symbol.Four if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/4_of_hearts.png"
-      case Symbol.Five if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/5_of_hearts.png"
-      case Symbol.Six if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/6_of_hearts.png"
-      case Symbol.Seven if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/7_of_hearts.png"
-      case Symbol.Eight if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/8_of_hearts.png"
-      case Symbol.Nine if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/9_of_hearts.png"
-      case Symbol.Ten if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/10_of_hearts.png"
-      case Symbol.Jack if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/jack_of_hearts.png"
-      case Symbol.Lady if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/queen_of_hearts.png"
-      case Symbol.King if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/king_of_hearts.png"
+      case Some(c: Symbol.Value) => color match {
+        case Some(color: Color.Value) => c match {
+          case Symbol.ASS if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/ace_of_hearts.png"
+          case Symbol.Two if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/2_of_hearts.png"
+          case Symbol.Three if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/3_of_hearts.png"
+          case Symbol.Four if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/4_of_hearts.png"
+          case Symbol.Five if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/5_of_hearts.png"
+          case Symbol.Six if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/6_of_hearts.png"
+          case Symbol.Seven if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/7_of_hearts.png"
+          case Symbol.Eight if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/8_of_hearts.png"
+          case Symbol.Nine if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/9_of_hearts.png"
+          case Symbol.Ten if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/10_of_hearts.png"
+          case Symbol.Jack if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/jack_of_hearts.png"
+          case Symbol.Lady if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/queen_of_hearts.png"
+          case Symbol.King if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/king_of_hearts.png"
 
-      case Symbol.ASS if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/ace_of_spades.png"
-      case Symbol.Two if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/2_of_spades.png"
-      case Symbol.Three if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/3_of_spades.png"
-      case Symbol.Four if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/4_of_spades.png"
-      case Symbol.Five if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/5_of_spades.png"
-      case Symbol.Six if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/6_of_spades.png"
-      case Symbol.Seven if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/7_of_spades.png"
-      case Symbol.Eight if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/8_of_spades.png"
-      case Symbol.Nine if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/9_of_spades.png"
-      case Symbol.Ten if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/10_of_spades.png"
-      case Symbol.Jack if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/jack_of_spades.png"
-      case Symbol.Lady if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/queen_of_spades.png"
-      case Symbol.King if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/king_of_spades.png"
+          case Symbol.ASS if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/ace_of_spades.png"
+          case Symbol.Two if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/2_of_spades.png"
+          case Symbol.Three if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/3_of_spades.png"
+          case Symbol.Four if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/4_of_spades.png"
+          case Symbol.Five if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/5_of_spades.png"
+          case Symbol.Six if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/6_of_spades.png"
+          case Symbol.Seven if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/7_of_spades.png"
+          case Symbol.Eight if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/8_of_spades.png"
+          case Symbol.Nine if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/9_of_spades.png"
+          case Symbol.Ten if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/10_of_spades.png"
+          case Symbol.Jack if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/jack_of_spades.png"
+          case Symbol.Lady if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/queen_of_spades.png"
+          case Symbol.King if (color == Spades) => "file:src/main/scala/de/htwg/se/maumau/util/textures/king_of_spades.png"
 
-      case Symbol.ASS if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/ace_of_clubs.png"
-      case Symbol.Two if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/2_of_clubs.png"
-      case Symbol.Three if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/3_of_clubs.png"
-      case Symbol.Four if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/4_of_clubs.png"
-      case Symbol.Five if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/5_of_clubs.png"
-      case Symbol.Six if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/6_of_clubs.png"
-      case Symbol.Seven if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/7_of_clubs.png"
-      case Symbol.Eight if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/8_of_clubs.png"
-      case Symbol.Nine if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/9_of_clubs.png"
-      case Symbol.Ten if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/10_of_clubs.png"
-      case Symbol.Jack if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/jack_of_clubs.png"
-      case Symbol.Lady if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/queen_of_clubs.png"
-      case Symbol.King if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/king_of_clubs.png"
+          case Symbol.ASS if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/ace_of_clubs.png"
+          case Symbol.Two if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/2_of_clubs.png"
+          case Symbol.Three if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/3_of_clubs.png"
+          case Symbol.Four if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/4_of_clubs.png"
+          case Symbol.Five if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/5_of_clubs.png"
+          case Symbol.Six if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/6_of_clubs.png"
+          case Symbol.Seven if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/7_of_clubs.png"
+          case Symbol.Eight if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/8_of_clubs.png"
+          case Symbol.Nine if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/9_of_clubs.png"
+          case Symbol.Ten if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/10_of_clubs.png"
+          case Symbol.Jack if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/jack_of_clubs.png"
+          case Symbol.Lady if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/queen_of_clubs.png"
+          case Symbol.King if (color == Clubs) => "file:src/main/scala/de/htwg/se/maumau/util/textures/king_of_clubs.png"
 
-      case Symbol.ASS if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/ace_of_diamonds.png"
-      case Symbol.Two if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/2_of_diamonds.png"
-      case Symbol.Three if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/3_of_diamonds.png"
-      case Symbol.Four if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/4_of_diamonds.png"
-      case Symbol.Five if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/5_of_diamonds.png"
-      case Symbol.Six if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/6_of_diamonds.png"
-      case Symbol.Seven if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/7_of_diamonds.png"
-      case Symbol.Eight if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/8_of_diamonds.png"
-      case Symbol.Nine if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/9_of_diamonds.png"
-      case Symbol.Ten if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/10_of_diamonds.png"
-      case Symbol.Jack if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/jack_of_diamonds.png"
-      case Symbol.Lady if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/queen_of_diamonds.png"
-      case Symbol.King if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/king_of_diamonds.png"
+          case Symbol.ASS if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/ace_of_diamonds.png"
+          case Symbol.Two if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/2_of_diamonds.png"
+          case Symbol.Three if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/3_of_diamonds.png"
+          case Symbol.Four if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/4_of_diamonds.png"
+          case Symbol.Five if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/5_of_diamonds.png"
+          case Symbol.Six if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/6_of_diamonds.png"
+          case Symbol.Seven if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/7_of_diamonds.png"
+          case Symbol.Eight if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/8_of_diamonds.png"
+          case Symbol.Nine if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/9_of_diamonds.png"
+          case Symbol.Ten if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/10_of_diamonds.png"
+          case Symbol.Jack if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/jack_of_diamonds.png"
+          case Symbol.Lady if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/queen_of_diamonds.png"
+          case Symbol.King if (color == Diamonds) => "file:src/main/scala/de/htwg/se/maumau/util/textures/king_of_diamonds.png"
+        }
+      }
     }
   }
 }
