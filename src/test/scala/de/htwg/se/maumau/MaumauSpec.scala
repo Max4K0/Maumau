@@ -21,7 +21,6 @@ class MaumauSpec extends AnyWordSpec with Matchers {
       val in = new ByteArrayInputStream("quit".getBytes())
       Console.withIn(in) {
         Maumau.main(Array("3", "q"))
-
       }
     }
     "run normal and quit" in {
