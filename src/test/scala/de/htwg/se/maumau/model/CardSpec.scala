@@ -47,6 +47,9 @@ class CardSpec extends AnyWordSpec with Matchers {
       "UTF8 of all cards should look like" in {
         fullDeck.cards.map(Card => Card.UTFSymbols) should be(fullDeck.cards.map(Card => Card.UTFSymbols))
       }
+      "ImgPath of all cards should look like" in {
+        fullDeck.cards.map(Card => Card.imgPath) should be(fullDeck.cards.map(Card => Card.imgPath))
+      }
 //      "UTF 8 View of card2 should look like" in {
 //        card2.UTFSymbols should be("\u001B[30m\uD83C\uDCCE")
 //      }
