@@ -10,15 +10,21 @@ case class TUI(controller: Controller) extends Observer {
   controller.add(this)
   def processInputLine(input: String):String = {
     input.toString match {
-      case "help" => println("throw card \n take card \n q = quit Game \n")
+      case "help" => println("Commands       Description\n" +
+        "throw card   => You throw a card\n" +
+        "take card    => You take a card\n" +
+        "change strat => Chance the Settings\n" +
+        "z            => Go one step back\n" +
+        "r            => Go one step forward\n" +
+        "q            => Quit the game")
         "valid input"
 
       case "z" =>println("")
         if (State.state.equals("")) {
-          println("you cant undo the start")
+          println("You cannot use undo at the beginning of the game!")
           "invalid undo"
         } else {
-          println("|-----Undooooooo!-----|")
+          println("<-<-<-Undooo!<-<-<-")
           controller.undo
 
           "valid undo"
@@ -27,21 +33,21 @@ case class TUI(controller: Controller) extends Observer {
       case "r" =>println("")
         println(State.state)
         if (State.state.equals("")) {
-          println("you cant redo the start")
+          println("You are already at the latest position!")
           "invalid redo"
         } else {
-          println("|-----reedoo!-----|")
+          println("->->->Redooo!->->->")
           controller.redo
           "valid redo"
         }
 
-      case "throw card" => println("wich card?")
+      case "throw card" => println("Wich card?")
         val cardNumber = readLine().toInt
         if (controller.checkCard(cardNumber)) {
           Try {controller.throwCard(cardNumber)} match {
 //          case Failure(e) => println(e.getMessage)
 //            "invalid throw"
-            case Success(e) => print("commands: throw card, take card, q for Quit")
+            case Success(e) => print("Success!\n")
               "valid throw"
           }
           //println("\n\n")
@@ -50,13 +56,13 @@ case class TUI(controller: Controller) extends Observer {
 
         } else {
           //State.handle(invalidThrowEvent())
-          println("you cant throw this card")
+          println("You cant throw this card")
           "invalid throw"
         }
 
-      case "change strat" => println("select strat")
-        println("standard:  1")
-        println("special:   2")
+      case "change strat" => println("Select strat")
+        println("Type 1 for the default settings")
+        println("Type 2 for the special settings")
         val stratNumber = readLine().toInt
 
         stratNumber match {
@@ -80,7 +86,7 @@ case class TUI(controller: Controller) extends Observer {
           Try {controller.takeCard()} match {
 //            case Failure(e) => println(e.getMessage)
 //              "invalid try"
-            case Success(e) => println("commands: throw card, take card, q for Quit")
+            case Success(e) => println("Success!\n")
               State.handle(nextPlayerEvent())
               println("")
               println(controller)
@@ -88,12 +94,12 @@ case class TUI(controller: Controller) extends Observer {
           }
 
         }
-      case "q" =>
+      case "quit" =>
         State.handle(winEvent())
 
         "valid input"
       case _ => //State.handle(unknownCommandEvent())
-        println("invalid command\ncommands: throw card, take card, q for Quit")
+        println("Invalid command! Type help to see all commands.")
 
         "invalid input"
     }

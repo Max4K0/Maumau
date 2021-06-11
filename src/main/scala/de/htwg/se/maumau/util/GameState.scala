@@ -19,5 +19,5 @@ case class nextPlayerEvent() extends GameState {
 //}
 
 case class winEvent() extends GameState {
-  def gameOver  = if (State.state == "Player1:") "♥♦♣♠--Player 2 won!--♥♦♣♠" else "♥♦♣♠--Player 1 won!--♥♦♣♠"
+  def gameOver  = if (State.state == "Player1:") "♦♥♠♣--Player 2 won!--♣♠♥♦" else "♦♥♠♣--Player 1 won!--♣♠♥♦"
 }

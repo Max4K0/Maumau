@@ -14,6 +14,7 @@ class Controller(var table: Table) extends Observable {
   var strategy = 1
   var shouldUpdate = true
   var checkCardLable = false
+  var visiblesettings = false
  //var commands = Stack[Comma]()
 
   def throwCard(cardNumber: Int): Unit = {

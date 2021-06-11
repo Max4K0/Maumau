@@ -1,7 +1,7 @@
 package de.htwg.se.maumau.aview
 
 import de.htwg.se.maumau.controller.Controller
-import de.htwg.se.maumau.util.State
+import de.htwg.se.maumau.util.{State, winEvent}
 import scalafx.Includes.observableList2ObservableBuffer
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{JFXApp, Platform}
@@ -21,10 +21,10 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
 
           title = "MauMau"
 
+          this.getIcons.add(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/icon.png", 500, 500, true, true))
 
-
-          onCloseRequest = (eventHandler) =>{
-            System.exit(1)
+          onCloseRequest = (eventHandler) => {
+            System.exit(0)
           }
 
           scene = new Scene(1320, 900) {
@@ -40,10 +40,36 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
 
             content = view2
 
+            /*
+              Labels
+            */
+
+            content += new HBox {
+
+
+              this.padding = Insets(0, 0, 0, 0)
+              children = Seq(
+
+                new Label() {
+                  this.padding = Insets(580, 0, 0, 545)
+                  this.text = "-You can not put this card-"
+
+                  this.visible = controller.checkCardLable
+                },
+
+                new Label() {
+                  this.setStyle("-fx-font-size: 25")
+                  this.padding = Insets(400, 0, 0, -270)
+                  this.text = winEvent().gameOver
+                  this.visible = controller.table.player(playerNumber).playerDeck.cards.size == 0
+
+                }
+              )
+            }
 
             /*
-        * Player 1 Cards
-        * */
+              Player 1 Cards
+            */
 
             val playerNumber = if (State.state == "Player1:") 1 else 0
 
@@ -51,7 +77,7 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
               children.addAll(new Button() {
                 this.visible = false
               })
-              this.padding = Insets(680, 0, 0, 400)
+              this.padding = Insets(680, 0, 0, 635 - (45 * controller.table.player(playerNumber).playerDeck.cards.size))
               for (x <- 0 to controller.table.player(playerNumber).playerDeck.cards.size - 1) {
                 children.addAll(new Button() {
                   this.padding = Insets(0, 0, 0, -30)
@@ -79,7 +105,8 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
                     }
                     if (controller.checkCard(x +1)) {
                       Try {controller.throwCard(x +1)} match {
-                        case Success(e) => print("commands: throw card, take card, q for Quit")
+                        case Success(e) => print("Success!\n")
+                          controller.checkCardLable = false
                       }
                     } else {
                       /*
@@ -87,34 +114,38 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
                        */
 
                       controller.checkCardLable = true
-                      println("you cant throw this card")
+                      println("You cant throw this card")
                     }
                     //controller.throwCard(+ 1)
                     reprint()
-                    println(x + 1)
                   }
                 })
               }
             }
             /*
-        * Player 2 Cards
-        * */
+              Player 2 Cards
+            */
 
             for (x <- 0 to controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size - 1) {
               content += new HBox {
-                padding = Insets(50, 0, 0, 455 + x * 80)
+
+              padding = Insets(55, 0, 0, 642 + (x * 62) - (31 * controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size))
                 children = Seq(
                   new Label() {
                     //this.setGraphic(new ImageView(new Image(controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards(x).imgPath, cardSizeX - 50, cardSizeY - 50, true, true)))
-                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 50, cardSizeY - 50, true, true)))
+                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 45, cardSizeY - 45, true, true)))
                     this.setStyle("-fx-background-color: transparent")
                     effect = new Lighting
-                    this.visible = true
+                    this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0
 
                   }
                 )
               }
             }
+
+            /*
+              Middle Cards
+            */
             content += new HBox {
 
 
@@ -125,8 +156,7 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
                   this.setGraphic(new ImageView(new Image(controller.table.tableDecks(1).cards.last.imgPath, cardSizeX - 10, cardSizeY - 10, true, true)))
                   this.setStyle("-fx-background-color: transparent")
                   effect = new Lighting
-                  this.visible = true
-
+                  this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0
                 },
 
                 new Label() {
@@ -135,26 +165,126 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
                   this.setStyle("-fx-background-color: transparent")
 
                   this.onMouseEntered = (MouseEvent) => {
-                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX * 1.1, cardSizeY * 1.1, true, true)))
-
+                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", (cardSizeX - 10) * 1.1, (cardSizeY - 10) * 1.1, true, true)))
+                    this.padding = Insets(-5, 0, 0, 15)
                   }
                   this.onMouseExited = (MouseEvent) => {
                     this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
+                    this.padding = Insets(0, 0, 0, 20)
                   }
 
                   this.onMouseClicked = (MouseEvent) => {
                     this.onMouseExited = (MouseEvent) => {
+
                     }
-                    controller.takeCard()
-                    State.state = if (State.state == "Player1:") "Player2:" else "Player1:"
+                    Try {controller.takeCard()} match {
+                      //            case Failure(e) => println(e.getMessage)
+                      //              "invalid try"
+                      case Success(e) => println("Success!\n")
+                        State.state = if (State.state == "Player1:") "Player2:" else "Player1:"
+                        "valid pull"
+                    }
+
                     reprint()
                   }
                   effect = new Lighting
-                  this.visible = true
+                  this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0
 
                 }
               )
             }
+            /*
+              Undo and redo
+            */
+
+            content += new HBox {
+
+
+              this.padding = Insets(820, 0, 0, 0)
+              children = Seq(
+
+                new Label() {
+                  this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/settings.png", cardSizeX - 80, cardSizeY - 100, false, true)))
+                  this.setStyle("-fx-background-color: transparent")
+                  this.padding = Insets(0, 0, 0, 0)
+                  this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0
+
+                  this.onMouseEntered = (MouseEvent) => {
+                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/settings2.png", cardSizeX - 80, cardSizeY - 100, false, true)))
+
+                  }
+                  this.onMouseExited = (MouseEvent) => {
+                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/settings.png", cardSizeX - 80, cardSizeY - 100, false, true)))
+
+                  }
+
+                  this.onMouseClicked = (MouseEvent) => {
+                    this.onMouseExited = (MouseEvent) => {
+
+                    }
+                    if(controller.visiblesettings == true) {
+                      controller.visiblesettings = false
+                    } else {
+                      controller.visiblesettings = true
+                    }
+
+                    reprint()
+                  }
+                  this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0
+
+                },
+
+
+                new Label() {
+                  this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/left.png", cardSizeX - 80, cardSizeY - 80, false, true)))
+                  this.setStyle("-fx-background-color: transparent")
+                  this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0
+                  this.padding = Insets(0, 0, 0, 0)
+                  this.onMouseEntered = (MouseEvent) => {
+                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/left.png", cardSizeX - 80, cardSizeY - 80, false, true)))
+                    this.padding = Insets(2, 0, 0, 0)
+                  }
+                  this.onMouseExited = (MouseEvent) => {
+                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/left.png", cardSizeX - 80, cardSizeY - 80, false, true)))
+                    this.padding = Insets(0, 0, 0, 0)
+                  }
+
+                  this.onMouseClicked = (MouseEvent) => {
+                    this.onMouseExited = (MouseEvent) => {}
+                    controller.undo
+                    reprint()
+                  }
+                  this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.visiblesettings
+
+                },
+
+                new Label() {
+                  this.padding = Insets(0, 0, 0, 0)
+                  this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/right.png", cardSizeX - 80, cardSizeY - 80, false, true)))
+                  this.setStyle("-fx-background-color: transparent")
+                  this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0
+
+                  this.onMouseEntered = (MouseEvent) => {
+                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/right.png", cardSizeX - 80, cardSizeY - 80, false, true)))
+                    this.padding = Insets(2, 0, 0, 0)
+                  }
+                  this.onMouseExited = (MouseEvent) => {
+                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/right.png", cardSizeX - 80, cardSizeY - 80, false, true)))
+                    this.padding = Insets(0, 0, 0, 0)
+                  }
+
+                  this.onMouseClicked = (MouseEvent) => {
+                    this.onMouseExited = (MouseEvent) => {}
+                    controller.redo
+                    reprint()
+                  }
+                  this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.visiblesettings
+
+                }
+              )
+            }
+
+
           }
 
         }
