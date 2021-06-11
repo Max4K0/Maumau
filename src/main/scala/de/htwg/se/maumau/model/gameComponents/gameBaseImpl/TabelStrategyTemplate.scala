@@ -1,4 +1,4 @@
-package de.htwg.se.maumau.model.gameBaseImpl
+package de.htwg.se.maumau.model.gameComponents.gameBaseImpl
 
 trait TabelStrategyTemplate {
   def checkCard(table: Table, playerNumber: Int, cardNumber: Int): Boolean

@@ -1,5 +1,5 @@
-package de.htwg.se.maumau.model.gameAdvanceImpl
-/*
+package de.htwg.se.maumau.model.gameComponents.gameBaseImpl
+
 import de.htwg.se.maumau.util.{State, nextPlayerEvent, winEvent}
 
 import scala.util.Random
@@ -75,4 +75,3 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
   }
 
 }
-*/

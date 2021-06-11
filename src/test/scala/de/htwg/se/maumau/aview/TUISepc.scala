@@ -3,7 +3,7 @@ package de.htwg.se.maumau.aview
 import de.htwg.se.maumau.Maumau
 import de.htwg.se.maumau.Maumau.{controller, welcome}
 import de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl.Controller
-import de.htwg.se.maumau.model.gameBaseImpl.Table
+import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.Table
 import de.htwg.se.maumau.util.{State, winEvent}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
@@ -24,8 +24,8 @@ class TUISepc extends AnyWordSpec with Matchers {
 
       "tui invalid input should be" in {
         State.state = ""
-              tui.processInputLine("r") should be("invalid redo")
-              tui.processInputLine("z") should be("invalid undo")
+              tui.processInputLine("redo") should be("invalid redo")
+              tui.processInputLine("undo") should be("invalid undo")
               tui.processInputLine(input = "fdf") should be("invalid input")
       }
       "tui help input should be" in {
@@ -35,9 +35,9 @@ class TUISepc extends AnyWordSpec with Matchers {
        val in = new ByteArrayInputStream("3".getBytes)
        Console.withIn(in) { tui.processInputLine("throw card") should be("valid throw")
          State.state should be("Player1:")
-         tui.processInputLine("r") should be("valid redo")
+         tui.processInputLine("redo") should be("valid redo")
          State.state should be("Player1:")
-         tui.processInputLine("z") should be("valid undo")
+         tui.processInputLine("undo") should be("valid undo")
        }
      }
       "tui invalid throw card input with strategy 1 should be" in {
@@ -58,18 +58,18 @@ class TUISepc extends AnyWordSpec with Matchers {
        tui.processInputLine(input = "q") should be("invalid input")
      }
       "tui valid take card should be" in {
-        val in = new ByteArrayInputStream("2".getBytes)
-        Console.withIn(in) { tui.processInputLine("change strat") should be("valid strategy")}
-        tui.processInputLine(input = "take card") should be("valid pull")
-        tui.processInputLine("r") should be("valid redo")
-        tui.processInputLine("z") should be("valid undo")
-      }
-      "tui invalid take card should be" in {
         val in = new ByteArrayInputStream("1".getBytes)
         Console.withIn(in) { tui.processInputLine("change strat") should be("valid strategy")}
+        tui.processInputLine(input = "take card") should be("valid pull")
+        tui.processInputLine("redo") should be("valid redo")
+        tui.processInputLine("undo") should be("valid undo")
+      }
+      "tui invalid take card should be" in {
+        val in = new ByteArrayInputStream("2".getBytes)
+        Console.withIn(in) { tui.processInputLine("change strat") should be("valid strategy")}
         tui.processInputLine(input = "take card") should be("invalid pull")
-        tui.processInputLine("r") should be("valid redo")
-        tui.processInputLine("z") should be("valid undo")
+        tui.processInputLine("redo") should be("valid redo")
+        tui.processInputLine("undo") should be("valid undo")
       }
       "tui invalid strategy should be" in {
         val in = new ByteArrayInputStream("11".getBytes)

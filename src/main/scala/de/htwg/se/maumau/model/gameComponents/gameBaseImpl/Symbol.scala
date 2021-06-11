@@ -1,4 +1,4 @@
-package de.htwg.se.maumau.model.gameBaseImpl
+package de.htwg.se.maumau.model.gameComponents.gameBaseImpl
 
 object Symbol extends Enumeration {
   type Symbols = Value

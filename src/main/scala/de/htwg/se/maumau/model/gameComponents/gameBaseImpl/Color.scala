@@ -1,4 +1,4 @@
-package de.htwg.se.maumau.model.gameBaseImpl
+package de.htwg.se.maumau.model.gameComponents.gameBaseImpl
 
 object Color extends Enumeration {
   type Color = Value

@@ -44,18 +44,13 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
 
         labels
         def labels: Unit = {
-
-
           content += new HBox {
-
-
             this.padding = Insets(0, 0, 0, 0)
             children = Seq(
 
               new Label() {
                 this.padding = Insets(580, 0, 0, 545)
-                this.text = "-You can not put this card-"
-
+                this.text = "-You can not throw this card-"
                 this.visible = controller.checkCardLable
               },
 

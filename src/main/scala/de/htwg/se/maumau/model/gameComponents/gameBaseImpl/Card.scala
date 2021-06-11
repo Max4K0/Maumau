@@ -1,7 +1,7 @@
-package de.htwg.se.maumau.model.gameBaseImpl
+package de.htwg.se.maumau.model.gameComponents.gameBaseImpl
 
-import de.htwg.se.maumau.model.gameBaseImpl.Color._
-import de.htwg.se.maumau.model.gameBaseImpl.Symbol._
+import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.Color._
+import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.Symbol._
 
 case class Card(color: Color, symbol: Symbols) {
   /**

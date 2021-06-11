@@ -1,4 +1,4 @@
-package de.htwg.se.maumau.model.gameBaseImpl
+package de.htwg.se.maumau.model.gameComponents.gameBaseImpl
 
 abstract class AbstractTable(player: List[Player] , tableDecks: List[Deck]) {
 

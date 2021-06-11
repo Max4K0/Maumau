@@ -14,13 +14,13 @@ case class TUI(controller: ControllerInterface) extends Observer {
       case "help" => println("Commands       Description\n" +
         "throw card   => You throw a card\n" +
         "take card    => You take a card\n" +
-        "change strat => Chance the Settings\n" +
-        "z            => Go one step back\n" +
-        "r            => Go one step forward\n" +
-        "q            => Quit the game")
+        "change strat => Chance the Strategy\n" +
+        "undo         => Go one step back\n" +
+        "redo         => Go one step forward\n" +
+        "quit         => Quit the game")
         "valid input"
 
-      case "z" =>println("")
+      case "undo" =>println("")
         if (State.state.equals("")) {
           println("You cannot use undo at the beginning of the game!")
           "invalid undo"
@@ -31,7 +31,7 @@ case class TUI(controller: ControllerInterface) extends Observer {
           "valid undo"
         }
 
-      case "r" =>println("")
+      case "redo" =>println("")
         println(State.state)
         if (State.state.equals("")) {
           println("You are already at the latest position!")

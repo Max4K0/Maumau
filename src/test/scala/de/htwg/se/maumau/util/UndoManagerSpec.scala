@@ -3,7 +3,7 @@ package de.htwg.se.maumau.util
 import de.htwg.se.maumau.Maumau
 import de.htwg.se.maumau.aview.{TUI, Welcome}
 import de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl.Controller
-import de.htwg.se.maumau.model.gameBaseImpl.Table
+import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.Table
 
 import java.security.KeyStore.TrustedCertificateEntry
 import de.htwg.se.maumau.util.Observer
@@ -26,11 +26,11 @@ class UndoManagerSpec extends AnyWordSpec with Matchers {
         controller.tables = Stack[Table]()
         controller.states = Stack[String]("")
         State.state=""
-        tui.processInputLine("r") should be("invalid redo")
+        tui.processInputLine("redo") should be("invalid redo")
         controller.undo should be()
         controller.redo should be()
         State.state=""
-        tui.processInputLine("z") should be("invalid undo")
+        tui.processInputLine("undo") should be("invalid undo")
       }
 
 
