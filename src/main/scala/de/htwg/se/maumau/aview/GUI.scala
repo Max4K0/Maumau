@@ -13,6 +13,8 @@ import scalafx.scene.effect.Lighting
 import scalafx.scene.image._
 import scalafx.scene.layout.HBox
 
+import scala.collection.Seq
+import scala.language.implicitConversions
 import scala.util.{Success, Try}
 
 case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp {

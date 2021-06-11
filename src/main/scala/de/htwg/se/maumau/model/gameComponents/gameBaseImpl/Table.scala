@@ -16,8 +16,8 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
 
   override def checkDeck(table: Table, playerNumber: Int): Boolean = {
     val currentPlayer = table.player(playerNumber)
-    currentPlayer.playerDeck.cards.map(Card => Some(Card.symbol)).contains(tableDecks(1).cards.last.symbol) ||
-      currentPlayer.playerDeck.cards.map(Card => Some(Card.color)).contains(tableDecks(1).cards.last.color)
+    currentPlayer.playerDeck.cards.map(Card => Card.symbol).contains(tableDecks(1).cards.last.symbol) ||
+      currentPlayer.playerDeck.cards.map(Card => Card.color).contains(tableDecks(1).cards.last.color)
   }
 
   override def addPlayers(table: Table, name: String, playerNumber: Int): Table = {

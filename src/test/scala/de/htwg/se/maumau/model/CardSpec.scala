@@ -11,8 +11,8 @@ class CardSpec extends AnyWordSpec with Matchers {
   "Card" when {
     "new" should {
       val fullDeck = Deck().fillDeck
-      val card = Card(Some(Color.Clubs), Some(Symbol.ASS))
-      val card2 = Card(Some(Color.Diamonds), Some(Symbol.King))
+      val card = Card(Color.Clubs, Symbol.ASS)
+      val card2 = Card(Color.Diamonds, Symbol.King)
       "Symbol of card should" in {
         card.color should be(Color.Clubs)
       }

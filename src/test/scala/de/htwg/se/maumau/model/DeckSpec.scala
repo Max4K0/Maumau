@@ -34,7 +34,7 @@ class DeckSpec extends AnyWordSpec with Matchers {
         fullDeck.throwOneCard(5, testPlayerDeck)._2 should be(fullDeck.throwOneCard(5, testPlayerDeck)._2)
       }
       "second Deck after fullDeck used throwOneCard (Throw the fifth Card)" in {
-        fullDeck.throwOneCard(5, testPlayerDeck)._1 should be(Deck(List(Card(Some(Color.Clubs), Some(Symbol.Five)))))
+        fullDeck.throwOneCard(5, testPlayerDeck)._1 should be(Deck(List(Card(Color.Clubs, Symbol.Five))))
       }
     }
   }
