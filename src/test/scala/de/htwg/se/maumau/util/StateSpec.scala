@@ -1,7 +1,7 @@
 package de.htwg.se.maumau.util
 
 import de.htwg.se.maumau.aview.{TUI, Welcome}
-import de.htwg.se.maumau.controller.Controller
+import de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.maumau.util.State
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
@@ -31,12 +31,12 @@ class StateSpec extends AnyWordSpec with Matchers{
       "state a Player 1 win should be" in {
         State.state= "Player2:"
         State.handle(winEvent())
-        State.state should be("♥♦♣♠--Player 1 won!--♥♦♣♠")
+        State.state should be("♦♥♠♣--Player 1 won!--♣♠♥♦")
       }
       "state a Player 2 win should be" in {
         State.state= "Player1:"
         State.handle(winEvent())
-        State.state should be("♥♦♣♠--Player 2 won!--♥♦♣♠")
+        State.state should be("♦♥♠♣--Player 2 won!--♣♠♥♦")
       }
       //"state after invalid pull event should be" in {
       //  State.handle(invalidPullEvent())

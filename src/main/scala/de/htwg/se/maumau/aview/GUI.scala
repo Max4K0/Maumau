@@ -1,6 +1,7 @@
 package de.htwg.se.maumau.aview
 
-import de.htwg.se.maumau.controller.Controller
+import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
+import de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.maumau.util.{State, winEvent}
 import scalafx.Includes.observableList2ObservableBuffer
 import scalafx.application.JFXApp.PrimaryStage
@@ -13,7 +14,7 @@ import scalafx.scene.image._
 import scalafx.scene.layout.HBox
 
 import scala.util.{Success, Try}
-case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
+case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp {
 
   loop()
   def reprint() {
@@ -106,14 +107,14 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
                     if (controller.checkCard(x +1)) {
                       Try {controller.throwCard(x +1)} match {
                         case Success(e) => print("Success!\n")
-                          controller.checkCardLable = false
+                          controller.changeCheckCardLable(false)
                       }
                     } else {
                       /*
                       Invalid Card push Message
                        */
 
-                      controller.checkCardLable = true
+                      controller.changeCheckCardLable(true)
                       println("You cant throw this card")
                     }
                     //controller.throwCard(+ 1)
@@ -223,9 +224,11 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
 
                     }
                     if(controller.visiblesettings == true) {
-                      controller.visiblesettings = false
+                      //controller.visiblesettings = false
+                      controller.changeVis()
                     } else {
-                      controller.visiblesettings = true
+                      //controller.visiblesettings = true
+                      controller.changeVis()
                     }
 
                     reprint()
@@ -292,7 +295,7 @@ case class GUI (guiApp: GUIApp, controller: Controller) extends JFXApp {
       def loop(): Unit = {
         Platform.runLater(new Runnable(){
           if (controller.shouldUpdate) {
-            controller.shouldUpdate = false
+            controller.changeShouldUpdate(false)
             reprint()
           }
         override def run(): Unit = {

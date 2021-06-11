@@ -2,7 +2,7 @@ package de.htwg.se.maumau.aview
 
 import de.htwg.se.maumau.Maumau
 import de.htwg.se.maumau.Maumau.{controller, welcome}
-import de.htwg.se.maumau.controller.Controller
+import de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.maumau.model.gameBaseImpl.Table
 import de.htwg.se.maumau.util.{State, winEvent}
 import org.scalatest.matchers.should.Matchers
@@ -60,7 +60,7 @@ class TUISepc extends AnyWordSpec with Matchers {
       "tui valid take card should be" in {
         val in = new ByteArrayInputStream("2".getBytes)
         Console.withIn(in) { tui.processInputLine("change strat") should be("valid strategy")}
-        tui.processInputLine(input = "take card") should be("invalid pull")
+        tui.processInputLine(input = "take card") should be("valid pull")
         tui.processInputLine("r") should be("valid redo")
         tui.processInputLine("z") should be("valid undo")
       }

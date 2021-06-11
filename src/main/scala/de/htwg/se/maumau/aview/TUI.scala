@@ -1,12 +1,13 @@
 package de.htwg.se.maumau.aview
 
-import de.htwg.se.maumau.controller.Controller
+import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
+import de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.maumau.util.{Observer, State, nextPlayerEvent, winEvent}
 
 import scala.io.StdIn.readLine
 import scala.util.{Success, Try}
 
-case class TUI(controller: Controller) extends Observer {
+case class TUI(controller: ControllerInterface) extends Observer {
   controller.add(this)
   def processInputLine(input: String):String = {
     input.toString match {
@@ -67,10 +68,10 @@ case class TUI(controller: Controller) extends Observer {
 
         stratNumber match {
             case 1 => print("you choose normal")
-              controller.strategy = 1
+              controller.changeStrat(1)
               "valid strategy"
             case 2 => print("you choose special")
-              controller.strategy = 2
+              controller.changeStrat(2)
               "valid strategy"
             case _ => print("no valid strategy")
               "invalid strategy"

@@ -1,14 +1,14 @@
-package de.htwg.se.maumau.controller
+package de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl
 
-
-import de.htwg.se.maumau.model.gameBaseImpl.Table
+import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
 import de.htwg.se.maumau.model.gameBaseImpl.{TabelStrictStrategy, Table}
 import de.htwg.se.maumau.util.{Observable, State, UndoManager}
 
 import scala.collection.mutable.Stack
 
-class Controller(var table: Table) extends Observable {
+class Controller(var table1: Table) extends ControllerInterface  {
 
+  var table= table1
   private val undoManager = new UndoManager
   var tables = Stack[Table]()
   var states = Stack[String]("")
@@ -17,6 +17,22 @@ class Controller(var table: Table) extends Observable {
   var checkCardLable = false
   var visiblesettings = false
  //var commands = Stack[Comma]()
+
+
+  def changeStrat(InStrat: Int): Unit = {
+    strategy = InStrat
+  }
+  def changeVis(): Boolean = {
+  if (visiblesettings == false) visiblesettings = true else visiblesettings = false
+    visiblesettings
+  }
+  def changeCheckCardLable(checkCard: Boolean): Unit = {
+    checkCardLable = checkCard
+  }
+
+  def changeShouldUpdate(InshouldUpdate: Boolean): Unit = {
+    shouldUpdate = InshouldUpdate
+  }
 
   def throwCard(cardNumber: Int): Unit = {
     tables.push(table)

@@ -1,6 +1,6 @@
 package de.htwg.se.maumau.aview
 
-import de.htwg.se.maumau.controller.Controller
+import de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.maumau.util.Observer
 
 

@@ -1,4 +1,4 @@
-package de.htwg.se.maumau.controller
+package de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl
 
 import de.htwg.se.maumau.util.{Command, State}
 
