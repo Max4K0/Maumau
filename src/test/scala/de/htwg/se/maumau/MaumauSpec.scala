@@ -4,7 +4,7 @@ import de.htwg.se.maumau.aview.{TUI, Welcome}
 import de.htwg.se.maumau.controller.Controller
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import de.htwg.se.maumau.model.{Card, Color, Deck, Symbol, Table}
+import de.htwg.se.maumau.model.gameBaseImpl.Table
 
 import java.io.ByteArrayInputStream
 import scala.util.Random

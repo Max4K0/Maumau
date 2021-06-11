@@ -2,7 +2,6 @@ package de.htwg.se.maumau.util
 
 import de.htwg.se.maumau.aview.{TUI, Welcome}
 import de.htwg.se.maumau.controller.Controller
-import de.htwg.se.maumau.model.{Card, Deck, Player, Table}
 import de.htwg.se.maumau.util.State
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec

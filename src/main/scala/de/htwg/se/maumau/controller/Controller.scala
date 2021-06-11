@@ -1,7 +1,8 @@
 package de.htwg.se.maumau.controller
 
 
-import de.htwg.se.maumau.model.{TabelStrictStrategy, Table}
+import de.htwg.se.maumau.model.gameBaseImpl.Table
+import de.htwg.se.maumau.model.gameBaseImpl.{TabelStrictStrategy, Table}
 import de.htwg.se.maumau.util.{Observable, State, UndoManager}
 
 import scala.collection.mutable.Stack

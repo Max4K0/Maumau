@@ -1,8 +1,7 @@
-package de.htwg.se.maumau.model
-import de.htwg.se.maumau.model._
-import de.htwg.se.maumau.controller._
-import de.htwg.se.maumau.model.Color._
-import de.htwg.se.maumau.model.Symbol._
+package de.htwg.se.maumau.model.gameBaseImpl
+
+import de.htwg.se.maumau.model.gameBaseImpl.Color._
+import de.htwg.se.maumau.model.gameBaseImpl.Symbol._
 
 case class Card(color: Color, symbol: Symbols) {
   /**
@@ -145,6 +144,7 @@ case class Card(color: Color, symbol: Symbols) {
       case Symbol.King if (color == Diamonds) => DK
     }
   }
+
   def imgPath: String = {
     symbol match {
       case Symbol.ASS if (color == Hearts) => "file:src/main/scala/de/htwg/se/maumau/util/textures/ace_of_hearts.png"

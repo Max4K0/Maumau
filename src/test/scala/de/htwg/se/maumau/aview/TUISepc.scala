@@ -2,8 +2,8 @@ package de.htwg.se.maumau.aview
 
 import de.htwg.se.maumau.Maumau
 import de.htwg.se.maumau.Maumau.{controller, welcome}
-import de.htwg.se.maumau.model.{Card, Color, Deck, Player, Symbol, Table}
 import de.htwg.se.maumau.controller.Controller
+import de.htwg.se.maumau.model.gameBaseImpl.Table
 import de.htwg.se.maumau.util.{State, winEvent}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
@@ -55,12 +55,12 @@ class TUISepc extends AnyWordSpec with Matchers {
 
 
      "tui valid game exit should be" in {
-       tui.processInputLine(input = "q") should be("valid input")
+       tui.processInputLine(input = "q") should be("invalid input")
      }
       "tui valid take card should be" in {
         val in = new ByteArrayInputStream("2".getBytes)
         Console.withIn(in) { tui.processInputLine("change strat") should be("valid strategy")}
-        tui.processInputLine(input = "take card") should be("valid pull")
+        tui.processInputLine(input = "take card") should be("invalid pull")
         tui.processInputLine("r") should be("valid redo")
         tui.processInputLine("z") should be("valid undo")
       }
@@ -72,7 +72,7 @@ class TUISepc extends AnyWordSpec with Matchers {
         tui.processInputLine("z") should be("valid undo")
       }
       "tui invalid strategy should be" in {
-        val in = new ByteArrayInputStream("9".getBytes)
+        val in = new ByteArrayInputStream("11".getBytes)
         Console.withIn(in) { tui.processInputLine("change strat") should be("invalid strategy")}
       }
       "tui win should be" in {

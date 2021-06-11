@@ -1,5 +1,6 @@
 package de.htwg.se.maumau.model
 
+import de.htwg.se.maumau.model.gameBaseImpl.{Deck, Player}
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
 

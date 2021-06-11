@@ -3,7 +3,7 @@ package de.htwg.se.maumau.util
 import de.htwg.se.maumau.Maumau
 import de.htwg.se.maumau.aview.{TUI, Welcome}
 import de.htwg.se.maumau.controller.Controller
-import de.htwg.se.maumau.model.Table
+import de.htwg.se.maumau.model.gameBaseImpl.Table
 
 import java.security.KeyStore.TrustedCertificateEntry
 import de.htwg.se.maumau.util.Observer

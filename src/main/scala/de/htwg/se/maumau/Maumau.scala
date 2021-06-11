@@ -3,6 +3,8 @@ package de.htwg.se.maumau
 import de.htwg.se.maumau.aview.{GUIApp, TUI, Welcome}
 import de.htwg.se.maumau.controller.Controller
 import de.htwg.se.maumau.model._
+import de.htwg.se.maumau.model.gameBaseImpl.Table
+
 import scala.io.StdIn.readLine
 
 object Maumau {

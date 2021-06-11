@@ -1,6 +1,7 @@
 package de.htwg.se.maumau.model
 
 import de.htwg.se.maumau.model
+import de.htwg.se.maumau.model.gameBaseImpl.{Card, Color, Deck}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 //import de.htwg.se.maumau.model.Color._
@@ -11,13 +12,13 @@ class CardSpec extends AnyWordSpec with Matchers {
   "Card" when {
     "new" should {
       val fullDeck = Deck().fillDeck
-      val card = model.Card(Color.Clubs, Symbol.ASS)
-      val card2 = model.Card(Color.Diamonds, Symbol.King)
+      val card = Card(Color.Clubs, gameBaseImpl.Symbol.ASS)
+      val card2 = gameBaseImpl.Card(Color.Diamonds, gameBaseImpl.Symbol.King)
       "Symbol of card should" in {
         card.color should be(Color.Clubs)
       }
       "Color of card should" in {
-        card.symbol should be(Symbol.ASS)
+        card.symbol should be(gameBaseImpl.Symbol.ASS)
       }
       "String of card should look like" in {
         card.toString should be("C A")
@@ -35,7 +36,7 @@ class CardSpec extends AnyWordSpec with Matchers {
         card2.color should be(Color.Diamonds)
       }
       "Color of card2 should" in {
-        card2.symbol should be(Symbol.King)
+        card2.symbol should be(gameBaseImpl.Symbol.King)
       }
       "String of card2 should look like" in {
         card2.toString should be("D K")

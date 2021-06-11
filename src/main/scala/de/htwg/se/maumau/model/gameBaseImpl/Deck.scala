@@ -1,9 +1,8 @@
-package de.htwg.se.maumau.model
+package de.htwg.se.maumau.model.gameBaseImpl
 
-import de.htwg.se.maumau.model.{Card,Symbol,Color}
 import scala.util.Random
 
-case class Deck(cards : List[Card] = List[Card]()) {
+case class Deck(cards: List[Card] = List[Card]()) {
   val fullDeck = List[Card](
     Card(Color.Clubs, Symbol.ASS),
     Card(Color.Clubs, Symbol.Two),
@@ -57,16 +56,17 @@ case class Deck(cards : List[Card] = List[Card]()) {
     Card(Color.Hearts, Symbol.Jack),
     Card(Color.Hearts, Symbol.Lady),
     Card(Color.Hearts, Symbol.King))
-  
+
   val emptyDeck = List[Card]()
 
   def throwDeck: Deck = copy(cards = cards.drop(cards.size))
 
   def fillDeck: Deck = copy(cards = cards.appendedAll(fullDeck))
-//  def takeOneCard(cardNumber: Integer = 1, deck1: Deck): (Deck, Deck) = (copy(deck1.cards.appendedAll(cards.slice(cardNumber-1, cardNumber))), copy(cards.patch(cardNumber-1, Nil, 1)))
+
+  //  def takeOneCard(cardNumber: Integer = 1, deck1: Deck): (Deck, Deck) = (copy(deck1.cards.appendedAll(cards.slice(cardNumber-1, cardNumber))), copy(cards.patch(cardNumber-1, Nil, 1)))
   def shuffleDeck(random: Random): Deck = copy(cards = random.shuffle(cards))
 
   def throwCards(dropNumber: Integer, deck1: Deck): (Deck, Deck) = (copy(deck1.cards.appendedAll(cards.takeRight(dropNumber))), copy(cards.dropRight(dropNumber)))
 
-  def throwOneCard(cardNumber: Integer, deck1: Deck): (Deck, Deck) = (copy(deck1.cards.appendedAll(cards.slice(cardNumber-1, cardNumber))), copy(cards.patch(cardNumber-1, Nil, 1)))
+  def throwOneCard(cardNumber: Integer, deck1: Deck): (Deck, Deck) = (copy(deck1.cards.appendedAll(cards.slice(cardNumber - 1, cardNumber))), copy(cards.patch(cardNumber - 1, Nil, 1)))
 }

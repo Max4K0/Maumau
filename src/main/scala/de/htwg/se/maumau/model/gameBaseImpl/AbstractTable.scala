@@ -1,6 +1,4 @@
-package de.htwg.se.maumau.model
-
-import scala.util.Random
+package de.htwg.se.maumau.model.gameBaseImpl
 
 abstract class AbstractTable(player: List[Player] , tableDecks: List[Deck]) {
 
