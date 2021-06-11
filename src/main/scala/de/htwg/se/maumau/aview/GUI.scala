@@ -2,7 +2,7 @@ package de.htwg.se.maumau.aview
 
 
 import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
-import de.htwg.se.maumau.util.{State, winEvent}
+import de.htwg.se.maumau.util.State
 import scalafx.Includes.observableList2ObservableBuffer
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.application.{JFXApp, Platform}
@@ -16,8 +16,8 @@ import scalafx.scene.layout.HBox
 import scala.util.{Success, Try}
 case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp {
 
-  loop()
 
+  loop()
   def reprint() {
     stage = new PrimaryStage {
 
@@ -56,7 +56,7 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
 
               new Label() {
                 this.setStyle("-fx-font-size: 25")
-                this.padding = Insets(400, 0, 0, -270)
+                this.padding = Insets(400, 0, 0, -289)
                 this.text = State.state
                 this.visible = controller.table.player(playerNumber).playerDeck.cards.size == 0 || controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size == 0
 
