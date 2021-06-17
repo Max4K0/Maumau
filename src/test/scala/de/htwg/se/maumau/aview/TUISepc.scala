@@ -16,7 +16,7 @@ class TUISepc extends AnyWordSpec with Matchers {
   "TUI" when {
     "new" should {
       val table = Table()
-      val controller = new Controller(table)
+      val controller = new Controller()
       val welcome = new Welcome(controller)
       val tui = TUI(controller)
       welcome.welcome()

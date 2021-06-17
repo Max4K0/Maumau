@@ -1,6 +1,7 @@
 package de.htwg.se.maumau
-
+import com.google.inject.Guice
 import de.htwg.se.maumau.aview.{GUIApp, TUI, Welcome}
+import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
 import de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.maumau.model._
 import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.Table
@@ -8,8 +9,10 @@ import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.Table
 import scala.io.StdIn.readLine
 
 object Maumau {
-  val table = Table()
-  val controller = new Controller(table)
+
+  val injector = Guice.createInjector(new MaumauModul)
+  //val controller = new Controller(table)
+  val controller = injector.getInstance(classOf[ControllerInterface])
   val welcome = new Welcome(controller)
   val tui =  TUI(controller)
   val gui = new GUIApp(controller)

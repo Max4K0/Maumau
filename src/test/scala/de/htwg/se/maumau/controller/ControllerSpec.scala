@@ -13,7 +13,7 @@ class ControllerSpec extends AnyWordSpec with Matchers {
 
     "new" should {
       val table = Table()
-      val controller = new Controller(table)
+      val controller = new Controller()
       val player = Player("", Deck())
       val welcome = new Welcome(controller)
       val tui =  TUI(controller)

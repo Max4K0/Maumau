@@ -1,11 +1,12 @@
 package de.htwg.se.maumau.aview
 
+import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
 import de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.maumau.util.Observer
 
 
 
-case class GUIApp( val controller:Controller ) extends Observer {
+case class GUIApp(controller: ControllerInterface) extends Observer {
   val gui: GUI = new GUI( this, controller)
 
 

@@ -1,9 +1,10 @@
 package de.htwg.se.maumau.aview
 
+import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
 import de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.maumau.util.Observer
 
-class Welcome(controller: Controller){
+class Welcome(controller: ControllerInterface){
   def welcome():String= {
     println("""|•♦♣♠♥•Welcome to MauMau!•♥♠♣♦•""".stripMargin)
     controller.addPlayer("P1", 0)

@@ -1,5 +1,7 @@
 package de.htwg.se.maumau.model.gameComponents.gameBaseImpl
 
+import com.google.inject.Inject
+import com.google.inject.name.Named
 import de.htwg.se.maumau.util.{State, nextPlayerEvent, winEvent}
 
 import scala.util.Random
