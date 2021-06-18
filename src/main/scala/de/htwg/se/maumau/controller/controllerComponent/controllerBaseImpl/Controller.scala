@@ -1,11 +1,9 @@
 package de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl
 
-import com.google.inject.name.Names
-import com.google.inject.{Guice, Inject}
-import net.codingwell.scalaguice.InjectorExtensions._
+import com.google.inject.Inject
 import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
 import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.{TabelStrictStrategy, Table}
-import de.htwg.se.maumau.util.{Observable, State, UndoManager}
+import de.htwg.se.maumau.util.{State, UndoManager}
 
 import scala.collection.mutable.Stack
 
@@ -18,6 +16,8 @@ class Controller @Inject() () extends ControllerInterface  {
   var shouldUpdate = true
   var checkCardLable = false
   var visiblesettings = false
+  var visiblethememanager = true
+  var visiblecardthememanager = true
  //var commands = Stack[Comma]()
 
 
@@ -27,6 +27,14 @@ class Controller @Inject() () extends ControllerInterface  {
   def changeVis(): Boolean = {
   if (visiblesettings == false) visiblesettings = true else visiblesettings = false
     visiblesettings
+  }
+  def changeThemeVis(): Boolean = {
+    if (visiblethememanager == false) visiblethememanager = true else visiblethememanager = false
+    visiblethememanager
+  }
+  def changeCardThemeVis(): Boolean = {
+    if (visiblecardthememanager == false) visiblecardthememanager = true else visiblecardthememanager = false
+    visiblecardthememanager
   }
   def changeCheckCardLable(checkCard: Boolean): Unit = {
     checkCardLable = checkCard

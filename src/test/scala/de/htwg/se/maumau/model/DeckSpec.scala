@@ -3,7 +3,6 @@ package de.htwg.se.maumau.model
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.{Card, Color, Deck, Symbol}
-
 import scala.util.Random
 
 class DeckSpec extends AnyWordSpec with Matchers {

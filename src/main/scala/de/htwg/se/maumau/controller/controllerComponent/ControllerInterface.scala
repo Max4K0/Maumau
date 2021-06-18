@@ -10,7 +10,11 @@ trait ControllerInterface extends Observable{
   def changeCheckCardLable(checkCard: Boolean): Unit
   def changeShouldUpdate(InshouldUpdate: Boolean): Unit
   def changeVis(): Boolean
+  def changeThemeVis(): Boolean
+  def changeCardThemeVis(): Boolean
   def visiblesettings:Boolean
+  def visiblethememanager:Boolean
+  def visiblecardthememanager:Boolean
   def table:Table
   def tables:Stack[Table]
   def states:Stack[String]
