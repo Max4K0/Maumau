@@ -43,6 +43,7 @@ case class TUI(controller: ControllerInterface) extends Observer {
         }
 
       case "throw card" => println("Wich card?")
+
         val cardNumber = readLine().toInt
         if (controller.checkCard(cardNumber)) {
           Try {controller.throwCard(cardNumber)} match {
@@ -101,7 +102,6 @@ case class TUI(controller: ControllerInterface) extends Observer {
         "valid input"
       case _ => //State.handle(unknownCommandEvent())
         println("Invalid command! Type help to see all commands.")
-
         "invalid input"
     }
   }
