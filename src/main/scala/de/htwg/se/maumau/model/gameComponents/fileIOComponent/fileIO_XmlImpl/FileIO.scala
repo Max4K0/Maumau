@@ -1,7 +1,6 @@
 package de.htwg.se.maumau.model.gameComponents.fileIOComponent.fileIO_XmlImpl
-import de.htwg.se.maumau.aview.{GUI, GUIApp}
+import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
 import de.htwg.se.maumau.model.gameComponents.fileIOComponent.fileIO_Interface
-import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.Table
 
 class FileIO extends fileIO_Interface{
 

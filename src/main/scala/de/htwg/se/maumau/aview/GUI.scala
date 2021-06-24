@@ -29,6 +29,8 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
       this.getIcons.add(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/icon.png", 500, 500, true, true))
 
       onCloseRequest = (eventHandler) => {
+
+        controller.saveFile()
         System.exit(0)
       }
 

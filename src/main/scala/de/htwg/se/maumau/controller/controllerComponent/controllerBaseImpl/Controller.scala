@@ -24,6 +24,15 @@ class Controller @Inject() () extends ControllerInterface  {
   def changeStrat(InStrat: Int): Unit = {
     strategy = InStrat
   }
+
+  def saveFile(): Unit = {
+    fileIo.save(this)
+  }
+
+  def loadFile(): Unit = {
+    fileIo.load(this)
+  }
+
   def changeVis(): Unit = {
   if (visiblesettings == false) visiblesettings = true else visiblesettings = false
     visiblesettings
@@ -65,6 +74,8 @@ class Controller @Inject() () extends ControllerInterface  {
   def changeShouldUpdate(InshouldUpdate: Boolean): Unit = {
     shouldUpdate = InshouldUpdate
   }
+
+
 
   def throwCard(cardNumber: Int): Unit = {
     tables.push(table)

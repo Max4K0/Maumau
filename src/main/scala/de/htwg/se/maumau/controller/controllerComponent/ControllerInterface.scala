@@ -9,6 +9,10 @@ trait ControllerInterface extends Observable{
   def changeStrat(InStrat: Int): Unit
   def changeCheckCardLable(checkCard: Boolean): Unit
   def changeShouldUpdate(InshouldUpdate: Boolean): Unit
+  def changeMainTheme(themeNumber: Int): Unit
+  def changeCardTheme(themeNumber: Int): Unit
+  def saveFile(): Unit
+  def loadFile(): Unit
   def changeVis(): Unit
   def changeThemeVis(): Unit
   def changeCardThemeVis(): Unit

@@ -19,7 +19,6 @@ object Maumau {
   def main(args: Array[String]): Unit = {
     welcome.welcome()
     var input: String = ""
-
     while (input != "quit") {
       input = readLine()
       tui.processInputLine(input)

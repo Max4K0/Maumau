@@ -1,7 +1,6 @@
 package de.htwg.se.maumau.aview
 
 import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
-import de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.maumau.util.{Observer, State, nextPlayerEvent, winEvent}
 
 import scala.io.StdIn.readLine
@@ -98,7 +97,7 @@ case class TUI(controller: ControllerInterface) extends Observer {
         }
       case "quit" =>
         State.handle(winEvent())
-
+        controller.saveFile()
         "valid input"
       case _ => //State.handle(unknownCommandEvent())
         println("Invalid command! Type help to see all commands.")
