@@ -16,26 +16,48 @@ class Controller @Inject() () extends ControllerInterface  {
   var shouldUpdate = true
   var checkCardLable = false
   var visiblesettings = false
-  var visiblethememanager = true
-  var visiblecardthememanager = true
+  var visiblethememanager = 0
+  var visiblecardthememanager = 0
  //var commands = Stack[Comma]()
 
 
   def changeStrat(InStrat: Int): Unit = {
     strategy = InStrat
   }
-  def changeVis(): Boolean = {
+  def changeVis(): Unit = {
   if (visiblesettings == false) visiblesettings = true else visiblesettings = false
     visiblesettings
   }
-  def changeThemeVis(): Boolean = {
-    if (visiblethememanager == false) visiblethememanager = true else visiblethememanager = false
-    visiblethememanager
+  def changeThemeVis(): Unit = {
+    visiblethememanager match  {
+
+      case 0 => {
+        visiblethememanager += 1
+      }
+
+
+      case 1 => {
+        visiblethememanager = 0
+      }
+
+
+    }
   }
-  def changeCardThemeVis(): Boolean = {
-    if (visiblecardthememanager == false) visiblecardthememanager = true else visiblecardthememanager = false
-    visiblecardthememanager
+  def changeCardThemeVis(): Unit = {
+    visiblecardthememanager match {
+
+      case 0 => {
+        visiblecardthememanager += 1
+      }
+
+      case 1 => {
+        visiblecardthememanager = 0
+      }
+
+
+    }
   }
+
   def changeCheckCardLable(checkCard: Boolean): Unit = {
     checkCardLable = checkCard
   }

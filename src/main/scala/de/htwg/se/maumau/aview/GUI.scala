@@ -46,11 +46,17 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
         val view3 = new ImageView(table2)
         view2.setStyle("-fx-background-color: transparent")
 
-        if(controller.visiblethememanager) {
-          content = view2
-        } else {
-          content = view3
-          content += view2
+        controller.visiblethememanager match {
+
+          case 0 => {
+            content = view2
+          }
+
+          case 1 => {
+            content = view3
+            content += view2
+          }
+
         }
 
         labels
@@ -143,10 +149,15 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
                 children = Seq(
                   new Label() {
                     //this.setGraphic(new ImageView(new Image(controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards(x).imgPath, cardSizeX - 50, cardSizeY - 50, true, true)))
-                    if(controller.visiblecardthememanager) {
-                      this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 45, cardSizeY - 45, true, true)))
-                    } else {
-                      this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back_alternative.png", cardSizeX - 45, cardSizeY - 45, true, true)))
+                    controller.visiblecardthememanager match {
+                      case 0 => {
+                        this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 45, cardSizeY - 45, true, true)))
+
+                      }
+                      case 1 => {
+                        this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back_alternative.png", cardSizeX - 45, cardSizeY - 45, true, true)))
+
+                      }
                     }
                     this.setStyle("-fx-background-color: transparent")
                     effect = new Lighting
@@ -175,27 +186,38 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
 
                 new Label() {
                   this.padding = Insets(0, 0, 0, 20)
-                  if(controller.visiblecardthememanager) {
-                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
-                  } else {
-                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back_alternative.png", cardSizeX - 10, cardSizeY - 10, true, true)))
-                  }
+                  controller.visiblecardthememanager match {
+
+                    case 0 => {
+                      this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
+
+                    }
+
+                    case 1 => {
+                      this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back_alternative.png", cardSizeX - 10, cardSizeY - 10, true, true)))
+
+                    }
+
+                    }
                   this.setStyle("-fx-background-color: transparent")
 
                   this.onMouseEntered = (MouseEvent) => {
-                    if(controller.visiblecardthememanager) {
-                      this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", (cardSizeX - 10) * 1.1, (cardSizeY - 10) * 1.1, true, true)))
-                    } else {
-                      this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back_alternative.png", (cardSizeX - 10) * 1.1, (cardSizeY - 10) * 1.1, true, true)))
+                    controller.visiblecardthememanager match {
+                      case 0 =>
+                        this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", (cardSizeX - 10) * 1.1, (cardSizeY - 10) * 1.1, true, true)))
+
+                      case 1 =>
+                        this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back_alternative.png", (cardSizeX - 10) * 1.1, (cardSizeY - 10) * 1.1, true, true)))
                     }
 
                     this.padding = Insets(-5, 0, 0, 15)
                   }
                   this.onMouseExited = (MouseEvent) => {
-                    if(controller.visiblecardthememanager) {
-                      this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
-                    } else {
-                      this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back_alternative.png", cardSizeX - 10, cardSizeY - 10, true, true)))
+                    controller.visiblecardthememanager match {
+                      case 0 =>
+                        this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
+                      case 1 =>
+                        this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back_alternative.png", cardSizeX - 10, cardSizeY - 10, true, true)))
                     }
                     this.padding = Insets(0, 0, 0, 20)
                   }
