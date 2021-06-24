@@ -11,6 +11,8 @@ class MaumauModul extends AbstractModule with ScalaModule{
   override def configure() = {
     //bindConstant().annotatedWith(Names.named("default")).->(default)
     bind[ControllerInterface].to[controllerBaseImpl.Controller]
+    bind[fileIO_Interface].to[fileIO_JsonImpl.FileIO]
+    //bind[fileIO_Interface].to[fileIO_XmlImpl.FileIO]
   }
 
 }

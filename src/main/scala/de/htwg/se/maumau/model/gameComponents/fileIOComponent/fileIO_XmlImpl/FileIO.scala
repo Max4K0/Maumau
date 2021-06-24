@@ -6,11 +6,7 @@ class FileIO extends fileIO_Interface{
 
 
 
-  override def load(table: Table): Table = ???
+  override def load(controller: ControllerInterface): Unit = ???
 
-  override def save(table: Table): Unit = ???
-
-  override def loadTheme(theme: GUI): GUI = ???
-
-  override def saveTheme(theme: GUI): Unit = ???
+  override def save(controller: ControllerInterface): Unit = ???
 }

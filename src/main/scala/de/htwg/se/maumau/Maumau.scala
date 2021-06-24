@@ -2,10 +2,6 @@ package de.htwg.se.maumau
 import com.google.inject.Guice
 import de.htwg.se.maumau.aview.{GUIApp, TUI, Welcome}
 import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
-import de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl.Controller
-import de.htwg.se.maumau.model._
-import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.Table
-
 import scala.io.StdIn.readLine
 
 object Maumau {
@@ -15,6 +11,7 @@ object Maumau {
   val welcome = new Welcome(controller)
   val tui =  TUI(controller)
   val gui = new GUIApp(controller)
+  controller.loadFile()
 
   def main(args: Array[String]): Unit = {
     welcome.welcome()

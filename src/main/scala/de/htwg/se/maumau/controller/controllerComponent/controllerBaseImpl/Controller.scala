@@ -4,12 +4,16 @@ import com.google.inject.Inject
 import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
 import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.{TabelStrictStrategy, Table}
 import de.htwg.se.maumau.util.{State, UndoManager}
-
+import de.htwg.se.maumau.MaumauModul
+import com.google.inject.Guice
+import de.htwg.se.maumau.model.gameComponents.fileIOComponent.fileIO_Interface
 import scala.collection.mutable.Stack
 
-class Controller @Inject() () extends ControllerInterface  {
-  var table= new Table()
+class Controller @Inject()() extends ControllerInterface {
+  var table = new Table()
   private val undoManager = new UndoManager
+  val injector = Guice.createInjector(new MaumauModul)
+  val fileIo = injector.getInstance(classOf[fileIO_Interface])
   var tables = Stack[Table]()
   var states = Stack[String]("")
   var strategy = 1
@@ -18,7 +22,7 @@ class Controller @Inject() () extends ControllerInterface  {
   var visiblesettings = false
   var visiblethememanager = 0
   var visiblecardthememanager = 0
- //var commands = Stack[Comma]()
+  //var commands = Stack[Comma]()
 
 
   def changeStrat(InStrat: Int): Unit = {
@@ -34,22 +38,28 @@ class Controller @Inject() () extends ControllerInterface  {
   }
 
   def changeVis(): Unit = {
-  if (visiblesettings == false) visiblesettings = true else visiblesettings = false
+    if (visiblesettings == false) visiblesettings = true else visiblesettings = false
     visiblesettings
   }
+
+  def changeMainTheme(themeNumber: Int): Unit = {
+    visiblethememanager = themeNumber
+  }
+
+  def changeCardTheme(themeNumber: Int): Unit = {
+    visiblecardthememanager = themeNumber
+  }
+
   def changeThemeVis(): Unit = {
-    visiblethememanager match  {
+    visiblethememanager match {
 
       case 0 => {
         visiblethememanager += 1
       }
 
-
       case 1 => {
         visiblethememanager = 0
       }
-
-
     }
   }
   def changeCardThemeVis(): Unit = {
