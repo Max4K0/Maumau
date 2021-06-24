@@ -20,15 +20,13 @@ class FileIO extends fileIO_Interface{
 
 
   override def load(controller: ControllerInterface): Unit = {
-//    var table: Table = Table()
+    //    var table: Table = Table()
     val source: String = Source.fromFile("save.json").getLines.mkString
     val json: JsValue = Json.parse(source)
-//    val injector = Guice.createInjector(new MaumauModul)
+    //    val injector = Guice.createInjector(new MaumauModul)
     val visableCardThemeManager = (json \ "themeManager" \ "visableCardThemeManager").get
     val visableThemeManager = (json \ "themeManager" \ "visableThemeManager").get
 
-    print(visableCardThemeManager)
-    print(visableThemeManager)
     controller.changeCardTheme(visableCardThemeManager.as[Int])
     controller.changeMainTheme(visableThemeManager.as[Int])
   }

@@ -1,6 +1,6 @@
 {
   "themeManager" : {
-    "visableThemeManager" : 1,
-    "visableCardThemeManager" : 0
+    "visableThemeManager" : 0,
+    "visableCardThemeManager" : 1
   }
 }
