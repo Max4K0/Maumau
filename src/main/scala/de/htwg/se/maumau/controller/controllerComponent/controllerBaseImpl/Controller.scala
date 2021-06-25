@@ -58,6 +58,10 @@ class Controller @Inject()() extends ControllerInterface {
       }
 
       case 1 => {
+        visiblethememanager += 1
+      }
+
+      case 2 => {
         visiblethememanager = 0
       }
     }

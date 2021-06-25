@@ -1,6 +1,6 @@
 <game>
       <theme>
-            <visableCardThemeManager>1</visableCardThemeManager>
-            <visableMainThemeManager>1</visableMainThemeManager>
+          <visableCardThemeManager>0</visableCardThemeManager>
+          <visableMainThemeManager>2</visableMainThemeManager>
       </theme>
 </game>
