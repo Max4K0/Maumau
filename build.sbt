@@ -8,7 +8,7 @@ libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.7"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.7" % "test"
 
 //GUI- Swing/FX
-libraryDependencies += "org.scalafx" %% "scalafx" % "15.0.1-R21"
+libraryDependencies += "org.scalafx" %% "scalafx" % "16.0.0-R24"
 libraryDependencies += "org.openjfx" % "javafx" % "12.0.2" pomOnly()
 
 //Dependency Injection
@@ -32,4 +32,4 @@ coverageExcludedPackages := "de.htwg.se.maumau.aview.GUIApp; de.htwg.se.maumau.a
 
 // Add JavaFX dependencies
 lazy val javaFXModules = Seq("base", "controls", "fxml", "graphics", "media", "swing", "web")
-libraryDependencies ++= javaFXModules.map( m=>  "org.openjfx" % s"javafx-$m" % "11" classifier osName)
+libraryDependencies ++= javaFXModules.map( m=>  "org.openjfx" % s"javafx-$m" % "16" classifier osName)
