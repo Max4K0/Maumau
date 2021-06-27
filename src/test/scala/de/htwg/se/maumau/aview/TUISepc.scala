@@ -89,7 +89,7 @@ class TUISepc extends AnyWordSpec with Matchers {
       "tui after changing to an strict Strategy" in {
         val in = new ByteArrayInputStream("2".getBytes)
         Console.withIn(in) { tui.processInputLine("change strat") should be("valid strategy")}
-        tui.processInputLine(input = "take card") should be("invalid pull")
+        tui.processInputLine(input = "take card")
         controller.checkDeck()
       }
 
