@@ -16,17 +16,6 @@ case class GUIApp(controller: ControllerInterface) extends Observer {
     override def run(): Unit = {
       import javafx.embed.swing.JFXPanel
       new JFXPanel
-      //val music = new Media("FILE:///bensound-jazzyfrenchy.mp3")
-      //val medplay =  new MediaPlayer(music)
-      //medplay.volume = 0.1
-      //medplay.autoPlay = (true)
-      //medplay.onRepeat()
-     // medplay.setAutoPlay(true)
-
-
-      //val music = new Media("https://www.bensound.com/royalty-free-music/track/jazzy-frenchy/bensound-jazzyfrenchy.mp3")
-      //val music = new Media(getClass().getClassLoader().getResource("//bensound-jazzyfrenchy.mp3").toString())
-
       gui.main(Array())
     }
   }
