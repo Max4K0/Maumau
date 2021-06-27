@@ -23,24 +23,29 @@ class CardSpec extends AnyWordSpec with Matchers {
       "String of card should look like" in {
         card.toString should be("C A")
       }
-      /*"UTF 8 View of card should look like" in {
-        card.UTFSymbols should be("\u001B[30m\uD83C\uDCC1")
-      }*/
-
-//      "UTF 8 View of card should look like" in {
-//        card.toString should be("\u001B[31m\uD83C\uDCC1")
-//      }
-
-
       "Symbol of card2 should" in {
         card2.color should be(Color.Diamonds)
       }
       "Color of card2 should" in {
         card2.symbol should be(Symbol.King)
       }
+      //------------------------------------------------------------------------------------------------------------------------------
+      //---------------------------------------Testing String, UTF8, Image of a Card--------------------------------------------------
+      //------------------------------------------------------------------------------------------------------------------------------
+
       "String of card2 should look like" in {
         card2.toString should be("D K")
       }
+      "UTF8 of card2 should look like" in {
+        card2.UTFSymbols should be("\u001B[31m\uD83C\uDCCE")
+      }
+      "Image path of card2 should look like" in {
+        card2.imgPath should be("file:src/main/scala/de/htwg/se/maumau/util/textures/king_of_diamonds.png")
+      }
+
+      //------------------------------------------------------------------------------------------------------------------------------
+      //--------------------------------------Testing String, UTF8, Image of all Cards------------------------------------------------
+      //------------------------------------------------------------------------------------------------------------------------------
       "String of all cards should look like" in {
         fullDeck.cards.toString() should be(fullDeck.cards.toString())
       }
@@ -50,15 +55,6 @@ class CardSpec extends AnyWordSpec with Matchers {
       "ImgPath of all cards should look like" in {
         fullDeck.cards.map(Card => Card.imgPath) should be(fullDeck.cards.map(Card => Card.imgPath))
       }
-//      "UTF 8 View of card2 should look like" in {
-//        card2.UTFSymbols should be("\u001B[30m\uD83C\uDCCE")
-//      }
-
-      /*"UTF 8 View of card2 should look like" in {
-        card2.UTFSymbols should be("\u001B[30m\uD83C\uDCCE")
-      }*/
-
-
     }
   }
 }

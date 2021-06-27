@@ -15,7 +15,7 @@ class WelcomSpec extends AnyWordSpec with Matchers {
       val welcome = new Welcome(controller)
       val tui = TUI(controller)
       welcome.welcome()
-      "tui invalid input should be" in {
+      "successful welcome process should be" in {
         welcome.welcome() should be("game start successfully")
       }
     }
