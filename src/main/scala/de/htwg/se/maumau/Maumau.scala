@@ -22,3 +22,7 @@ object Maumau {
     }
   }
 }
+
+//Music By: Benjamin Tissot (also known as Bensound)
+//www.bensound.com
+//https://www.bensound.com/royalty-free-music/track/jazzy-frenchy
