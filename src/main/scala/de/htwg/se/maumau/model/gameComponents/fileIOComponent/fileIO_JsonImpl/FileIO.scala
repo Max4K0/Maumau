@@ -10,9 +10,7 @@ class FileIO extends fileIO_Interface{
 
   val file = new File("save.json")
 
-
   override def save(controller: ControllerInterface): Unit = {
-
     val pw = new PrintWriter(new File("save.json"))
     pw.write(Json.prettyPrint(saveToJson(controller)))
     pw.close()
@@ -20,10 +18,8 @@ class FileIO extends fileIO_Interface{
 
 
   override def load(controller: ControllerInterface): Unit = {
-    //    var table: Table = Table()
     val source: String = Source.fromFile("save.json").getLines.mkString
     val json: JsValue = Json.parse(source)
-    //    val injector = Guice.createInjector(new MaumauModul)
     val visableCardThemeManager = (json \ "themeManager" \ "visableCardThemeManager").get
     val visableThemeManager = (json \ "themeManager" \ "visableThemeManager").get
 

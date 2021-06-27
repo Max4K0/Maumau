@@ -10,7 +10,7 @@ object Maumau {
   val controller = injector.getInstance(classOf[ControllerInterface])
   val welcome = new Welcome(controller)
   val tui =  TUI(controller)
-  //val gui = new GUIApp(controller)
+  val gui = new GUIApp(controller)
   controller.loadFile()
 
   def main(args: Array[String]): Unit = {

@@ -14,7 +14,6 @@ class FileIO extends fileIO_Interface{
     val f1 = file \\ "theme"
     val cardTheme = (f1 \ "visableCardThemeManager").text
     val mainTheme = (f1 \ "visableMainThemeManager").text
-
     controller.changeCardTheme(cardTheme(0).asDigit)
     controller.changeMainTheme(mainTheme(0).asDigit)
   }

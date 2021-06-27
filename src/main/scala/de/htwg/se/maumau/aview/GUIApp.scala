@@ -29,19 +29,15 @@ case class GUIApp(controller: ControllerInterface) extends Observer {
       //val music = new Media("https://www.bensound.com/royalty-free-music/track/jazzy-frenchy/bensound-jazzyfrenchy.mp3")
       //val music = new Media(getClass().getClassLoader().getResource("//bensound-jazzyfrenchy.mp3").toString())
       //------------------------------------------------------------------------------------------------------------------------------------
-
       gui.main(Array())
     }
   }
-
-
-
-
+  //------------------------------------------------------------------------------------------------------------------------------------
+  //------------------------------------------------------------Starting Gui------------------------------------------------------------
+  //------------------------------------------------------------------------------------------------------------------------------------
   thread.start()
   controller.add( this )
   def exit( ):Unit = gui.stopApp()
-
-
   override def update: Boolean = {
     true
   }

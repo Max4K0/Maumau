@@ -25,17 +25,22 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
     stage = new PrimaryStage {
 
       title = "MauMau"
-
+      //--------------------------------------------------------------------------------------------------------------------------------
+      //------------------------------------------------------------Gui Icon------------------------------------------------------------
+      //--------------------------------------------------------------------------------------------------------------------------------
       this.getIcons.add(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/icon.png", 500, 500, true, true))
 
+      //--------------------------------------------------------------------------------------------------------------------------------
+      //-----------------------------------------------------------Exit + Save----------------------------------------------------------
+      //--------------------------------------------------------------------------------------------------------------------------------
       onCloseRequest = (eventHandler) => {
-
         controller.saveFile()
         System.exit(0)
       }
-
+      //--------------------------------------------------------------------------------------------------------------------------------
+      //----------------------------------------------------Creating Scene + Variables--------------------------------------------------
+      //--------------------------------------------------------------------------------------------------------------------------------
       scene = new Scene(1320, 900) {
-
         val cardRatio = 0.25
         val cardSizeX = 500 * cardRatio
         val cardSizeY = 726 * cardRatio
@@ -50,6 +55,9 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
         val view4 = new ImageView(table3)
         view2.setStyle("-fx-background-color: transparent")
 
+        //------------------------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------Theme Manager---------------------------------------------------------
+        //------------------------------------------------------------------------------------------------------------------------------
         controller.visiblethememanager match {
 
           case 0 => {
@@ -78,7 +86,6 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
                 this.text = "-You can not throw this card-"
                 this.visible = controller.checkCardLable
               },
-
               new Label() {
                 this.setStyle("-fx-font-size: 25")
                 this.padding = Insets(400, 0, 0, -289)
@@ -90,28 +97,34 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
             )
           }
         }
+        //------------------------------------------------------------------------------------------------------------------------------
+        //-----------------------------------------------------------Player 1-----------------------------------------------------------
+        //------------------------------------------------------------------------------------------------------------------------------
           player1Cards
           def player1Cards: Unit = {
-
-
             content += new HBox {
               children.addAll(new Button() {
                 this.visible = false
               })
               this.padding = Insets(680, 0, 0, 635 - (45 * controller.table.player(playerNumber).playerDeck.cards.size))
+              //--------------------------------------
+              // Creating a variable amount of Buttons
+              //--------------------------------------
               for (x <- 0 to controller.table.player(playerNumber).playerDeck.cards.size - 1) {
                 children.addAll(new Button() {
                   this.padding = Insets(0, 0, 0, -30)
-                  // this.padding = Insets(701 , 0, 500, -60)
-                  //this.padding = Insets(700, 1, 1, (150 * x ) )
                   this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size != 0
 
-                  //
+                  //-------------------------------------
+                  // Card Image and Effects
+                  //-------------------------------------
                   this.setGraphic(new ImageView(new Image(controller.table.player(playerNumber).playerDeck.cards(x).imgPath, cardSizeX, cardSizeY, true, true)))
                   this.setStyle("-fx-background-color: transparent")
                   effect = new Lighting
-                  //
-                  val cardNumber = 1
+
+                  //-------------------------------------
+                  // Animations and Actions
+                  //-------------------------------------
                   this.onMouseEntered = (MouseEvent) => {
                     this.padding = Insets(-50, 0, 500, -30)
                     this.setGraphic(new ImageView(new Image(controller.table.player(playerNumber).playerDeck.cards(x).imgPath, cardSizeX * 1.1, cardSizeY * 1.1, true, true)))
@@ -120,11 +133,12 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
                     this.padding = Insets(0, 0, 0, -30)
                     this.setGraphic(new ImageView(new Image(controller.table.player(playerNumber).playerDeck.cards(x).imgPath, cardSizeX, cardSizeY, true, true)))
                   }
-                  //
+
+                  //-------------------------------------
+                  // Card Push + Verification
+                  //-------------------------------------
                   this.onMouseClicked = (MouseEvent) => {
-                    this.onMouseExited = (MouseEvent) => {
-                      //
-                    }
+                    this.onMouseExited = (MouseEvent) => {}
                     if (controller.checkCard(x + 1)) {
                       Try {
                         controller.throwCard(x + 1)
@@ -133,10 +147,6 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
                           controller.changeCheckCardLable(false)
                       }
                     } else {
-                      /*
-                      Invalid Card push Message
-                       */
-
                       controller.changeCheckCardLable(true)
                       println("You cant throw this card")
                     }
@@ -148,40 +158,48 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
             }
 
           }
+
+        //------------------------------------------------------------------------------------------------------------------------------
+        //-----------------------------------------------------------Player 2-----------------------------------------------------------
+        //------------------------------------------------------------------------------------------------------------------------------
         player2Cards
           def player2Cards: Unit = {
             for (x <- 0 to controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size - 1) {
               content += new HBox {
-
                 padding = Insets(55, 0, 0, 642 + (x * 62) - (31 * controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size))
                 children = Seq(
                   new Label() {
-                    //this.setGraphic(new ImageView(new Image(controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards(x).imgPath, cardSizeX - 50, cardSizeY - 50, true, true)))
+                    //-------------------------------------
+                    // Theme Manager
+                    //-------------------------------------
                     controller.visiblecardthememanager match {
                       case 0 => {
                         this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 45, cardSizeY - 45, true, true)))
-
                       }
+
                       case 1 => {
                         this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back_alternative.png", cardSizeX - 45, cardSizeY - 45, true, true)))
-
                       }
+
                     }
+                    //-------------------------------------
+                    // Card Effects
+                    //-------------------------------------
                     this.setStyle("-fx-background-color: transparent")
                     effect = new Lighting
                     this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size != 0
-
                   }
                 )
               }
             }
           }
+        //------------------------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------Stack Cards-----------------------------------------------------------
+        //------------------------------------------------------------------------------------------------------------------------------
         middleCards
           def middleCards: Unit = {
 
             content += new HBox {
-
-
               this.padding = Insets(300, 0, 0, 532)
               children = Seq(
 
@@ -193,22 +211,31 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
                 },
 
                 new Label() {
-                  this.padding = Insets(0, 0, 0, 20)
-                  controller.visiblecardthememanager match {
 
+                  //-------------------------------------
+                  // Alignment
+                  //-------------------------------------
+                  this.padding = Insets(0, 0, 0, 20)
+                  //-------------------------------------
+                  // Theme Manager
+                  //-------------------------------------
+                  controller.visiblecardthememanager match {
                     case 0 => {
                       this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
-
                     }
-
                     case 1 => {
                       this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back_alternative.png", cardSizeX - 10, cardSizeY - 10, true, true)))
-
                     }
-
-                    }
+                  }
+                  //-------------------------------------
+                  // Card Effects
+                  //-------------------------------------
                   this.setStyle("-fx-background-color: transparent")
-
+                  effect = new Lighting
+                  this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size != 0
+                  //-------------------------------------
+                  // Animations and Actions
+                  //-------------------------------------
                   this.onMouseEntered = (MouseEvent) => {
                     controller.visiblecardthememanager match {
                       case 0 =>
@@ -217,7 +244,6 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
                       case 1 =>
                         this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back_alternative.png", (cardSizeX - 10) * 1.1, (cardSizeY - 10) * 1.1, true, true)))
                     }
-
                     this.padding = Insets(-5, 0, 0, 15)
                   }
                   this.onMouseExited = (MouseEvent) => {
@@ -229,53 +255,57 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
                     }
                     this.padding = Insets(0, 0, 0, 20)
                   }
-
+                  //-------------------------------------
+                  // Card Pull + Verification
+                  //-------------------------------------
                   this.onMouseClicked = (MouseEvent) => {
                     this.onMouseExited = (MouseEvent) => {
-
                     }
                     Try {
                       controller.takeCard()
                     } match {
-                      //            case Failure(e) => println(e.getMessage)
-                      //              "invalid try"
                       case Success(e) => println("Success!\n")
                         State.state = if (State.state == "Player1:") "Player2:" else "Player1:"
                         "valid pull"
                     }
-
+                    //----------
+                    //Update Gui
+                    //----------
                     reprint()
                   }
-                  effect = new Lighting
-                  this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size != 0
+
 
                 }
               )
             }
           }
 
+
+        //------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------Setting-------------------------------------------------------------
+        //------------------------------------------------------------------------------------------------------------------------------
           settings
           def settings: Unit = {
-
-
             content += new HBox {
-
-
               this.padding = Insets(820, 0, 0, 0)
               children = Seq(
 
                 new Label() {
+                  //-------------------------------------
+                  // Setting Image and Effects
+                  //-------------------------------------
                   this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/settings.png", cardSizeX - 80, cardSizeY - 100, false, true)))
                   this.setStyle("-fx-background-color: transparent")
                   this.padding = Insets(0, 0, 0, 0)
-
+                  //-------------------------------------
+                  // Animations and Actions
+                  //-------------------------------------
                   this.onMouseEntered = (MouseEvent) => {
                     this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/settings2.png", cardSizeX - 80, cardSizeY - 100, false, true)))
-
                   }
+
                   this.onMouseExited = (MouseEvent) => {
                     this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/settings.png", cardSizeX - 80, cardSizeY - 100, false, true)))
-
                   }
 
                   this.onMouseClicked = (MouseEvent) => {
@@ -286,10 +316,11 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
                     reprint()
                   }
                   this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size != 0
-
                 },
 
-
+                //------------------------------------------------------------------------------------------------------------------------------
+                //--------------------------------------------------------Undo Button-----------------------------------------------------------
+                //------------------------------------------------------------------------------------------------------------------------------
                 new Label() {
                   this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/left.png", cardSizeX - 80, cardSizeY - 80, false, true)))
                   this.setStyle("-fx-background-color: transparent")
@@ -312,6 +343,9 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
 
                 },
 
+                //------------------------------------------------------------------------------------------------------------------------------
+                //--------------------------------------------------------Redo Button-----------------------------------------------------------
+                //------------------------------------------------------------------------------------------------------------------------------
                 new Label() {
                   this.padding = Insets(0, 0, 0, 0)
                   this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/right.png", cardSizeX - 80, cardSizeY - 80, false, true)))
@@ -328,16 +362,17 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
                     this.padding = Insets(0, 0, 0, 0)
 
                   }
-
-
                   this.onMouseClicked = (MouseEvent) => {
                     this.onMouseExited = (MouseEvent) => {}
                     controller.redo
                     reprint()
                   }
                   this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size != 0 && controller.visiblesettings
-
                 },
+
+                //------------------------------------------------------------------------------------------------------------------------------
+                //----------------------------------------------------Theme Manager Button------------------------------------------------------
+                //------------------------------------------------------------------------------------------------------------------------------
                 new Label() {
                   this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/thememanager.png", cardSizeX - 80, cardSizeY - 80, false, true)))
                   this.setStyle("-fx-background-color: transparent")
@@ -355,8 +390,11 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
                     reprint()
                   }
                   this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size != 0 && controller.visiblesettings
-
                 },
+
+                //------------------------------------------------------------------------------------------------------------------------------
+                //-----------------------------------------------------Card Manager Button------------------------------------------------------
+                //------------------------------------------------------------------------------------------------------------------------------
                 new Label() {
                   this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/cardthememanager.png", cardSizeX - 80, cardSizeY - 80, false, true)))
                   this.setStyle("-fx-background-color: transparent")
@@ -385,18 +423,18 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
       }
     }
 
+  //------------------------------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------------Gui Update------------------------------------------------------------
+  //------------------------------------------------------------------------------------------------------------------------------
     def loop(): Unit = {
       Platform.runLater(new Runnable() {
         if (controller.shouldUpdate) {
           controller.changeShouldUpdate(false)
           reprint()
         }
-
         override def run(): Unit = {
           loop()
         }
-
       })
     }
-
   }

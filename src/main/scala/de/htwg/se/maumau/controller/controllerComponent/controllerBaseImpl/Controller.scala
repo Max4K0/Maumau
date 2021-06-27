@@ -24,11 +24,16 @@ class Controller @Inject()() extends ControllerInterface {
   var visiblecardthememanager = 0
   //var commands = Stack[Comma]()
 
-
+  //--------------------------------------------------------------------------------------------------------------------------------
+  //--------------------------------------------------Strategy Methods--------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------------------
   def changeStrat(InStrat: Int): Unit = {
     strategy = InStrat
   }
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+  //----------------------------------------------------File IO Methods------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------------------
   def saveFile(): Unit = {
     fileIo.save(this)
   }
@@ -37,6 +42,9 @@ class Controller @Inject()() extends ControllerInterface {
     fileIo.load(this)
   }
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+  //----------------------------------------------------GUI Methods-----------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------------------
   def changeVis(): Unit = {
     if (visiblesettings == false) visiblesettings = true else visiblesettings = false
     visiblesettings
@@ -76,21 +84,37 @@ class Controller @Inject()() extends ControllerInterface {
       case 1 => {
         visiblecardthememanager = 0
       }
-
-
     }
   }
-
   def changeCheckCardLable(checkCard: Boolean): Unit = {
     checkCardLable = checkCard
   }
-
   def changeShouldUpdate(InshouldUpdate: Boolean): Unit = {
     shouldUpdate = InshouldUpdate
   }
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+  //----------------------------------------------Verification of Player Move-------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------------------
+  def checkCard(cardNumber: Int): Boolean = {
+    val playerNumber = if (State.state == "Player1:") 1 else 0
+    strategy match {
+      case 1 => table.checkCard(table, playerNumber, cardNumber)
+      case 2 => (new TabelStrictStrategy).checkCard(table, playerNumber, cardNumber)
+    }
+  }
 
+  def checkDeck(): Boolean = {
+    val playerNumber = if (State.state == "Player1:") 1 else 0
+    strategy match {
+      case 2 => table.checkDeck(table, playerNumber)
+      case 1 => (new TabelStrictStrategy).checkDeck(table, playerNumber)
+    }
+  }
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+  //--------------------------------------------Player move after verification------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------------------
   def throwCard(cardNumber: Int): Unit = {
     tables.push(table)
     states.push(State.state)
@@ -111,42 +135,31 @@ class Controller @Inject()() extends ControllerInterface {
     shouldUpdate = true
   }
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+  //---------------------------------------------------Dealing the Cards------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------------------
   def throwFirstCard(): Unit = {
     table = table.throwFirstCard(table)
     notifyObservers()
   }
-  def checkCard(cardNumber: Int): Boolean = {
-    val playerNumber = if (State.state == "Player1:") 1 else 0
-    strategy match {
-      case 1 => table.checkCard(table, playerNumber, cardNumber)
-      case 2 => (new TabelStrictStrategy).checkCard(table, playerNumber, cardNumber)
-    }
-  }
 
-  def checkDeck(): Boolean = {
-    val playerNumber = if (State.state == "Player1:") 1 else 0
-    strategy match {
-      case 2 => table.checkDeck(table, playerNumber)
-      case 1 => (new TabelStrictStrategy).checkDeck(table, playerNumber)
-    }
-  }
 
+  //--------------------------------------------------------------------------------------------------------------------------------
+  //------------------------------------------------------Startseq.-----------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------------------
   def addPlayer(name: String, playerNum: Int): Unit = {
     table = table.addPlayers(table, name, playerNum)
     tables.push(table)
     states.push(State.state)
    // table = (new TabelStrictStrategy).addPlayers(table, name, playerNum)
   }
+  //--------------------------------------------------------------------------------------------------------------------------------
+  //----------------------------------------------------Undo a. Redo----------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------------------
   def undoStep(): Unit = {
     table = tables.pop()
     State.state = states.pop()
-    // table = (new TabelStrictStrategy).addPlayers(table, name, playerNum)
   }
-
-  override def toString(): String = {
-    table.toString()
-  }
-
   def undo: Unit = {
     undoManager.undoStep
     notifyObservers()
@@ -156,5 +169,11 @@ class Controller @Inject()() extends ControllerInterface {
     undoManager.redoStep
     notifyObservers()
     shouldUpdate = true
+  }
+  //--------------------------------------------------------------------------------------------------------------------------------
+  //------------------------------------------------------to String-----------------------------------------------------------------
+  //--------------------------------------------------------------------------------------------------------------------------------
+  override def toString(): String = {
+    table.toString()
   }
 }
