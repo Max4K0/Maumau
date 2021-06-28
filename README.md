@@ -12,4 +12,4 @@ Ein Mauamau welches mit einem Undo und Thememanager daherkommt, TUI und GUI sync
 Sollte ein Spieler keine Handkarten mehr haben, so gewinnt dieser und es erscheint ein Text, dass der Spieler gewonnen hat.
 ![Screenshot 2021-06-28 052116](https://user-images.githubusercontent.com/31143468/123574723-b1239280-d7d0-11eb-8f12-c082feb8ebfe.png)
 Hovert man auf die Karten, so erscheint ein Feedback, dass die Karte berührt wird.
-![image](https://user-images.githubusercontent.com/31143468/123574842-dfa16d80-d7d0-11eb-81be-16dcf93b435e.png)
+![ezgif-5-19023872a0f8](https://user-images.githubusercontent.com/31143468/123638332-58c7b180-d81f-11eb-9bb4-53426f2610ab.gif)
