@@ -1,26 +1,28 @@
 package de.htwg.se.maumau
-
-import de.htwg.se.maumau.aview.{TUI, Welcome}
-import de.htwg.se.maumau.controller.Controller
-import de.htwg.se.maumau.model._
-
+import com.google.inject.Guice
+import de.htwg.se.maumau.aview.{GUIApp, TUI, Welcome}
+import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
 import scala.io.StdIn.readLine
+
 object Maumau {
-  val table = Table()
-  val controller = new Controller(table)
+
+  val injector = Guice.createInjector(new MaumauModul)
+  val controller = injector.getInstance(classOf[ControllerInterface])
   val welcome = new Welcome(controller)
   val tui =  TUI(controller)
-//  controller.notifyObservers()
+  val gui = new GUIApp(controller)
+  controller.loadFile()
 
-  def main(args: Array[String]): String = {
+  def main(args: Array[String]): Unit = {
     welcome.welcome()
-    controller.notifyObservers()
     var input: String = ""
-
-    while (input != "q") {
+    while (input != "quit") {
       input = readLine()
       tui.processInputLine(input)
     }
-    "GameOver"
   }
 }
+
+//Music By: Benjamin Tissot (also known as Bensound)
+//www.bensound.com
+//https://www.bensound.com/royalty-free-music/track/jazzy-frenchy

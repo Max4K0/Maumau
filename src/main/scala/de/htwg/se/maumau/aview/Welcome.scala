@@ -1,12 +1,14 @@
 package de.htwg.se.maumau.aview
 
-import de.htwg.se.maumau.controller.Controller
+import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
+import de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.maumau.util.Observer
 
-class Welcome(controller: Controller){
-  def welcome():String= {//<--String
+class Welcome(controller: ControllerInterface){
+  def welcome():String= {
     println("""|•♦♣♠♥•Welcome to MauMau!•♥♠♣♦•""".stripMargin)
-    controller.addPlayer("P1", 0)// Unit ->
+    controller.addPlayer("P1", 0)
+    controller.addPlayer("P2", 1)
     controller.throwFirstCard()
     //    val playerAmount: Int = readLine(
     //      """|•♦♣♠♥•Welcome to MauMau!•♥♠♣♦•

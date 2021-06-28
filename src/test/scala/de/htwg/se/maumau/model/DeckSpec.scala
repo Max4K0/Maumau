@@ -2,8 +2,7 @@ package de.htwg.se.maumau.model
 
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
-import de.htwg.se.maumau.model.{Card, Color, Deck, Symbol}
-
+import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.{Card, Color, Deck, Symbol}
 import scala.util.Random
 
 class DeckSpec extends AnyWordSpec with Matchers {
@@ -21,6 +20,7 @@ class DeckSpec extends AnyWordSpec with Matchers {
         testDeck.fillDeck.cards should be(testDeck.fullDeck)
       }
       "testDeck after shuffle" in {
+        fullDeck.shuffleDeck(new Random(2)) should not be(fullDeck)
         fullDeck.shuffleDeck(new Random(2)) should be(rendDeck)
       }
       "testDeck after throwDeck" in {

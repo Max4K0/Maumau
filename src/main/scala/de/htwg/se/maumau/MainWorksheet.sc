@@ -1,1 +1,0 @@
-print("\u001B[30m" + "\uD83C\uDCD8")
