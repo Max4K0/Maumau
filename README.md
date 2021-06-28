@@ -2,9 +2,7 @@
 [![Build Status](https://travis-ci.com/MaxHD00/Maumau.svg?branch=main)](https://travis-ci.com/MaxHD00/Maumau)
 [![Coverage Status](https://coveralls.io/repos/github/MaxHD00/Maumau/badge.svg?branch=main)](https://coveralls.io/github/MaxHD00/Maumau?branch=main)
 
-
 Video zum Spiel: https://tinyurl.com/yhauwxbo
-![image](https://user-images.githubusercontent.com/31143468/123575333-d06eef80-d7d1-11eb-85b5-35f0136493f3.png)
 
 
 
