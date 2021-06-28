@@ -27,7 +27,7 @@ lazy val osName = System.getProperty("os.name") match {
 }
 
 //Excluding Folders for Coveralls
-coverageExcludedPackages := "de.htwg.se.maumau.aview.GUIApp; de.htwg.se.maumau.aview.GUI; de.htwg.se.maumau.model.fileIoComponent.*;"
+coverageExcludedPackages := "de.htwg.se.maumau.aview.GUIApp; de.htwg.se.maumau.aview.GUI; de.htwg.se.maumau.model.gameComponents.fileIOComponent.*;"
 
 
 // Add JavaFX dependencies
