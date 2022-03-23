@@ -1,7 +1,7 @@
 name          := "main"
 organization  := ""
-version       := "0.0.1"
-scalaVersion  := "2.13.5"
+version := "0.0.1"
+scalaVersion := "3.1.1"
 
 //Testing
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.7"

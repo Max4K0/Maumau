@@ -4,14 +4,14 @@ import de.htwg.se.maumau.controller.controllerComponent.{ControllerInterface, co
 import net.codingwell.scalaguice.ScalaModule
 import de.htwg.se.maumau.model.gameComponents.fileIOComponent._
 
-class MaumauModul extends AbstractModule with ScalaModule{
+class MaumauModul extends AbstractModule {
 
   //val default:Table = Table();
 
   override def configure() = {
     //bindConstant().annotatedWith(Names.named("default")).->(default)
-    bind[ControllerInterface].to[controllerBaseImpl.Controller]
+    bind(classOf[ControllerInterface]).to(classOf[controllerBaseImpl.Controller])
     //bind[fileIO_Interface].to[fileIO_JsonImpl.FileIO]
-    bind[fileIO_Interface].to[fileIO_XmlImpl.FileIO]
+    bind(classOf[fileIO_Interface]).to(classOf[fileIO_XmlImpl.FileIO])
   }
 }

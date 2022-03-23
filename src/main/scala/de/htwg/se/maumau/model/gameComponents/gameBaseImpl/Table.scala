@@ -71,7 +71,7 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
 
     //hand.append(player(playerNumber).playerDeck.cards.map(Card => Card.Path).mkString(" "))
     val Statement = new StringBuilder()
-    Statement.append(table + "\n\n")
+    Statement.append(table).append("\n\n")
     Statement.append(hand)
     Statement.toString()
   }
