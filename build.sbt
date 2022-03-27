@@ -27,6 +27,14 @@ lazy val root = project
     //FileIO
     libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "2.0.1",
     libraryDependencies += "com.typesafe.play" %% "play-json" % "2.10.0-RC5",
+    jacocoCoverallsServiceName := "github-actions",
+    jacocoCoverallsBranch := sys.env.get("CI_BRANCH"),
+    jacocoCoverallsPullRequest := sys.env.get("GITHUB_EVENT_NAME"),
+    jacocoCoverallsRepoToken := sys.env.get("COVERALLS_REPO_TOKEN"),
+    jacocoExcludes in Test := Seq(
+      "de.htwg.se.maumau.aview.*",
+      "de.htwg.se.maumau.model.gameComponents.fileIOComponent.*"
+    ),
 
     libraryDependencies ++= {
       lazy val osName = System.getProperty("os.name") match {
@@ -39,5 +47,6 @@ lazy val root = project
         .map( m=>  "org.openjfx" % s"javafx-$m" % "17.0.1" classifier osName)
     },
     //Excluding Folders for Coveralls
-    coverageExcludedPackages := "de.htwg.se.maumau.aview.GUIApp; de.htwg.se.maumau.aview.GUI; de.htwg.se.maumau.model.gameComponents.fileIOComponent.*;"
+    //coverageExcludedPackages := "de.htwg.se.maumau.aview.GUIApp; de.htwg.se.maumau.aview.GUI; de.htwg.se.maumau.model.gameComponents.fileIOComponent.*;"
 )
+.enablePlugins(JacocoCoverallsPlugin)
