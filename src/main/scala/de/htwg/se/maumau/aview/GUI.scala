@@ -4,8 +4,8 @@ package de.htwg.se.maumau.aview
 import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
 import de.htwg.se.maumau.util.State
 import scalafx.Includes.observableList2ObservableBuffer
-import scalafx.application.JFXApp.PrimaryStage
-import scalafx.application.{JFXApp, Platform}
+import scalafx.application.JFXApp3.PrimaryStage
+import scalafx.application.{JFXApp3, Platform}
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.{Button, Label}
@@ -17,9 +17,9 @@ import scala.collection.Seq
 import scala.language.implicitConversions
 import scala.util.{Success, Try}
 
-case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp {
+case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3 {
 
-  def loop(): Unit = {
+  override def start(): Unit = {
     Platform.runLater(new Runnable() {
       if (controller.shouldUpdate) {
         controller.changeShouldUpdate(false)
@@ -27,12 +27,11 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp 
       }
 
       override def run(): Unit = {
-        loop()
+        start()
       }
     })
   }
 
-  loop()
 
   def reprint(): Unit = {
 

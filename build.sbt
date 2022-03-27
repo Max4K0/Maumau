@@ -1,35 +1,43 @@
-name          := "main"
-organization  := ""
-version := "0.0.1"
-scalaVersion := "3.1.1"
+val scala3Version = "3.1.1"
 
-//Testing
-libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.7"
-libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.7" % "test"
+scalacOptions ++= Seq(
+  "--source:3.0-migration",
+  "-explain",
+  "-explain-types"
+)
 
-//GUI- Swing/FX
-libraryDependencies += "org.scalafx" %% "scalafx" % "16.0.0-R24"
-libraryDependencies += "org.openjfx" % "javafx" % "12.0.2" pomOnly()
+lazy val root = project
+  .in(file("."))
+  .settings(
+    name := "Battleship",
 
-//Dependency Injection
-libraryDependencies += "com.google.inject" % "guice" % "5.0.1"
-libraryDependencies += "net.codingwell" %% "scala-guice" % "5.0.1"
+    scalaVersion := scala3Version,
 
-//FileIO
-libraryDependencies += "org.scala-lang.modules" % "scala-xml_2.13" % "2.0.0"
-libraryDependencies += "com.typesafe.play" %% "play-json" % "2.10.0-RC2"
+    //Testing
+    libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.11",
+    libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.11" % "test",
 
-lazy val osName = System.getProperty("os.name") match {
-  case n if n.startsWith("Linux") => "linux"
-  case n if n.startsWith("Mac") => "mac"
-  case n if n.startsWith("Windows") => "win"
-  case _ => throw new Exception("Unknown platform!")
-}
+    //GUI- Swing/FX
+    libraryDependencies += "org.scalafx" %% "scalafx" % "17.0.1-R26",
 
-//Excluding Folders for Coveralls
-coverageExcludedPackages := "de.htwg.se.maumau.aview.GUIApp; de.htwg.se.maumau.aview.GUI; de.htwg.se.maumau.model.gameComponents.fileIOComponent.*;"
+    //Dependency Injection
+    libraryDependencies += "com.google.inject" % "guice" % "5.1.0",
+    libraryDependencies += ("net.codingwell" %% "scala-guice" % "5.0.1").cross(CrossVersion.for3Use2_13),
 
+    //FileIO
+    libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "2.0.1",
+    libraryDependencies += "com.typesafe.play" %% "play-json" % "2.10.0-RC5",
 
-// Add JavaFX dependencies
-lazy val javaFXModules = Seq("base", "controls", "fxml", "graphics", "media", "swing", "web")
-libraryDependencies ++= javaFXModules.map( m=>  "org.openjfx" % s"javafx-$m" % "16" classifier osName)
+    libraryDependencies ++= {
+      lazy val osName = System.getProperty("os.name") match {
+        case n if n.startsWith("Linux") => "linux"
+        case n if n.startsWith("Mac") => "mac"
+        case n if n.startsWith("Windows") => "win"
+        case _ => throw new Exception("Unknown platform!")
+      }
+      Seq("base", "controls", "fxml", "graphics", "media", "swing", "web")
+        .map( m=>  "org.openjfx" % s"javafx-$m" % "17.0.1" classifier osName)
+    },
+    //Excluding Folders for Coveralls
+    coverageExcludedPackages := "de.htwg.se.maumau.aview.GUIApp; de.htwg.se.maumau.aview.GUI; de.htwg.se.maumau.model.gameComponents.fileIOComponent.*;"
+)

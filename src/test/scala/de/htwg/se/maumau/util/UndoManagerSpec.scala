@@ -27,8 +27,8 @@ class UndoManagerSpec extends AnyWordSpec with Matchers {
         controller.states = Stack[String]("")
         State.state=""
         tui.processInputLine("redo") should be("invalid redo")
-        controller.undo should be()
-        controller.redo should be()
+        controller.undo should be
+        controller.redo should be
         State.state=""
         tui.processInputLine("undo") should be("invalid undo")
       }

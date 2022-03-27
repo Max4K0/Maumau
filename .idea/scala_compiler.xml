@@ -2,5 +2,12 @@
 <project version="4">
   <component name="ScalaCompilerConfiguration">
     <profile name="sbt 1" modules="Maumau.main,main,maumau.main" />
+    <profile name="sbt 2" modules="Battleship">
+      <parameters>
+        <parameter value="--source:3.0-migration" />
+        <parameter value="-explain" />
+        <parameter value="-explain-types" />
+      </parameters>
+    </profile>
   </component>
 </project>
