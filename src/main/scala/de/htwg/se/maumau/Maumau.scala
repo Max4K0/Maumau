@@ -1,15 +1,16 @@
 package de.htwg.se.maumau
-import com.google.inject.Guice
+import com.google.inject.{Guice, Injector}
 import de.htwg.se.maumau.aview.{GUIApp, TUI, Welcome}
 import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
+
 import scala.io.StdIn.readLine
 
 object Maumau {
 
-  val injector = Guice.createInjector(new MaumauModul)
-  val controller = injector.getInstance(classOf[ControllerInterface])
+  val injector: Injector = Guice.createInjector(new MaumauModul)
+  val controller: ControllerInterface = injector.getInstance(classOf[ControllerInterface])
   val welcome = new Welcome(controller)
-  val tui =  TUI(controller)
+  val tui: TUI =  TUI(controller)
   val gui = new GUIApp(controller)
   controller.loadFile()
 
