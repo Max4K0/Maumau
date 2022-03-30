@@ -71,7 +71,7 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
         //------------------------------------------------------------------------------------------------------------------------------
         //--------------------------------------------------------Theme Manager---------------------------------------------------------
         //------------------------------------------------------------------------------------------------------------------------------
-        controller.visiblethememanager match {
+        controller.visibleThemeManager match {
 
           case 0 => {
             content = view2
@@ -188,7 +188,7 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
                   //-------------------------------------
                   // Theme Manager
                   //-------------------------------------
-                  controller.visiblecardthememanager match {
+                  controller.visibleCardThemeManager match {
                     case 0 => {
                       this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 45, cardSizeY - 45, true, true)))
                     }
@@ -236,7 +236,7 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
                 //-------------------------------------
                 // Theme Manager
                 //-------------------------------------
-                controller.visiblecardthememanager match {
+                controller.visibleCardThemeManager match {
                   case 0 => {
                     this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
                   }
@@ -254,7 +254,7 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
                 // Animations and Actions
                 //-------------------------------------
                 this.onMouseEntered = (MouseEvent) => {
-                  controller.visiblecardthememanager match {
+                  controller.visibleCardThemeManager match {
                     case 0 =>
                       this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", (cardSizeX - 10) * 1.1, (cardSizeY - 10) * 1.1, true, true)))
 
@@ -264,7 +264,7 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
                   this.padding = Insets(-5, 0, 0, 15)
                 }
                 this.onMouseExited = (MouseEvent) => {
-                  controller.visiblecardthememanager match {
+                  controller.visibleCardThemeManager match {
                     case 0 =>
                       this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
                     case 1 =>
@@ -357,7 +357,7 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
                   controller.undo
                   reprint()
                 }
-                this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size != 0 && controller.visiblesettings
+                this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size != 0 && controller.visibleSetting
 
               },
 
@@ -385,7 +385,7 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
                   controller.redo
                   reprint()
                 }
-                this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size != 0 && controller.visiblesettings
+                this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size != 0 && controller.visibleSetting
               },
 
               //------------------------------------------------------------------------------------------------------------------------------
@@ -407,7 +407,7 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
                   controller.changeThemeVis()
                   reprint()
                 }
-                this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size != 0 && controller.visiblesettings
+                this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size != 0 && controller.visibleSetting
               },
 
               //------------------------------------------------------------------------------------------------------------------------------
@@ -429,7 +429,7 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
                   controller.changeCardThemeVis()
                   reprint()
                 }
-                this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size != 0 && controller.visiblesettings
+                this.visible = controller.table.player(playerNumber).playerDeck.cards.size != 0 && controller.table.player(if (State.state == "Player1:") 0 else 1).playerDeck.cards.size != 0 && controller.visibleSetting
 
               }
             )

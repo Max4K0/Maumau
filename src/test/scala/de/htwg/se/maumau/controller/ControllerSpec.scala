@@ -14,8 +14,8 @@ class ControllerSpec extends AnyWordSpec with Matchers {
     "new" should {
       val table = Table()
       val controller = new Controller()
-      controller.visiblethememanager = 0
-      controller.visiblecardthememanager = 0
+      controller.visibleThemeManager = 0
+      controller.visibleCardThemeManager = 0
       controller.checkCardLable = false
       controller.shouldUpdate = false
       val player = Player("", Deck())
@@ -25,31 +25,31 @@ class ControllerSpec extends AnyWordSpec with Matchers {
         table.addPlayers(table, "", 0) should be(table.addPlayers(table, "", 0))
       }
       "Theme number at start should" in {
-        controller.visiblethememanager should be(0)
+        controller.visibleThemeManager should be(0)
         controller.changeThemeVis()
       }
       "Theme number after first change should" in {
-        controller.visiblethememanager should be(1)
+        controller.visibleThemeManager should be(1)
         controller.changeThemeVis()
       }
 
       "Theme number after second change should" in {
-        controller.visiblethememanager should be(2)
+        controller.visibleThemeManager should be(2)
         controller.changeThemeVis()
       }
       "Theme number after third change should" in {
-        controller.visiblethememanager should be(0)
+        controller.visibleThemeManager should be(0)
       }
       "Card theme number at start should" in {
-        controller.visiblecardthememanager should be(0)
+        controller.visibleCardThemeManager should be(0)
         controller.changeCardThemeVis()
       }
       "Card theme number after first change should" in {
-        controller.visiblecardthememanager should be(1)
+        controller.visibleCardThemeManager should be(1)
         controller.changeCardThemeVis()
       }
       "Card theme number after second change should" in {
-        controller.visiblecardthememanager should be(0)
+        controller.visibleCardThemeManager should be(0)
         controller.changeCardThemeVis()
       }
       "Card after valid check" in {

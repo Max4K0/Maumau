@@ -19,9 +19,9 @@ class Controller @Inject()() extends ControllerInterface {
   var strategy = 1
   var shouldUpdate = true
   var checkCardLable = false
-  var visiblesettings = false
-  var visiblethememanager = 0
-  var visiblecardthememanager = 0
+  var visibleSetting = false
+  var visibleThemeManager = 0
+  var visibleCardThemeManager = 0
   //var commands = Stack[Comma]()
 
   //--------------------------------------------------------------------------------------------------------------------------------
@@ -46,43 +46,43 @@ class Controller @Inject()() extends ControllerInterface {
   //----------------------------------------------------GUI Methods-----------------------------------------------------------------
   //--------------------------------------------------------------------------------------------------------------------------------
   def changeVis(): Unit = {
-    if (visiblesettings == false) visiblesettings = true else visiblesettings = false
-    visiblesettings
+    if (visibleSetting == false) visibleSetting = true else visibleSetting = false
+    visibleSetting
   }
 
   def changeMainTheme(themeNumber: Int): Unit = {
-    visiblethememanager = themeNumber
+    visibleThemeManager = themeNumber
   }
 
   def changeCardTheme(themeNumber: Int): Unit = {
-    visiblecardthememanager = themeNumber
+    visibleCardThemeManager = themeNumber
   }
 
   def changeThemeVis(): Unit = {
-    visiblethememanager match {
+    visibleThemeManager match {
 
       case 0 => {
-        visiblethememanager += 1
+        visibleThemeManager += 1
       }
 
       case 1 => {
-        visiblethememanager += 1
+        visibleThemeManager += 1
       }
 
       case 2 => {
-        visiblethememanager = 0
+        visibleThemeManager = 0
       }
     }
   }
   def changeCardThemeVis(): Unit = {
-    visiblecardthememanager match {
+    visibleCardThemeManager match {
 
       case 0 => {
-        visiblecardthememanager += 1
+        visibleCardThemeManager += 1
       }
 
       case 1 => {
-        visiblecardthememanager = 0
+        visibleCardThemeManager = 0
       }
     }
   }

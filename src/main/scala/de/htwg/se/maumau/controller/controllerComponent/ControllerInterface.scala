@@ -17,9 +17,9 @@ trait ControllerInterface extends Observable{
   def changeVis(): Unit
   def changeThemeVis(): Unit
   def changeCardThemeVis(): Unit
-  def visiblesettings:Boolean
-  def visiblethememanager:Int
-  def visiblecardthememanager:Int
+  def visibleSetting:Boolean
+  def visibleThemeManager:Int
+  def visibleCardThemeManager:Int
   def table:Table
   def tables:mutable.Stack[Table]
   def states:mutable.Stack[String]

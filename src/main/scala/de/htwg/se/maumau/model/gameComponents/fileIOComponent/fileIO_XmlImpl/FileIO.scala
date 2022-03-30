@@ -26,8 +26,8 @@ class FileIO extends fileIO_Interface{
 
   def theme_toXML(controller: ControllerInterface): Elem = {
     <theme>
-      <visableCardThemeManager>{controller.visiblecardthememanager}</visableCardThemeManager>
-      <visableMainThemeManager>{controller.visiblethememanager}</visableMainThemeManager>
+      <visableCardThemeManager>{controller.visibleCardThemeManager}</visableCardThemeManager>
+      <visableMainThemeManager>{controller.visibleThemeManager}</visableMainThemeManager>
     </theme>
   }
 

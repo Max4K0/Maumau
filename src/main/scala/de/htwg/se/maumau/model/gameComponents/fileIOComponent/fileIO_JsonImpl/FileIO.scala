@@ -30,8 +30,8 @@ class FileIO extends fileIO_Interface{
   def saveToJson(controller: ControllerInterface): JsValue = {
     Json.obj(
       "themeManager" -> Json.obj(
-        "visableThemeManager" -> controller.visiblethememanager,
-        "visableCardThemeManager" -> controller.visiblecardthememanager,
+        "visableThemeManager" -> controller.visibleThemeManager,
+        "visableCardThemeManager" -> controller.visibleCardThemeManager,
       )
     )
   }
