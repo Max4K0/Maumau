@@ -1,11 +1,10 @@
 package de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl
 
-import com.google.inject.Inject
+import com.google.inject.{Guice, Inject, Injector}
 import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
 import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.{Table, TableStrictStrategy}
 import de.htwg.se.maumau.util.{State, UndoManager}
 import de.htwg.se.maumau.MaumauModul
-import com.google.inject.Guice
 import de.htwg.se.maumau.model.gameComponents.fileIOComponent.fileIO_Interface
 
 import scala.collection.mutable
@@ -14,10 +13,10 @@ import scala.collection.mutable.Stack
 class Controller @Inject()() extends ControllerInterface {
   var table = new Table()
   private val undoManager = new UndoManager
-  val injector = Guice.createInjector(new MaumauModul)
-  val fileIo = injector.getInstance(classOf[fileIO_Interface])
-  val tables = mutable.Stack[Table]()
-  val states = mutable.Stack[String]("")
+  val injector: Injector = Guice.createInjector(new MaumauModul)
+  val fileIo: fileIO_Interface = injector.getInstance(classOf[fileIO_Interface])
+  val tables: mutable.Stack[Table] = mutable.Stack[Table]()
+  val states: mutable.Stack[String] = mutable.Stack[String]("")
   var strategy = 1
   var shouldUpdate = true
   var checkCardLable = false
@@ -74,6 +73,7 @@ class Controller @Inject()() extends ControllerInterface {
       case 2 => {
         visibleThemeManager = 0
       }
+      case _ =>
     }
   }
   def changeCardThemeVis(): Unit = {
@@ -86,6 +86,7 @@ class Controller @Inject()() extends ControllerInterface {
       case 1 => {
         visibleCardThemeManager = 0
       }
+      case _ =>
     }
   }
   def changeCheckCardLable(checkCard: Boolean): Unit = {
@@ -103,6 +104,7 @@ class Controller @Inject()() extends ControllerInterface {
     strategy match {
       case 1 => table.checkCard(table, playerNumber, cardNumber)
       case 2 => (new TableStrictStrategy).checkCard(table, playerNumber, cardNumber)
+      case _ => false
     }
   }
 
@@ -111,6 +113,7 @@ class Controller @Inject()() extends ControllerInterface {
     strategy match {
       case 2 => table.checkDeck(table, playerNumber)
       case 1 => (new TableStrictStrategy).checkDeck(table, playerNumber)
+      case _ => false
     }
   }
 
