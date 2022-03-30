@@ -9,7 +9,7 @@ scalacOptions ++= Seq(
 lazy val root = project
   .in(file("."))
   .settings(
-    name := "Mauamau",
+    name := "Maumau",
 
     scalaVersion := scala3Version,
 

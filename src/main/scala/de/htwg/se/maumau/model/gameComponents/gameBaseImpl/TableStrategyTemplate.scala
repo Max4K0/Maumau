@@ -1,6 +1,6 @@
 package de.htwg.se.maumau.model.gameComponents.gameBaseImpl
 
-trait TabelStrategyTemplate {
+trait TableStrategyTemplate {
   def checkCard(table: Table, playerNumber: Int, cardNumber: Int): Boolean
 
   def checkDeck(table: Table, playerNumber: Int): Boolean
