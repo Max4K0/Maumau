@@ -1,6 +1,6 @@
 package de.htwg.se.maumau.model.gameComponents.gameBaseImpl
 
-class TabelStrictStrategy extends TabelStrategyTemplate{
+class TableStrictStrategy extends TableStrategyTemplate{
 
   override def checkCard(table: Table, playerNumber: Int, cardNumber: Int): Boolean = {
     true

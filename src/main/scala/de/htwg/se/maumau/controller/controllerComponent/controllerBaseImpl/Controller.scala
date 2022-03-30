@@ -2,11 +2,13 @@ package de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl
 
 import com.google.inject.Inject
 import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
-import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.{TabelStrictStrategy, Table}
+import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.{Table, TableStrictStrategy}
 import de.htwg.se.maumau.util.{State, UndoManager}
 import de.htwg.se.maumau.MaumauModul
 import com.google.inject.Guice
 import de.htwg.se.maumau.model.gameComponents.fileIOComponent.fileIO_Interface
+
+import scala.collection.mutable
 import scala.collection.mutable.Stack
 
 class Controller @Inject()() extends ControllerInterface {
@@ -14,8 +16,8 @@ class Controller @Inject()() extends ControllerInterface {
   private val undoManager = new UndoManager
   val injector = Guice.createInjector(new MaumauModul)
   val fileIo = injector.getInstance(classOf[fileIO_Interface])
-  var tables = Stack[Table]()
-  var states = Stack[String]("")
+  val tables = mutable.Stack[Table]()
+  val states = mutable.Stack[String]("")
   var strategy = 1
   var shouldUpdate = true
   var checkCardLable = false
@@ -100,7 +102,7 @@ class Controller @Inject()() extends ControllerInterface {
     val playerNumber = if (State.state == "Player1:") 1 else 0
     strategy match {
       case 1 => table.checkCard(table, playerNumber, cardNumber)
-      case 2 => (new TabelStrictStrategy).checkCard(table, playerNumber, cardNumber)
+      case 2 => (new TableStrictStrategy).checkCard(table, playerNumber, cardNumber)
     }
   }
 
@@ -108,7 +110,7 @@ class Controller @Inject()() extends ControllerInterface {
     val playerNumber = if (State.state == "Player1:") 1 else 0
     strategy match {
       case 2 => table.checkDeck(table, playerNumber)
-      case 1 => (new TabelStrictStrategy).checkDeck(table, playerNumber)
+      case 1 => (new TableStrictStrategy).checkDeck(table, playerNumber)
     }
   }
 
