@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Battleship.iml" filepath="$PROJECT_DIR$/.idea/modules/Battleship.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Battleship-build.iml" filepath="$PROJECT_DIR$/.idea/modules/Battleship-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau-build.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/main.iml" filepath="$PROJECT_DIR$/.idea/modules/main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/main-build.iml" filepath="$PROJECT_DIR$/.idea/modules/main-build.iml" />
     </modules>

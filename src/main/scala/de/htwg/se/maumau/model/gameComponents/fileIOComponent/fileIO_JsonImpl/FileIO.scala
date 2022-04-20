@@ -12,7 +12,7 @@ class FileIO extends fileIO_Interface{
 
   override def save(controller: ControllerInterface): Unit = {
     val pw = new PrintWriter(new File("save.json"))
-    pw.write(Json.prettyPrint(saveToJson(controller)))
+    Some(pw.write(Json.prettyPrint(saveToJson(controller))))
     pw.close()
   }
 
