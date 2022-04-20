@@ -6,6 +6,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Battleship-build.iml" filepath="$PROJECT_DIR$/.idea/modules/Battleship-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau-build.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau.aview.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau.aview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau.controller.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau.controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau.model.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau.model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau.util.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau.util.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/aview.iml" filepath="$PROJECT_DIR$/.idea/modules/aview.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/controller.iml" filepath="$PROJECT_DIR$/.idea/modules/controller.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/main.iml" filepath="$PROJECT_DIR$/.idea/modules/main.iml" />
