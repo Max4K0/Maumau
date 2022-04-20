@@ -29,6 +29,8 @@ lazy val root = project
     libraryDependencies += "com.google.inject" % "guice" % "5.1.0",
     libraryDependencies += ("net.codingwell" %% "scala-guice" % "5.0.1").cross(CrossVersion.for3Use2_13),
 
+    libraryDependencies += ("com.typesafe.akka" %% "akka-actor-typed" % "2.6.19").cross(CrossVersion.for3Use2_13),
+
     //FileIO
     libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "2.0.1",
     libraryDependencies += "com.typesafe.play" %% "play-json" % "2.10.0-RC5",
@@ -50,7 +52,8 @@ lazy val root = project
       }
       Seq("base", "controls", "fxml", "graphics", "media", "swing", "web")
         .map( m=>  "org.openjfx" % s"javafx-$m" % "17.0.1" classifier osName)
-    }
+    },
+
     //Excluding Folders for Coveralls
     //coverageExcludedPackages := "de.htwg.se.maumau.aview.GUIApp; de.htwg.se.maumau.aview.GUI; de.htwg.se.maumau.model.gameComponents.fileIOComponent.*;"
 )
