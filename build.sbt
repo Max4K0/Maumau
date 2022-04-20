@@ -5,11 +5,16 @@ scalacOptions ++= Seq(
   "-explain",
   "-explain-types"
 )
+lazy val controller = (project in file("controller"))
+lazy val util = (project in file("util"))
+lazy val model = (project in file("model"))
+lazy val aview = (project in file("aview"))
 
 lazy val root = project
   .in(file("."))
+  .aggregate(controller, util, model, aview)
   .settings(
-    name := "Battleship",
+    name := "Maumau",
 
     scalaVersion := scala3Version,
 
@@ -45,7 +50,7 @@ lazy val root = project
       }
       Seq("base", "controls", "fxml", "graphics", "media", "swing", "web")
         .map( m=>  "org.openjfx" % s"javafx-$m" % "17.0.1" classifier osName)
-    },
+    }
     //Excluding Folders for Coveralls
     //coverageExcludedPackages := "de.htwg.se.maumau.aview.GUIApp; de.htwg.se.maumau.aview.GUI; de.htwg.se.maumau.model.gameComponents.fileIOComponent.*;"
 )

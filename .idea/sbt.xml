@@ -8,7 +8,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/aview" />
+            <option value="$PROJECT_DIR$/controller" />
+            <option value="$PROJECT_DIR$/model" />
             <option value="$PROJECT_DIR$/project" />
+            <option value="$PROJECT_DIR$/util" />
           </set>
         </option>
         <option name="sbtVersion" value="1.6.2" />

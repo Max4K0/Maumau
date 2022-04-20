@@ -60,7 +60,6 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
     newTable
   }
 
-
   override def toString(): String = {
     val playerNumber = if (State.state == "Player1:") 1 else 0
     val table = new StringBuilder("\u001B[48;5;15m" + " tablecards: ")
@@ -75,5 +74,4 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
     Statement.append(hand)
     Statement.toString()
   }
-
 }
