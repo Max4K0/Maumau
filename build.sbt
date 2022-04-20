@@ -29,7 +29,7 @@ lazy val root = project
     libraryDependencies += "com.google.inject" % "guice" % "5.1.0",
     libraryDependencies += ("net.codingwell" %% "scala-guice" % "5.0.1").cross(CrossVersion.for3Use2_13),
 
-    libraryDependencies += ("com.typesafe.akka" %% "akka-actor-typed" % "2.6.19").cross(CrossVersion.for3Use2_13),
+    libraryDependencies += "com.typesafe.akka" %% "akka-actor-typed" % "2.6.19",
 
     //FileIO
     libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "2.0.1",
