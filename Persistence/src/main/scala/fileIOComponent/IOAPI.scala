@@ -33,9 +33,12 @@ object IOAPI :
 
   val route = concat(
 
+    pathSingleSlash {
+      complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, routes))
+    },
     get {
       path("fileio" / "load") {
-        complete(HttpEntity(ContentTypes.`application/json`, fileIO.load()))
+        complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, fileIO.load()))
       }
     },
     post {

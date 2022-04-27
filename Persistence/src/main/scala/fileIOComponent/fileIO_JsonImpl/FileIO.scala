@@ -16,12 +16,13 @@ class FileIO extends fileIO_Interface{
   }
 
 
-  override def load(): JsValue = {
+  override def load(): String = {
     val source: String = Source.fromFile("save.json").getLines.mkString
     val json: JsValue = Json.parse(source)
     //val visibleCardThemeManager = (json \ "visibleCardThemeManager").get
     //val visibleThemeManager = (json \ "visibleThemeManager").get
-    Json.obj("themeManager" -> (json \ "themeManager").get)
+    Json.prettyPrint(Json.obj("themeManager" -> (json \ "themeManager").get))
+
   }
 
   def saveToJson(s: String): JsValue = {

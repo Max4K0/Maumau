@@ -17,6 +17,7 @@ import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpMethods, HttpRequ
 import akka.http.scaladsl.server.{ExceptionHandler, Route}
 import akka.http.scaladsl.unmarshalling.Unmarshal
 import play.api.libs.json.{JsValue, Json}
+import scala.util.{Failure, Success}
 
 import scala.concurrent.Future
 
@@ -55,13 +56,12 @@ class Controller @Inject()() extends ControllerInterface {
     val responseFuture: Future[HttpResponse] = Http().singleRequest(HttpRequest(
       method = HttpMethods.POST,
       uri = fileIOServer + "/save",
-      entity = Json.obj(
+      entity = Json.prettyPrint(Json.obj(
         "themeManager" -> Json.obj(
           "visibleCardThemeManager" -> this.visiblecardthememanager,
           "visibleThemeManager" -> this.visiblethememanager
         )
-      )
-    ))
+      ))))
     notifyObservers()
   }
 
@@ -80,9 +80,10 @@ class Controller @Inject()() extends ControllerInterface {
           Unmarshal(value.entity).to[String].onComplete {
             case Failure(_) => sys.error("Failed unmarshalling")
             case Success(value) => {
-              val theme = (value \ "themeManager").get
-              this.visiblethememanager = (theme \ "visibleThemeManager").get
-              this.visiblecardthememanager = (theme \ "visibleCardThemeManager").get
+              val json = Json.parse(value)
+              val theme = (json \ "themeManager").get
+              this.visiblethememanager = (theme \ "visibleThemeManager").get.as[Int]
+              this.visiblecardthememanager = (theme \ "visibleCardThemeManager").get.as[Int]
               notifyObservers()
             }
           }

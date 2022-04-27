@@ -53,20 +53,24 @@ lazy val options = Seq(
   }
 )
 
-lazy val maumau = (project in file("Maumau"))
-  .settings(
-    name := "Maumau",
-    version := "0.5.0-SNAPSHOT",
-    options
-  )
 lazy val persistence = (project in file("Persistence"))
   .settings(
     name := "Maumau-Persistence",
     version := "0.5.0-SNAPSHOT",
     options
   )
-lazy val ui = (project in file("UI"))
 
+
+lazy val root = (project in file("Maumau"))
+  .aggregate(persistence)
+  .dependsOn(persistence)
+  .settings(
+    name := "Maumau",
+    version := "0.5.0-SNAPSHOT",
+    options
+  ).enablePlugins(JacocoCoverallsPlugin)
+
+/*
 lazy val root = project
   .in(file("."))
   .aggregate(maumau, persistence, ui)
@@ -75,3 +79,5 @@ lazy val root = project
     options
   )
   .enablePlugins(JacocoCoverallsPlugin)
+
+ */
