@@ -55,13 +55,13 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
       //--------------------------------------------------------------------------------------------------------------------------------
       scene = new Scene(1320, 900) {
         val cardRatio = 0.25
-        val cardSizeX = 500 * cardRatio
-        val cardSizeY = 726 * cardRatio
+        val cardSizeX: Double = 500 * cardRatio
+        val cardSizeY: Double = 726 * cardRatio
         val table = new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/Table.png", 1000, 1000, false, true)
         val table2 = new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/Table2.png", 1329, 920, false, false)
         val table3 = new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/Table3.png", 1329, 920, false, false)
         val img = new Image(controller.table.tableDecks(1).cards.last.imgPath, cardSizeX - 10, cardSizeY - 10, false, false)
-        val playerNumber = if (State.state == "Player1:") 1 else 0
+        val playerNumber: Int = if (State.state == "Player1:") 1 else 0
         val view = new ImageView(img)
         val view2 = new ImageView(table)
         val view3 = new ImageView(table2)
@@ -72,11 +72,9 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
         //--------------------------------------------------------Theme Manager---------------------------------------------------------
         //------------------------------------------------------------------------------------------------------------------------------
         controller.visiblethememanager match {
-
           case 0 => {
             content = view2
           }
-
           case 1 => {
             content = view3
             content += view2
@@ -85,7 +83,6 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
             content = view4
             content += view2
           }
-
         }
 
         labels

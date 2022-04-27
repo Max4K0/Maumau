@@ -70,12 +70,6 @@ project/**/target/
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
-
-/aview/
-/controller/
-/model/
-/util/
-
 .idea/*
 
 # JIRA plugin

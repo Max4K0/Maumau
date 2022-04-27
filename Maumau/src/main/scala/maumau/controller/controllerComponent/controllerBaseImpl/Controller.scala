@@ -66,7 +66,6 @@ class Controller @Inject()() extends ControllerInterface {
   }
 
   def loadFile(): Unit = {
-    //this.grid = FileIO.load(this.players(0), this.players(1), this.grid)
     implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
 
     implicit val executionContext = system.executionContext
@@ -89,6 +88,7 @@ class Controller @Inject()() extends ControllerInterface {
           }
         }
       }
+    println("here")
     notifyObservers()
     //fileIo.load(this)
   }
