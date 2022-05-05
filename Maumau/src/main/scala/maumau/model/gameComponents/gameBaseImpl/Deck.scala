@@ -3,7 +3,7 @@ package maumau.model.gameComponents.gameBaseImpl
 import scala.util.Random
 
 case class Deck(cards: List[Card] = List[Card]()) {
-  val fullDeck = List[Card](
+  val fullDeck: Seq[Card] = List[Card](
     Card(Color.Clubs, Symbol.ASS),
     Card(Color.Clubs, Symbol.Two),
     Card(Color.Clubs, Symbol.Three),
@@ -57,7 +57,7 @@ case class Deck(cards: List[Card] = List[Card]()) {
     Card(Color.Hearts, Symbol.Lady),
     Card(Color.Hearts, Symbol.King))
 
-  val emptyDeck = List[Card]()
+  val emptyDeck: Seq[Card] = List[Card]()
 
   def throwDeck: Deck = copy(cards = cards.drop(cards.size))
 

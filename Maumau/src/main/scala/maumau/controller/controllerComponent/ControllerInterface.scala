@@ -1,7 +1,8 @@
 package maumau.controller.controllerComponent
-import maumau.model.gameComponents.gameBaseImpl.{Table}
-import maumau.util.{Observable}
+import maumau.model.gameComponents.gameBaseImpl.Table
+import maumau.util.Observable
 
+import scala.collection.mutable
 import scala.collection.mutable.Stack
 
 trait ControllerInterface extends Observable{
@@ -11,6 +12,7 @@ trait ControllerInterface extends Observable{
   def changeShouldUpdate(InshouldUpdate: Boolean): Unit
   def changeMainTheme(themeNumber: Int): Unit
   def changeCardTheme(themeNumber: Int): Unit
+  def newGame(): Unit
   def saveFile(): Unit
   def loadFile(): Unit
   def changeVis(): Unit
@@ -20,8 +22,8 @@ trait ControllerInterface extends Observable{
   def visiblethememanager:Int
   def visiblecardthememanager:Int
   def table:Table
-  def tables:Stack[Table]
-  def states:Stack[String]
+  def tables:mutable.Stack[Table]
+  def states:mutable.Stack[String]
   def strategy:Int
   def shouldUpdate:Boolean
   def checkCardLable:Boolean
@@ -32,8 +34,8 @@ trait ControllerInterface extends Observable{
   def checkDeck(): Boolean
   def addPlayer(name: String, playerNum: Int): Unit
   def undoStep(): Unit
-  def toString(): String
-  def undo: Unit
-  def redo: Unit
+  def toString: String
+  def undo(): Unit
+  def redo(): Unit
 }
 

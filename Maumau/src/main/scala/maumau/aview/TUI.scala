@@ -36,7 +36,7 @@ case class TUI(controller: ControllerInterface) extends Observer {
           "invalid undo"
         } else {
           println("<-<-<-Undooo!<-<-<-")
-          controller.undo
+          controller.undo()
           "valid undo"
         }
       //--------------------------------------------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ case class TUI(controller: ControllerInterface) extends Observer {
           "invalid redo"
         } else {
           println("->->->Redooo!->->->")
-          controller.redo
+          controller.redo()
           "valid redo"
         }
 

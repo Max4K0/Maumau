@@ -7,7 +7,7 @@ import maumau.util.Observer
 
 
 case class GUIApp(controller: ControllerInterface) extends Observer {
-  val gui: GUI = new GUI( this, controller)
+  val gui: GUI = GUI( this, controller)
 
 
 
@@ -16,7 +16,6 @@ case class GUIApp(controller: ControllerInterface) extends Observer {
     override def run(): Unit = {
       import javafx.embed.swing.JFXPanel
       new JFXPanel
-
       //------------------------------------------------------------------------------------------------------------------------------------
       //------------------------------------------------------------Music Player------------------------------------------------------------
       //------------------------------------------------------------------------------------------------------------------------------------
@@ -36,9 +35,7 @@ case class GUIApp(controller: ControllerInterface) extends Observer {
   //------------------------------------------------------------Starting Gui------------------------------------------------------------
   //------------------------------------------------------------------------------------------------------------------------------------
   thread.start()
-  controller.add( this )
-  def exit( ):Unit = gui.stopApp()
-  override def update: Boolean = {
-    true
-  }
+  controller.add(this)
+  def exit():Unit = gui.stopApp()
+  override def update: Boolean = true
 }

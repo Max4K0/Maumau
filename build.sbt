@@ -28,6 +28,7 @@ lazy val options = Seq(
     ("com.typesafe.akka" %% "akka-stream" % AkkaVersion).cross(CrossVersion.for3Use2_13),
     ("com.typesafe.akka" %% "akka-http" % AkkaHttpVersion).cross(CrossVersion.for3Use2_13)
   ),
+  libraryDependencies += "org.slf4j" % "slf4j-api" % "1.7.36",
 
   //FileIO
   libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "2.0.1",
@@ -58,12 +59,23 @@ lazy val persistence = (project in file("Persistence"))
     name := "Maumau-Persistence",
     version := "0.5.0-SNAPSHOT",
     options
-  )
+  ).enablePlugins(JacocoCoverallsPlugin)
 
-
-lazy val root = (project in file("Maumau"))
+lazy val main = (project in file("Maumau"))
   .aggregate(persistence)
   .dependsOn(persistence)
+  .settings(
+    name := "Maumau-Main",
+    version := "0.5.0-SNAPSHOT",
+    options
+  ).enablePlugins(JacocoCoverallsPlugin)
+
+
+
+lazy val root = project
+  .in(file("."))
+  .aggregate(persistence, main)
+  .dependsOn(persistence, main)
   .settings(
     name := "Maumau",
     version := "0.5.0-SNAPSHOT",

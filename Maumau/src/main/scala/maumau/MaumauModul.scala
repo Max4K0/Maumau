@@ -10,7 +10,5 @@ class MaumauModul extends AbstractModule {
   override def configure(): Unit = {
     //bindConstant().annotatedWith(Names.named("default")).->(default)
     bind(classOf[ControllerInterface]).to(classOf[controllerBaseImpl.Controller])
-    //bind[fileIO_Interface].to[fileIO_JsonImpl.FileIO]
-    //bind(classOf[fileIO_Interface]).to(classOf[fileIO_XmlImpl.FileIO])
   }
 }
