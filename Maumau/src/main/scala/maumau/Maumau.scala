@@ -8,7 +8,7 @@ import fileIOComponent.IOAPI
 
 import scala.util.{Failure, Success, Try}
 
-object Maumau {
+case object Maumau {
   def main(args: Array[String]): Unit = {
     val injector: Injector = Guice.createInjector(new MaumauModul)
     val controller: ControllerInterface = injector.getInstance(classOf[ControllerInterface])

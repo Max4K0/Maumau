@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaCompilerConfiguration">
+    <profile name="sbt 1" modules="Maumau,Maumau-Main,Maumau-Persistence,Maumau.aview,Maumau.controller,Maumau.main,Maumau.model,Maumau.util,aview,controller,main,maumau,maumau.main,model,persistence,ui,util" />
+    <profile name="sbt 2" modules="Battleship,Maumau.Battleship,Maumau.maumau,SA.Maumau,root">
+      <parameters>
+        <parameter value="--source:3.0-migration" />
+        <parameter value="-explain" />
+        <parameter value="-explain-types" />
+      </parameters>
+    </profile>
+  </component>
+</project>

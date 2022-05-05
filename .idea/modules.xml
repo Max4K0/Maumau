@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Battleship.iml" filepath="$PROJECT_DIR$/.idea/modules/Battleship.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Battleship-build.iml" filepath="$PROJECT_DIR$/.idea/modules/Battleship-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau-Main.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau-Main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau-Persistence.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau-Persistence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau-build.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau.aview.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau.aview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau.controller.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau.controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau.model.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau.model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau.util.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau.util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SA.Maumau.iml" filepath="$PROJECT_DIR$/.idea/modules/SA.Maumau.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/controller.iml" filepath="$PROJECT_DIR$/.idea/modules/controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/main.iml" filepath="$PROJECT_DIR$/.idea/modules/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/main-build.iml" filepath="$PROJECT_DIR$/.idea/modules/main-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ui.iml" filepath="$PROJECT_DIR$/.idea/modules/ui.iml" />
+    </modules>
+  </component>
+</project>
