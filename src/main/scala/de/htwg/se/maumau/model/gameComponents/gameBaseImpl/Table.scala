@@ -82,7 +82,7 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
   override def fromJson(json: String): Table = {
     decode[Table](json) match {
       case Right(res) => res
-      case Left(res) => throw Exception(s"failed parsing JSON\n$result")
+      case Left(res) => throw Exception(s"failed parsing JSON\n$res")
     }
   }
 
