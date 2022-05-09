@@ -13,6 +13,7 @@ trait ControllerInterface extends Observable{
   def changeCardTheme(themeNumber: Int): Unit
   def saveFile(): Unit
   def loadFile(): Unit
+  def newGame(): Unit
   def changeVis(): Unit
   def changeThemeVis(): Unit
   def changeCardThemeVis(): Unit

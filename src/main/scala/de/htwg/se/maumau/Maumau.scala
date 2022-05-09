@@ -9,12 +9,11 @@ object Maumau {
   val injector = Guice.createInjector(new MaumauModul)
   val controller = injector.getInstance(classOf[ControllerInterface])
   val welcome = new Welcome(controller)
-  val tui =  TUI(controller)
-  val gui = new GUIApp(controller)
-  controller.loadFile()
 
   def main(args: Array[String]): Unit = {
     welcome.welcome()
+    val tui =  TUI(controller)
+    val gui = GUIApp(controller)
     var input: String = ""
     while (input != "quit") {
       input = readLine()

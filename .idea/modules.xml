@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Battleship.iml" filepath="$PROJECT_DIR$/.idea/modules/Battleship.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Battleship-build.iml" filepath="$PROJECT_DIR$/.idea/modules/Battleship-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau-Persistence.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau-Persistence.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau-build.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/aview.iml" filepath="$PROJECT_DIR$/.idea/modules/aview.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/controller.iml" filepath="$PROJECT_DIR$/.idea/modules/controller.iml" />

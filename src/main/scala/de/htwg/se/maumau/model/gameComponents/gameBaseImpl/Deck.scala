@@ -3,7 +3,7 @@ package de.htwg.se.maumau.model.gameComponents.gameBaseImpl
 import scala.util.Random
 
 case class Deck(cards: List[Card] = List[Card]()) {
-  val fullDeck = List[Card](
+  val fullDeck: List[Card] = List[Card](
     Card(Color.Clubs, Symbol.ASS),
     Card(Color.Clubs, Symbol.Two),
     Card(Color.Clubs, Symbol.Three),
@@ -57,11 +57,13 @@ case class Deck(cards: List[Card] = List[Card]()) {
     Card(Color.Hearts, Symbol.Lady),
     Card(Color.Hearts, Symbol.King))
 
-  val emptyDeck = List[Card]()
+  val emptyDeck: List[Card] = List[Card]()
 
   def throwDeck: Deck = copy(cards = cards.drop(cards.size))
 
   def fillDeck: Deck = copy(cards = cards.appendedAll(fullDeck))
+
+  def useDeck(cardList: List[Card]): Deck = copy(cards = cardList)
 
   //  def takeOneCard(cardNumber: Integer = 1, deck1: Deck): (Deck, Deck) = (copy(deck1.cards.appendedAll(cards.slice(cardNumber-1, cardNumber))), copy(cards.patch(cardNumber-1, Nil, 1)))
   def shuffleDeck(random: Random): Deck = copy(cards = random.shuffle(cards))

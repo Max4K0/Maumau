@@ -6,11 +6,13 @@ import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.{TabelStrictStrategy,
 import de.htwg.se.maumau.util.{State, UndoManager}
 import de.htwg.se.maumau.MaumauModul
 import com.google.inject.Guice
-import de.htwg.se.maumau.model.gameComponents.fileIOComponent.fileIO_Interface
+import fileIOComponent.fileIO_Interface
+
 import scala.collection.mutable.Stack
 
+
 class Controller @Inject()() extends ControllerInterface {
-  var table = new Table()
+  var table = Table()
   private val undoManager = new UndoManager
   val injector = Guice.createInjector(new MaumauModul)
   val fileIo = injector.getInstance(classOf[fileIO_Interface])
@@ -31,15 +33,20 @@ class Controller @Inject()() extends ControllerInterface {
     strategy = InStrat
   }
 
+  def newGame(): Unit = {
+    this.changeShouldUpdate(true)
+    notifyObservers()
+  }
+
   //--------------------------------------------------------------------------------------------------------------------------------
   //----------------------------------------------------File IO Methods------------------------------------------------------------
   //--------------------------------------------------------------------------------------------------------------------------------
   def saveFile(): Unit = {
-    fileIo.save(this)
+    fileIo.save(this.table.toJson)
   }
 
   def loadFile(): Unit = {
-    fileIo.load(this)
+    this.table = this.table.fromJson(fileIo.load())
   }
 
   //--------------------------------------------------------------------------------------------------------------------------------
