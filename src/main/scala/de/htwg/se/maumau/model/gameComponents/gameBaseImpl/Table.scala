@@ -21,6 +21,7 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
     .decodeString
     .emapTry(str => Try(Card(Color.fromString(str.split(" +")(0)), Symbol.fromString(str.split(" +")(1)))))
   implicit val cardEncoder : Encoder[Card] = (a: Card) => Json.fromString(a.toString)
+
   implicit val cardListDecoder : Decoder[List[Card]] = Decoder.decodeList[Card](cardDecoder)
   implicit val cardListEncoder : Encoder[List[Card]] = Encoder.encodeList[Card](cardEncoder)
 
@@ -45,7 +46,7 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
   )
   def decodePlayerDeck(res : Result[Deck]): Deck = res match {
     case Right(result) => result
-    case Left(result) => Deck().fillDeck.shuffleDeck(new Random(1))
+    case Left(result) => throw Exception(s"Failed parsing Deck JSON\n$result")
   }
 
   implicit val playerListDecoder : Decoder[List[Player]] = Decoder.decodeList[Player](playerDecoder)
@@ -67,22 +68,23 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
   )
   def decodeTableDeck(res : Result[List[Deck]]) : List[Deck] = res match {
     case Right(result) => result
-    case Left(result) => List[Deck](Deck().fillDeck.shuffleDeck(new Random(1)), Deck(List[Card]()))
+    case Left(result) => throw Exception(s"Failed parsing List[Deck] JSON\n$result")
   }
   def decodeTablePlayerList(res : Result[List[Player]]) : List[Player] = res match {
     case Right(result) => result
-    case Left(result) => List[Player](Player("P1", Deck()), Player("P2", Deck()))
+    case Left(result) => throw Exception(s"Failed parsing List[Player] JSON\n$result")
   }
 
 
 
   override def toJson: String = this.asJson.noSpaces
 
-  override def fromJson(json: String): Table =
+  override def fromJson(json: String): Table = {
     decode[Table](json) match {
       case Right(res) => res
-      case Left(res) => throw Exception("failed parsing JSON")
+      case Left(res) => throw Exception(s"failed parsing JSON\n$result")
     }
+  }
 
   override def checkCard(table: Table, playerNumber: Int, cardNumber: Int): Boolean = {
     val currentPlayer = table.player(playerNumber)

@@ -7,18 +7,18 @@ object Symbol extends Enumeration {
 
   def fromString(s : String) : Symbols =
     s match {
-      case "ASS" => ASS
-      case "Two" => Two
-      case "Three"  => Three
-      case "Four"  => Four
-      case "Five"  => Five
-      case "Six" => Six
-      case "Seven"  => Seven
-      case "Eight"  => Eight
-      case "Nine"  => Nine
-      case "Ten" => Ten
-      case "Jack"  => Jack
-      case "Lady" => Lady
-      case "King" => King
+      case "A" => ASS
+      case "2" => Two
+      case "3"  => Three
+      case "4"  => Four
+      case "5"  => Five
+      case "6" => Six
+      case "7"  => Seven
+      case "8"  => Eight
+      case "9"  => Nine
+      case "10" => Ten
+      case "J"  => Jack
+      case "L" => Lady
+      case "K" => King
     }
 }

@@ -6,9 +6,9 @@ object Color extends Enumeration {
 
   def fromString(s: String) : Color =
     s match {
-      case "Clubs" => Clubs
-      case "Diamonds" => Diamonds
-      case "Heart" => Hearts
-      case "Spades" => Spades
+      case "C" => Clubs
+      case "D" => Diamonds
+      case "H" => Hearts
+      case "S" => Spades
     }
 }
