@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  persistence:
+    image: maumau-persistence
+    build:
+      context: ./Persistence/
+      dockerfile: ./Dockerfile
+    ports:
+      - "8081:8081"
+    stdin_open: true
+    container_name: persistence_service
+
+  maumau:
+    image: maumau-service
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    stdin_open: true
+    container_name: maumau_service
+    depends_on:
+      - persistence
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix

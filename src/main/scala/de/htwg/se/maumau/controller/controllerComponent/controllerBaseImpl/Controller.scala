@@ -14,23 +14,21 @@ import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.{TabelStrictStrategy,
 import de.htwg.se.maumau.util.{State, UndoManager}
 import de.htwg.se.maumau.MaumauModul
 import com.google.inject.Guice
-import fileIOComponent.fileIO_Interface
 import play.api.libs.json.Json
 
+import scala.collection.mutable
 import scala.collection.mutable.Stack
 import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, Future}
+import scala.concurrent.{Await, ExecutionContextExecutor, Future}
 import scala.util.{Failure, Success}
 
 
 class Controller @Inject()() extends ControllerInterface {
-  var table = Table()
+  var table: Table = Table()
   private val undoManager = new UndoManager
   val fileIOServer = "http://localhost:8081/fileio"
-  val injector = Guice.createInjector(new MaumauModul)
-  val fileIo = injector.getInstance(classOf[fileIO_Interface])
-  var tables = Stack[Table]()
-  var states = Stack[String]("")
+  var tables: mutable.Stack[Table] = mutable.Stack[Table]()
+  var states: mutable.Stack[String] = mutable.Stack[String]("")
   var strategy = 1
   var shouldUpdate = true
   var checkCardLable = false
@@ -55,9 +53,9 @@ class Controller @Inject()() extends ControllerInterface {
   //----------------------------------------------------File IO Methods------------------------------------------------------------
   //--------------------------------------------------------------------------------------------------------------------------------
   def saveFile(): Unit = {
-    implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
+    implicit val system: ActorSystem[Nothing] = ActorSystem(Behaviors.empty, "SingleRequest")
 
-    implicit val executionContext = system.executionContext
+    implicit val executionContext: ExecutionContextExecutor = system.executionContext
 
     val responseFuture: Future[HttpResponse] = Http().singleRequest(HttpRequest(
       method = HttpMethods.POST,
@@ -69,21 +67,20 @@ class Controller @Inject()() extends ControllerInterface {
   }
 
   def loadFile(): Unit = {
-    implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
+    implicit val system: ActorSystem[Nothing] = ActorSystem(Behaviors.empty, "SingleRequest")
 
-    implicit val executionContext = system.executionContext
+    implicit val executionContext: ExecutionContextExecutor = system.executionContext
 
     val responseFuture: Future[HttpResponse] = Http().singleRequest(HttpRequest(uri = fileIOServer + "/load"))
 
     responseFuture
       .onComplete {
         case Failure(_) => sys.error("Failed getting Json")
-        case Success(value) => {
+        case Success(value) =>
           Unmarshal(value.entity).to[String].onComplete {
             case Failure(_) => sys.error("Failed unmarshalling")
             case Success(value) => this.table = this.table.fromJson(value)
           }
-        }
       }
     Await.ready(responseFuture, Duration.Inf)
     notifyObservers()
@@ -93,7 +90,7 @@ class Controller @Inject()() extends ControllerInterface {
   //----------------------------------------------------GUI Methods-----------------------------------------------------------------
   //--------------------------------------------------------------------------------------------------------------------------------
   def changeVis(): Unit = {
-    if (visiblesettings == false) visiblesettings = true else visiblesettings = false
+    if (!visiblesettings) visiblesettings = true else visiblesettings = false
     visiblesettings
   }
 
@@ -107,30 +104,15 @@ class Controller @Inject()() extends ControllerInterface {
 
   def changeThemeVis(): Unit = {
     visiblethememanager match {
-
-      case 0 => {
-        visiblethememanager += 1
-      }
-
-      case 1 => {
-        visiblethememanager += 1
-      }
-
-      case 2 => {
-        visiblethememanager = 0
-      }
+      case 0 => visiblethememanager += 1
+      case 1 => visiblethememanager += 1
+      case 2 => visiblethememanager = 0
     }
   }
   def changeCardThemeVis(): Unit = {
     visiblecardthememanager match {
-
-      case 0 => {
-        visiblecardthememanager += 1
-      }
-
-      case 1 => {
-        visiblecardthememanager = 0
-      }
+      case 0 => visiblecardthememanager += 1
+      case 1 => visiblecardthememanager = 0
     }
   }
   def changeCheckCardLable(checkCard: Boolean): Unit = {

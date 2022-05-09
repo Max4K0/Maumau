@@ -13,9 +13,7 @@ import scala.util.{Failure, Success}
 import fileIOComponent.fileIO_JsonImpl.FileIO
 import play.api.libs.json.JsValue
 
-
 object API :
-
   val fileIO = new FileIO
 
   val routes: String =
@@ -28,8 +26,10 @@ object API :
   // needed to run the route
   val system: ActorSystem[Any] = ActorSystem(Behaviors.empty, "my-system")
   given ActorSystem[Any] = system
+
   // needed for the future flatMap/onComplete in the end
   val executionContext: ExecutionContextExecutor = system.executionContext
+
   given ExecutionContextExecutor = executionContext
 
   val route: Route = concat(
@@ -44,7 +44,7 @@ object API :
     },
     post {
       path("fileio" / "save") {
-        entity(as [String]) { game =>
+        entity(as[String]) { game =>
           fileIO.save(game)
           complete("game saved")
         }
@@ -54,7 +54,7 @@ object API :
 
   val bindingFuture: Future[Http.ServerBinding] = Http().newServerAt("0.0.0.0", 8081).bind(route)
 
-  bindingFuture.onComplete{
+  bindingFuture.onComplete {
     case Success(binding) => {
       val address = binding.localAddress
       println(s"File IO REST service online at http://localhost:${address.getPort}\nPress RETURN to stop...")
