@@ -13,9 +13,9 @@ import scala.util.{Failure, Success}
 import fileIOComponent.fileIO_JsonImpl.FileIO
 import play.api.libs.json.JsValue
 
-object API :
-  val fileIO = new FileIO
+object API:
 
+  val fileIO = new FileIO
   val routes: String =
     """
         Welcome to the Persistence REST service! Available routes:

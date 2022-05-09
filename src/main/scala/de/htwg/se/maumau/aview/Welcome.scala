@@ -9,20 +9,11 @@ import scala.io.StdIn.readLine
 class Welcome(controller: ControllerInterface){
   def welcome():String= {
     println("""|•♦♣♠♥•Welcome to MauMau!•♥♠♣♦•""".stripMargin)
-
-    println("Load last game? (Y/n)")
-    var input : String = ""
-    while (input == "") {
-      input = readLine()
-    }
-    if(input == "Y" | input == "y" | input == "yes") {
-      try {
-        controller.loadFile()
-        println("Loaded last Game!")
-      }catch{
-        case e : Exception => System.exit(1)
-      }
-    } else {
+    try {
+      controller.loadFile()
+      println("Loaded last Game!")
+      "game start successfully"
+    }catch{
       controller.newGame()
       println("Starting new Game!")
       controller.addPlayer("P1", 0)
@@ -30,7 +21,7 @@ class Welcome(controller: ControllerInterface){
       controller.addPlayer("P2", 1)
       println("added player 2")
       controller.throwFirstCard()
+      "game start successfully"
     }
-    "game start successfully"
   }
 }

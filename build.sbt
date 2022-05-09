@@ -66,16 +66,13 @@ lazy val options = Seq(
 lazy val persistence = (project in file("Persistence"))
   .settings(
     name := "Maumau-Persistence",
-    version := "0.5.0-SNAPSHOT",
     options
   )
 
 lazy val root = project
   .in(file("."))
-  .aggregate(persistence)
-  .dependsOn(persistence)
   .settings(
     name := "Maumau",
-    version := "0.5.0-SNAPSHOT",
+    version := "1.5",
     options
   ).enablePlugins(JacocoCoverallsPlugin)

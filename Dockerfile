@@ -3,4 +3,4 @@ RUN apt-get update && apt-get install -y libxrender1 libxtst6 libxi6 libgl1-mesa
 EXPOSE 8080
 WORKDIR /maumau
 ADD . /maumau
-CMD sbt run -it
+CMD sbt run
