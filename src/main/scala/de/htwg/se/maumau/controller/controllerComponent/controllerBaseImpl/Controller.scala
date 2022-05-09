@@ -1,5 +1,13 @@
 package de.htwg.se.maumau.controller.controllerComponent.controllerBaseImpl
 
+import akka.http.scaladsl.server.Directives.{complete, concat, get, path}
+import akka.actor.typed.ActorSystem
+import akka.actor.typed.scaladsl.Behaviors
+import akka.http.scaladsl.Http
+import akka.http.scaladsl.server.Directives.*
+import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpMethods, HttpRequest, HttpResponse, StatusCode}
+import akka.http.scaladsl.server.{ExceptionHandler, Route}
+import akka.http.scaladsl.unmarshalling.Unmarshal
 import com.google.inject.Inject
 import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
 import de.htwg.se.maumau.model.gameComponents.gameBaseImpl.{TabelStrictStrategy, Table}
@@ -7,13 +15,18 @@ import de.htwg.se.maumau.util.{State, UndoManager}
 import de.htwg.se.maumau.MaumauModul
 import com.google.inject.Guice
 import fileIOComponent.fileIO_Interface
+import play.api.libs.json.Json
 
 import scala.collection.mutable.Stack
+import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, Future}
+import scala.util.{Failure, Success}
 
 
 class Controller @Inject()() extends ControllerInterface {
   var table = Table()
   private val undoManager = new UndoManager
+  val fileIOServer = "http://localhost:8081/fileio"
   val injector = Guice.createInjector(new MaumauModul)
   val fileIo = injector.getInstance(classOf[fileIO_Interface])
   var tables = Stack[Table]()
@@ -42,11 +55,38 @@ class Controller @Inject()() extends ControllerInterface {
   //----------------------------------------------------File IO Methods------------------------------------------------------------
   //--------------------------------------------------------------------------------------------------------------------------------
   def saveFile(): Unit = {
-    fileIo.save(this.table.toJson)
+    implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
+
+    implicit val executionContext = system.executionContext
+
+    val responseFuture: Future[HttpResponse] = Http().singleRequest(HttpRequest(
+      method = HttpMethods.POST,
+      uri = fileIOServer + "/save",
+      entity = this.table.toJson
+    ))
+    Await.ready(responseFuture, Duration.Inf)
+    notifyObservers()
   }
 
   def loadFile(): Unit = {
-    this.table = this.table.fromJson(fileIo.load())
+    implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
+
+    implicit val executionContext = system.executionContext
+
+    val responseFuture: Future[HttpResponse] = Http().singleRequest(HttpRequest(uri = fileIOServer + "/load"))
+
+    responseFuture
+      .onComplete {
+        case Failure(_) => sys.error("Failed getting Json")
+        case Success(value) => {
+          Unmarshal(value.entity).to[String].onComplete {
+            case Failure(_) => sys.error("Failed unmarshalling")
+            case Success(value) => this.table = this.table.fromJson(value)
+          }
+        }
+      }
+    Await.ready(responseFuture, Duration.Inf)
+    notifyObservers()
   }
 
   //--------------------------------------------------------------------------------------------------------------------------------

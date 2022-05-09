@@ -12,6 +12,7 @@ class FileIO extends fileIO_Interface{
   val file = new File("save.json")
 
   override def save(gameState: String): Unit = {
+    println(gameState)
     val pw = new PrintWriter(new File("save.json"))
     pw.write(gameState)
     pw.close()
