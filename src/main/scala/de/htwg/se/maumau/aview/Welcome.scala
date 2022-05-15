@@ -14,6 +14,8 @@ class Welcome(controller: ControllerInterface){
       println("Loaded last Game!")
       "game start successfully"
     }catch{
+      case e: Throwable => throw e
+        /*
       controller.newGame()
       println("Starting new Game!")
       controller.addPlayer("P1", 0)
@@ -21,7 +23,7 @@ class Welcome(controller: ControllerInterface){
       controller.addPlayer("P2", 1)
       println("added player 2")
       controller.throwFirstCard()
-      "game start successfully"
+      "game start successfully"*/
     }
   }
 }

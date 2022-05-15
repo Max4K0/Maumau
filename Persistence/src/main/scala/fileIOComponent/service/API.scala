@@ -13,6 +13,8 @@ import scala.util.{Failure, Success}
 import fileIOComponent.fileIO_JsonImpl.FileIO
 import play.api.libs.json.JsValue
 
+import scala.io.StdIn
+
 object API:
 
   val fileIO = new FileIO
@@ -55,12 +57,10 @@ object API:
   val bindingFuture: Future[Http.ServerBinding] = Http().newServerAt("0.0.0.0", 8081).bind(route)
 
   bindingFuture.onComplete {
-    case Success(binding) => {
+    case Success(binding) =>
       val address = binding.localAddress
-      println(s"File IO REST service online at http://localhost:${address.getPort}\nPress RETURN to stop...")
-    }
-    case Failure(exception) => {
-      println("File IO REST service couldn't be started! Error: " + exception + "\n")
-    }
+      println(s"File IO REST service online at http://localhost:${address.getPort}")
+    case Failure(exception) => println("File IO REST service couldn't be started! Error: " + exception + "\n")
+
   }
 

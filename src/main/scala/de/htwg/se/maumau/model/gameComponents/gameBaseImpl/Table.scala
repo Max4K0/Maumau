@@ -38,7 +38,12 @@ case class Table(player: List[Player] = List[Player](Player("P1", Deck()), Playe
   implicit val playerDecoder : Decoder[Player] = Decoder
     .decodeJsonObject
     .emapTry(js =>
-      Try(Player(js("name").toString, decodePlayerDeck(deckDecoder.decodeJson(js("playerDeck").get))))
+      Try(
+        Player(
+          js("name").toString,
+          decodePlayerDeck(deckDecoder.decodeJson(js("playerDeck").get))
+        )
+      )
     )
   implicit val playerEncoder : Encoder[Player] = (player : Player) => Json.obj(
     "name" -> Json.fromString(player.toString),

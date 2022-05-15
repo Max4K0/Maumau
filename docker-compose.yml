@@ -10,6 +10,7 @@ services:
       - "8081:8081"
     stdin_open: true
     container_name: persistence_service
+    tty: true
 
   maumau:
     image: maumau-service
@@ -19,8 +20,10 @@ services:
     ports:
       - "8080:8080"
     stdin_open: true
-    container_name: maumau_service
     depends_on:
       - persistence
+    container_name: maumau_service
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      DISPLAY: $DISPLAY
