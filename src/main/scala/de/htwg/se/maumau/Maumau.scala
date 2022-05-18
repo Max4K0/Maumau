@@ -17,7 +17,7 @@ object Maumau {
     var input: String = ""
     while (input != "quit") {
       input = readLine()
-      tui.processInputLine(input)
+      //tui.processInputLine(input)
     }
   }
 }

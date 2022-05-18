@@ -24,6 +24,8 @@ services:
       - persistence
     container_name: maumau_service
     volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
     environment:
-      DISPLAY: $DISPLAY
+      - DISPLAY=host.docker.internal:0
+    platform:
+      linux/amd64
