@@ -1,0 +1,45 @@
+FROM ubuntu:latest
+
+RUN rm -rf /var/lib/apt/lists/* && \
+    apt-get update && apt-get install -y libxrender1 libxtst6 libxi6 libgl1-mesa-glx libgtk-3-0 x11-xserver-utils x11-apps wget
+
+RUN apt-get -yq install gnupg curl
+
+RUN apt-get install -y xvfb
+
+RUN apt install -y software-properties-common
+
+RUN add-apt-repository ppa:ubuntu-x-swat/updates
+RUN apt-get -y dist-upgrade
+
+RUN apt-key adv \
+      --keyserver hkp://keyserver.ubuntu.com:80 \
+      --recv-keys 0xB1998361219BD9C9
+RUN curl -O https://cdn.azul.com/zulu/bin/zulu-repo_1.0.0-3_all.deb
+RUN apt-get install ./zulu-repo_1.0.0-3_all.deb
+RUN apt-get update
+RUN apt-get install -y zulu17-jdk
+RUN apt-get update
+
+ENV SCALA_VERSION 3.1.1
+ENV SBT_VERSION 1.6.2
+
+# Install scala and sbt
+RUN  echo 'Installing scala...'
+RUN  apt-get install -y scala
+RUN  echo 'Installing sbt...'
+RUN  apt-get update
+RUN  apt-get install apt-transport-https curl gnupg -yqq
+RUN  echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | tee /etc/apt/sources.list.d/sbt.list
+RUN  echo "deb https://repo.scala-sbt.org/scalasbt/debian /" | tee /etc/apt/sources.list.d/sbt_old.list
+RUN  curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/scalasbt-release.gpg --import
+RUN  chmod 644 /etc/apt/trusted.gpg.d/scalasbt-release.gpg
+RUN  apt-get update
+RUN  apt-get install -y sbt
+
+EXPOSE 8080
+WORKDIR /maumau
+ADD . /maumau
+#RUN export JAVA_OPTS="-Djavafx.platform=x11"
+RUN chmod a+x /maumau/run.sh
+CMD /bin/bash -c '/maumau/run.sh; /bin/bash'

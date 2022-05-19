@@ -21,4 +21,6 @@ libraryDependencies += "org.slf4j" % "slf4j-api" % "1.7.36"
 libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "2.0.1"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.10.0-RC5"
 
+//Database
+libraryDependencies += ("com.typesafe.slick" %% "slick" % "3.3.3").cross(CrossVersion.for3Use2_13)
 

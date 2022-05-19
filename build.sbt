@@ -6,6 +6,8 @@ val AkkaHttpVersion = "10.2.9"
 
 val circeVersion = "0.14.1"
 
+javacOptions := Seq("javafx.platform=x11")
+
 scalacOptions ++= Seq(
   "--source:3.0-migration",
   "-explain",
@@ -51,16 +53,19 @@ lazy val options = Seq(
     "maumau.model.gameComponents.fileIOComponent.*"
   ),
 
+  libraryDependencies += "org.slf4j" % "slf4j-simple" % "1.7.36" % Test,
+
   libraryDependencies ++= {
     lazy val osName = System.getProperty("os.name") match {
-      case n if n.startsWith("Linux") => "linux"
-      case n if n.startsWith("Mac") => "mac"
+      case n if n.startsWith("Linux") => "linux-aarch64"
+      case n if n.startsWith("Mac") => "mac-aarch64"
       case n if n.startsWith("Windows") => "win"
       case _ => throw new Exception("Unknown platform!")
     }
     Seq("base", "controls", "fxml", "graphics", "media", "swing", "web")
       .map( m=>  "org.openjfx" % s"javafx-$m" % "17.0.1" classifier osName)
   }
+
 )
 
 lazy val persistence = (project in file("Persistence"))

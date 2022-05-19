@@ -8,5 +8,4 @@ WORKDIR /persistence
 
 ADD . /persistence
 
-RUN sbt compile
 CMD sbt run

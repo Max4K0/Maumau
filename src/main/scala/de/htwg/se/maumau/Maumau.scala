@@ -12,12 +12,18 @@ object Maumau {
 
   def main(args: Array[String]): Unit = {
     welcome.welcome()
-    val tui =  TUI(controller)
-    val gui = GUIApp(controller)
+    val tui = TUI(controller)
     var input: String = ""
+    println("Use GUI?")
+    input = readLine()
+    if (input == "y"){
+      val gui = GUIApp(controller)
+    }
+
+    input = ""
     while (input != "quit") {
       input = readLine()
-      //tui.processInputLine(input)
+      tui.processInputLine(input)
     }
   }
 }
