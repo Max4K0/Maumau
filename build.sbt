@@ -53,8 +53,6 @@ lazy val options = Seq(
     "maumau.model.gameComponents.fileIOComponent.*"
   ),
 
-  libraryDependencies += "org.slf4j" % "slf4j-simple" % "1.7.36" % Test,
-
   libraryDependencies ++= {
     lazy val osName = System.getProperty("os.name") match {
       case n if n.startsWith("Linux") => "linux-aarch64"

@@ -22,5 +22,9 @@ libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "2.0.1"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.10.0-RC5"
 
 //Database
-libraryDependencies += ("com.typesafe.slick" %% "slick" % "3.3.3").cross(CrossVersion.for3Use2_13)
+libraryDependencies += ("com.typesafe.slick" %% "slick" % "3.4.0-M1").cross(CrossVersion.for3Use2_13)
+libraryDependencies += ("ch.qos.logback" % "logback-classic" % "1.2.11").cross(CrossVersion.for3Use2_13)
+
+resolvers += "jitpack" at "https://jitpack.io"
+
 
