@@ -13,8 +13,6 @@ case object LaunchAPI {
     Try(API) match
       case Success(v) => println("Persistance Rest Server is running!")
       case Failure(v) => println("Persistance Server couldn't be started! " + v.getMessage + v.getCause)
-
-
   StdIn.readLine()
 }
 
