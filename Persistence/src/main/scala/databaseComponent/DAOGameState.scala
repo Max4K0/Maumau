@@ -1,0 +1,5 @@
+package databaseComponent
+
+class DAOGameState {
+
+}

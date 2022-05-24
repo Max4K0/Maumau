@@ -22,9 +22,11 @@ libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "2.0.1"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.10.0-RC5"
 
 //Database
-//libraryDependencies += ("com.typesafe.slick" %% "slick" % "3.4.0-M1").cross(CrossVersion.for3Use2_13)
-//libraryDependencies += ("ch.qos.logback" % "logback-classic" % "1.1.2").cross(CrossVersion.for3Use2_13)
+libraryDependencies +=  "org.slf4j" % "slf4j-nop" % "2.0.0-alpha7"
+libraryDependencies +=  ("com.typesafe.slick" %% "slick" % "3.4.0-M1").cross(CrossVersion.for3Use2_13)
+libraryDependencies +=  ("com.typesafe.slick" %% "slick-hikaricp" % "3.4.0-M1").cross(CrossVersion.for3Use2_13)
+libraryDependencies += ("com.github.slick.slick" % "slick_3" % "nafg~dottyquery-SNAPSHOT")
+libraryDependencies +=  "org.postgresql" % "postgresql" % "42.3.4"
 
-//resolvers += "jitpack" at "https://jitpack.io"
-
+resolvers += "jitpack" at "https://jitpack.io"
 
