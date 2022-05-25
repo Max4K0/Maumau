@@ -6,7 +6,7 @@ import slick.jdbc.H2Profile.api._
 import java.sql.Date
 import scala.reflect.ClassTag
 
-class GameTables(tag: Tag) extends Table[(String, String, Int, Int)](tag, "GAME_TABLES") {
+class GameTable(tag: Tag) extends Table[(String, String, Int, Int)](tag, "GAME_TABLE") {
   def playerOne = column[String]("PLAYERONE")
   def playerTwo = column[String]("PLAYERTWO")
   def deckOne = column[Int]("DECKONE")

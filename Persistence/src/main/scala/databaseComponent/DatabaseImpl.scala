@@ -15,7 +15,7 @@ import scala.concurrent.{Await, Future}
 import scala.io.StdIn
 import scala.util.{Failure, Success, Try}
 
-import databaseComponent.slickTables.DeckTable
+import databaseComponent.slickTables.*
 
 class DatabaseImpl @Inject () extends DatabaseInterface {
 
@@ -25,6 +25,9 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
   val database_pw = "postgres"
   val database_name = "maumau"
   val deckTable = TableQuery[DeckTable]
+  val gameTable = TableQuery[GameTable]
+  val playerTable = TableQuery[PlayerTable]
+  val cardTable = TableQuery[CardTable]
 
   val database =
     Database.forURL(
@@ -33,6 +36,29 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
       password = database_pw,
       driver = "org.postgresql.Driver"
     )
+
+  override def createDB(): Unit = {
+    val playerDB = Future(Await.result(database.run(playerTable.schema.createIfNotExists), atMost = 100.second))
+    val gameDB = Future(Await.result(database.run(gameTable.schema.createIfNotExists), atMost = 100.second))
+    val deckDB = Future(Await.result(database.run(deckTable.schema.createIfNotExists), atMost = 100.second))
+    val cardDB = Future(Await.result(database.run(cardTable.schema.createIfNotExists), atMost = 100.second))
+    playerDB.onComplete {
+      case Success(_) => print("Connection to DB & Creation of playerTable successful!")
+      case Failure(e) => print("Error: " + e)
+    }
+    gameDB.onComplete {
+      case Success(_) => print("Connection to DB & Creation of gameTable successful!")
+      case Failure(e) => print("Error: " + e)
+    }
+    deckDB.onComplete {
+      case Success(_) => print("Connection to DB & Creation of deckTable successful!")
+      case Failure(e) => print("Error: " + e)
+    }
+    cardDB.onComplete {
+      case Success(_) => print("Connection to DB & Creation of cardTable successful!")
+      case Failure(e) => print("Error: " + e)
+    }
+  }
 
   def writeCardList(deckId: Int, cards: List[String]): List[Int] = {
     val ids = ListBuffer[Int]()
@@ -93,7 +119,7 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
     val players: List[String] = writePlayerList((tableJson \ "player").get.as[List[String]])
     val deckIds: List[Int] = writeDeckList((tableJson \ "tableDecks").get.as[List[String]])
 
-    val query = sqlu"""INSERT INTO "GAME_TABLES" VALUES ('${players.head}', '${players.last}', '${deckIds.head}', '${deckIds.last}');"""
+    val query = sqlu"""INSERT INTO "GAME_TABLE" VALUES ('${players.head}', '${players.last}', '${deckIds.head}', '${deckIds.last}');"""
     Await.result(database.run(query), Duration.Inf)
   }
   def readTable(): String = {

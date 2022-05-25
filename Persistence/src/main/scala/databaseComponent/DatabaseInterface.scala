@@ -1,6 +1,7 @@
 package databaseComponent
 
 trait DatabaseInterface {
+  def createDB(): Unit
   def writeCardList(deckId: Int, cards: List[String]): List[Int]
   def readCardList(id: Int): List[String]
   def writeDeck(deck: List[String]): Int
