@@ -5,6 +5,7 @@ import databaseComponent.DatabaseInterface
 import slick.jdbc.JdbcBackend.Database
 import slick.lifted.TableQuery
 import slick.jdbc.PostgresProfile.api.*
+import slick.dbio.{DBIO, DBIOAction}
 import play.api.libs.json.{JsArray, JsValue, Json}
 
 import scala.collection.mutable.ListBuffer
@@ -14,6 +15,8 @@ import scala.concurrent.{Await, Future}
 import scala.io.StdIn
 import scala.util.{Failure, Success, Try}
 
+import databaseComponent.slickTables.DeckTable
+
 class DatabaseImpl @Inject () extends DatabaseInterface {
 
   val connectIP = "localhost"
@@ -21,6 +24,7 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
   val database_user = "postgres"
   val database_pw = "postgres"
   val database_name = "maumau"
+  val deckTable = TableQuery[DeckTable]
 
   val database =
     Database.forURL(
@@ -31,33 +35,47 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
     )
 
   def writeCardList(deckId: Int, cards: List[String]): List[Int] = {
+    val ids = ListBuffer[Int]()
     for (card <- cards){
-      val query = sqlu"""INSERT INTO CARDS VALUES ($deckId, $card)"""
-      Await.result(database.run(query), atMost = 10.second)
+      val query = sqlu"""INSERT INTO "CARDS" VALUES ($deckId, $card)"""
+      ids += Await.result(database.run(query), atMost = 10.second)
     }
+    ids.toList
   }
-  def readCardList(id: Int): List[String]
+  def readCardList(id: Int): List[String] = {
+    List[String]()
+  }
 
   def writeDeck(deck: List[String]): Int = {
-    val deckIdQuery = sql"""SELECT MAX(id) FROM DECKS""".as[Int]
-    val deckId : Int = Await.result[Int](database.run(deckIdQuery), atMost = 10.second)
-    val cardListId : Int = writeCardList(deckId, deck)
-    val query = sqlu"""INSERT INTO DECKS VALUES ($deckId)"""
+    val deckIdQuery : DBIOAction[Seq[Int], slick.dbio.NoStream, Nothing] = deckTable.sortBy(_.id.desc).take(1).result
+    val deckId : Int = Await.result[Seq[Int]](database.run(deckIdQuery), atMost = 10.second).head
+    val cardListId : List[Int] = writeCardList(deckId+1, deck)
+    val query = sqlu"""INSERT INTO "DECKS" VALUES (${deckId+1})"""
+    Await.result[Seq[Int]](database.run(deckIdQuery), atMost = 10.second).head
   }
-  def readDeck(id: Int): List[String]
+  def readDeck(id: Int): List[String] = {
+    List[String]()
+  }
 
-  def writeDeckList(decks: List[String]): List[Int]
-  def readDeckList(id: Int): List[List[String]]
+  def writeDeckList(decks: List[String]): List[Int]  = {
+    List[Int]()
+  }
+  def readDeckList(id: Int): List[List[String]] = {
+    List[List[String]]()
+  }
 
-  def writePlayer(name: String, deck: String): Int = {
+  def writePlayer(name: String, deck: String): String = {
     val deckId : Int = writeDeck(Json.parse(deck).as[List[String]])
-    val query = sqlu"""INSERT INTO PLAYERS VALUES ($name, $deckId);"""
+    val query = sqlu"""INSERT INTO "PLAYERS" VALUES ($name, $deckId);"""
     Await.result[Int](database.run(query), atMost = 10.second)
+    name
   }
-  def readPlayer(id: Int): String
+  def readPlayer(name: String): String = {
+    "test"
+  }
 
-  def writePlayerList(players: List[String]): List[Int] = {
-    val ids = ListBuffer[Int]()
+  def writePlayerList(players: List[String]): List[String] = {
+    val ids = ListBuffer[String]()
     for (player <- players) {
       val playerJson: JsValue = Json.parse(player)
       val playerName: String = (playerJson \ "name").get.toString
@@ -66,16 +84,20 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
     }
     ids.toList
   }
-  def readPlayerList(id: Int): List[String]
+  def readPlayerList(name: String): List[String] = {
+    List[String]()
+  }
 
   def writeTable(table: String): Unit = {
     val tableJson: JsValue = Json.parse(table)
-    val playerIds: List[Int] = writePlayerList((tableJson \ "player").get.as[List[String]])
+    val players: List[String] = writePlayerList((tableJson \ "player").get.as[List[String]])
     val deckIds: List[Int] = writeDeckList((tableJson \ "tableDecks").get.as[List[String]])
 
-    val query = sqlu"""INSERT INTO GAME_TABLES VALUES ('${playerIds.head}', '${playerIds.last}', '${deckIds.head}', '${deckIds.last}');"""
+    val query = sqlu"""INSERT INTO "GAME_TABLES" VALUES ('${players.head}', '${players.last}', '${deckIds.head}', '${deckIds.last}');"""
     Await.result(database.run(query), Duration.Inf)
   }
-  def readTable(): String
+  def readTable(): String = {
+    "test"
+  }
 
 }
