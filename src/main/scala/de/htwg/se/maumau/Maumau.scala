@@ -2,7 +2,9 @@ package de.htwg.se.maumau
 import com.google.inject.Guice
 import de.htwg.se.maumau.aview.{GUIApp, TUI, Welcome}
 import de.htwg.se.maumau.controller.controllerComponent.ControllerInterface
+
 import scala.io.StdIn.readLine
+import sys.process.*
 
 object Maumau {
 
@@ -26,6 +28,8 @@ object Maumau {
       tui.processInputLine(input)
     }
     controller.saveFile()
+    controller.quit()
+    "exit".!
   }
 }
 

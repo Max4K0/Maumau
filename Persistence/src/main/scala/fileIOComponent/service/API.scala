@@ -4,7 +4,7 @@ import akka.http.scaladsl.server.Directives.{complete, concat, get, path}
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.server.Directives.*
+import akka.http.scaladsl.server.Directives.{_string2NR => _, _}
 import akka.http.scaladsl.model.{ContentTypes, HttpEntity, StatusCode}
 import akka.http.scaladsl.server.{ExceptionHandler, Route}
 import com.google.inject.{Guice, Injector}
@@ -14,6 +14,7 @@ import scala.concurrent.{ExecutionContextExecutor, Future}
 import scala.util.{Failure, Success}
 import play.api.libs.json.JsValue
 
+import sys.process._
 import scala.io.StdIn
 
 object API:
@@ -24,6 +25,7 @@ object API:
         Welcome to the Persistence REST service! Available routes:
           GET   /fileio/load
           POST  /fileio/save
+          POST  /fileio/quit
         """.stripMargin
 
   // needed to run the route
@@ -40,27 +42,38 @@ object API:
     pathSingleSlash {
       complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, routes))
     },
-    get {
-      path("fileio" / "load") {
+    path("fileio" / "load") {
+      get {
         complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, fileIO.load()))
       }
     },
-    post {
-      path("fileio" / "save") {
+    path("fileio" / "save") {
+      post {
         entity(as[String]) { game =>
           fileIO.save(game)
           complete("game saved")
         }
       }
+    },
+
+    path("fileio" / "quit"){
+      post {
+        Process("exit")
+        complete("exit")
+      }
     }
   )
-
   val bindingFuture: Future[Http.ServerBinding] = Http().newServerAt("0.0.0.0", 8081).bind(route)
 
   bindingFuture.onComplete {
     case Success(binding) =>
       val address = binding.localAddress
       println(s"File IO REST service online at http://localhost:${address.getPort}")
+      while (StdIn.readLine() != "i wanna quit"){;}
+      bindingFuture
+        .flatMap(_.unbind())
+        .onComplete(_ => system.terminate())
+
     case Failure(exception) => println("File IO REST service couldn't be started! Error: " + exception + "\n")
 
   }

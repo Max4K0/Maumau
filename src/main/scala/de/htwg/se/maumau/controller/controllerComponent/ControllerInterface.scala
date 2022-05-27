@@ -11,6 +11,7 @@ trait ControllerInterface extends Observable{
   def changeShouldUpdate(InshouldUpdate: Boolean): Unit
   def changeMainTheme(themeNumber: Int): Unit
   def changeCardTheme(themeNumber: Int): Unit
+  def quit(): Unit
   def saveFile(): Unit
   def loadFile(): Unit
   def newGame(): Unit

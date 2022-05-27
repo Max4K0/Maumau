@@ -86,6 +86,18 @@ class Controller @Inject()() extends ControllerInterface {
     notifyObservers()
   }
 
+  def quit(): Unit = {
+    implicit val system: ActorSystem[Nothing] = ActorSystem(Behaviors.empty, "SingleRequest")
+
+    implicit val executionContext: ExecutionContextExecutor = system.executionContext
+
+    val responseFuture: Future[HttpResponse] = Http().singleRequest(HttpRequest(
+      method = HttpMethods.POST,
+      uri = fileIOServer + "/quit"
+    ))
+    Await.ready(responseFuture, Duration.Inf)
+  }
+
   //--------------------------------------------------------------------------------------------------------------------------------
   //----------------------------------------------------GUI Methods-----------------------------------------------------------------
   //--------------------------------------------------------------------------------------------------------------------------------

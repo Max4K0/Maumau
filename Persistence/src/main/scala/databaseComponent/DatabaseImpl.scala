@@ -1,24 +1,24 @@
 package databaseComponent
 
 import databaseComponent.DatabaseInterface
-
 import play.api.libs.json.{JsArray, JsValue, Json}
-
 import slick.jdbc.JdbcBackend.Database
 import slick.lifted.TableQuery
 import slick.jdbc.PostgresProfile.api.*
+
+import com.google.inject.Inject
+
 import scala.collection.mutable.ListBuffer
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.{Duration, DurationInt}
 import scala.concurrent.{Await, Future}
 import scala.io.StdIn
 import scala.util.{Failure, Success, Try}
+import databaseComponent.Slick.tables.{CardTable, DeckTable, GameTable, PlayerTable}
 
-import databaseComponent.slickTables.*
+class DatabaseImpl @Inject () extends DatabaseInterface {
 
-class DatabaseImpl extends DatabaseInterface {
-
-  val connectIP = "localhost"
+  val connectIP = "172.20.0.2"
   val connectPort = 5432
   val database_user = "postgres"
   val database_pw = "postgres"
@@ -118,7 +118,7 @@ class DatabaseImpl extends DatabaseInterface {
     val players: List[String] = writePlayerList((tableJson \ "player").get.as[List[String]])
     val deckIds: List[Int] = writeDeckList((tableJson \ "tableDecks").get.as[List[String]])
 
-    val query : DBIO[Int] = sqlu"""INSERT INTO "GAME_TABLE" VALUES ('${players.head}', '${players.last}', '${deckIds.head}', '${deckIds.last}');"""
+    val query : DBIO[Int] = sqlu"""INSERT INTO "GAME_TABLE" VALUES (NULL, '${players.head}', '${players.last}', '${deckIds.head}', '${deckIds.last}');"""
     Await.result(database.run(query), Duration.Inf)
   }
   def readTable(): String = {

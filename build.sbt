@@ -20,8 +20,8 @@ lazy val options = Seq(
   resolvers += "jitpack" at "https://jitpack.io",
 
   //Testing
-  libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.11",
-  libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.11" % "test",
+  libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.12",
+  libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.12" % "test",
 
   //GUI- Swing/FX
   libraryDependencies += "org.scalafx" %% "scalafx" % "17.0.1-R26",
@@ -35,7 +35,6 @@ lazy val options = Seq(
     ("com.typesafe.akka" %% "akka-stream" % AkkaVersion).cross(CrossVersion.for3Use2_13),
     ("com.typesafe.akka" %% "akka-http" % AkkaHttpVersion).cross(CrossVersion.for3Use2_13)
   ),
-  libraryDependencies +=  "org.slf4j" % "slf4j-nop" % "2.0.0-alpha7",
 
   libraryDependencies ++= Seq(
     ("io.circe" %% "circe-core"% circeVersion).cross(CrossVersion.for3Use2_13),
@@ -45,14 +44,11 @@ lazy val options = Seq(
 
   //Database
   libraryDependencies +=  "org.slf4j" % "slf4j-nop" % "2.0.0-alpha7",
-  libraryDependencies +=  ("com.typesafe.slick" %% "slick" % "3.4.0-M1").cross(CrossVersion.for3Use2_13),
-  libraryDependencies +=  ("com.typesafe.slick" %% "slick-hikaricp" % "3.4.0-M1").cross(CrossVersion.for3Use2_13),
-  libraryDependencies += ("com.github.slick.slick" % "slick_3" % "nafg~dottyquery-SNAPSHOT"),
+  libraryDependencies += ("com.github.slick.slick" % "slick_3" % "nafg~dottyquery-SNAPSHOT") ,
   libraryDependencies +=  "org.postgresql" % "postgresql" % "42.3.4",
 
   //FileIO
-  libraryDependencies += ("com.github.slick.slick" % "slick_3" % "nafg~dottyquery-SNAPSHOT") ,
-  libraryDependencies +=  "org.postgresql" % "postgresql" % "42.3.4",
+  //FileIO
   libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "2.0.1",
   libraryDependencies += "com.typesafe.play" %% "play-json" % "2.10.0-RC5",
   jacocoCoverallsServiceName := "github-actions",
@@ -60,8 +56,7 @@ lazy val options = Seq(
   jacocoCoverallsPullRequest := sys.env.get("GITHUB_EVENT_NAME"),
   jacocoCoverallsRepoToken := sys.env.get("COVERALLS_REPO_TOKEN"),
   jacocoExcludes in Test := Seq(
-    "maumau.aview.*",
-    "maumau.model.gameComponents.fileIOComponent.*"
+    "maumau.aview.*"
   ),
 
   libraryDependencies ++= {
