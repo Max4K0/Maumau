@@ -25,6 +25,7 @@ object Maumau {
       input = readLine()
       tui.processInputLine(input)
     }
+    controller.saveFile()
   }
 }
 

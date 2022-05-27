@@ -7,17 +7,18 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.server.Directives.*
 import akka.http.scaladsl.model.{ContentTypes, HttpEntity, StatusCode}
 import akka.http.scaladsl.server.{ExceptionHandler, Route}
+import com.google.inject.{Guice, Injector}
+import fileIOComponent.{FileIOComponent, FileIOInterface}
 
 import scala.concurrent.{ExecutionContextExecutor, Future}
 import scala.util.{Failure, Success}
-import fileIOComponent.fileIO_JsonImpl.FileIO
 import play.api.libs.json.JsValue
 
 import scala.io.StdIn
 
 object API:
-
-  val fileIO = new FileIO
+  val injector: Injector = Guice.createInjector(new FileIOComponent)
+  val fileIO: FileIOInterface = injector.getInstance(classOf[FileIOInterface])
   val routes: String =
     """
         Welcome to the Persistence REST service! Available routes:

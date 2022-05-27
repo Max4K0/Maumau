@@ -1,6 +1,6 @@
 package fileIOComponent
 
-trait fileIO_Interface {
+trait FileIOInterface {
 
   def load(): String
   def save(gameState: String): Unit

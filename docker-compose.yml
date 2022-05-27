@@ -23,6 +23,8 @@ services:
       - "8081:8081"
     stdin_open: true
     tty: true
+    depends_on:
+      - db
     container_name: persistence_service
 
   maumau:

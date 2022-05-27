@@ -1,6 +1,6 @@
 package fileIOComponent.fileIO_JsonImpl
 
-import fileIOComponent.{FileIOComponent, fileIO_Interface}
+import fileIOComponent.{FileIOComponent, FileIOInterface}
 import play.api.libs.json.{JsValue, Json}
 import com.google.inject.{Guice, Inject, Injector}
 
@@ -9,13 +9,14 @@ import scala.io.Source
 import scala.io.*
 import databaseComponent.*
 
-class FileIO extends fileIO_Interface{
+class FileIO extends FileIOInterface {
 
   val injector: Injector = Guice.createInjector(new FileIOComponent)
-  val database = injector.getInstance(classOf[DatabaseInterface])
+  val database: DatabaseInterface = injector.getInstance(classOf[DatabaseInterface])
 
   override def save(gameState: String): Unit = {
     database.writeTable(gameState)
+    database.printDB()
   }
 
   override def load(): String = {

@@ -14,4 +14,5 @@ trait DatabaseInterface {
   def readPlayerList(name: String): List[String]
   def writeTable(table: String): Unit
   def readTable(): String
+  def printDB(): Unit
 }
