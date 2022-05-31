@@ -60,10 +60,11 @@ class Controller @Inject()() extends ControllerInterface {
     val responseFuture: Future[HttpResponse] = Http().singleRequest(HttpRequest(
       method = HttpMethods.POST,
       uri = fileIOServer + "/save",
-      entity = this.table.toJson
+      entity = this.table.toJson,
+
     ))
-    Await.ready(responseFuture, Duration.Inf)
-    notifyObservers()
+    val res = Await.ready(responseFuture, Duration.Inf)
+    println(res)
   }
 
   def loadFile(): Unit = {

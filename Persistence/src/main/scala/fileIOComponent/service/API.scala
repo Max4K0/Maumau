@@ -42,13 +42,13 @@ object API:
     pathSingleSlash {
       complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, routes))
     },
-    path("fileio" / "load") {
-      get {
+    get {
+      path("fileio" / "load") {
         complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, fileIO.load()))
       }
     },
-    path("fileio" / "save") {
-      post {
+    post {
+      path("fileio" / "save") {
         entity(as[String]) { game =>
           fileIO.save(game)
           complete("game saved")
@@ -56,7 +56,7 @@ object API:
       }
     }
   )
-  val bindingFuture: Future[Http.ServerBinding] = Http().newServerAt("0.0.0.0", 8081).bind(route)
+  val bindingFuture: Future[Http.ServerBinding] = Http().newServerAt("localhost", 8081).bind(route)
 
   StdIn.readLine()
   bindingFuture

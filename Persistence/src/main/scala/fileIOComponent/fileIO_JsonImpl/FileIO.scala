@@ -11,10 +11,11 @@ import databaseComponent.*
 
 class FileIO extends FileIOInterface {
 
-  val injector: Injector = Guice.createInjector(new FileIOComponent)
-  val database: DatabaseInterface = injector.getInstance(classOf[DatabaseInterface])
+  val injector = Guice.createInjector(new FileIOComponent)
+  val database = injector.getInstance(classOf[DatabaseInterface])
 
   override def save(gameState: String): Unit = {
+    println("saving")
     database.writeTable(gameState)
   }
 
