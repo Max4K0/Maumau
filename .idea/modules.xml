@@ -7,11 +7,14 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau-Persistence.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau-Persistence.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maumau-build.iml" filepath="$PROJECT_DIR$/.idea/modules/Maumau-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Persistence.Maumau-Persistence.iml" filepath="$PROJECT_DIR$/.idea/modules/Persistence.Maumau-Persistence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Scala.Maumau.iml" filepath="$PROJECT_DIR$/.idea/modules/Scala.Maumau.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/aview.iml" filepath="$PROJECT_DIR$/.idea/modules/aview.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/controller.iml" filepath="$PROJECT_DIR$/.idea/modules/controller.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/main.iml" filepath="$PROJECT_DIR$/.idea/modules/main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/main-build.iml" filepath="$PROJECT_DIR$/.idea/modules/main-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/model.iml" filepath="$PROJECT_DIR$/.idea/modules/model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/project.Maumau-build.iml" filepath="$PROJECT_DIR$/.idea/modules/project.Maumau-build.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/util.iml" filepath="$PROJECT_DIR$/.idea/modules/util.iml" />
     </modules>
   </component>
