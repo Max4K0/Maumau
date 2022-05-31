@@ -18,7 +18,7 @@ import databaseComponent.Slick.tables.{CardTable, DeckTable, GameTable, PlayerTa
 
 class DatabaseImpl @Inject () extends DatabaseInterface {
 
-  val connectIP = "172.20.0.2"
+  val connectIP = "172.18.0.1"
   val connectPort = 5432
   val database_user = "postgres"
   val database_pw = "postgres"
@@ -42,20 +42,20 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
     val deckDB = Future(Await.result(database.run(deckTable.schema.createIfNotExists), atMost = 100.second))
     val cardDB = Future(Await.result(database.run(cardTable.schema.createIfNotExists), atMost = 100.second))
     playerDB.onComplete {
-      case Success(_) => print("Connection to DB & Creation of playerTable successful!")
-      case Failure(e) => print("Error: " + e)
+      case Success(_) => println("Creation of playerTable successful!")
+      case Failure(e) => println("Error: " + e)
     }
     gameDB.onComplete {
-      case Success(_) => print("Connection to DB & Creation of gameTable successful!")
-      case Failure(e) => print("Error: " + e)
+      case Success(_) => println("Creation of gameTable successful!")
+      case Failure(e) => println("Error: " + e)
     }
     deckDB.onComplete {
-      case Success(_) => print("Connection to DB & Creation of deckTable successful!")
-      case Failure(e) => print("Error: " + e)
+      case Success(_) => println("Creation of deckTable successful!")
+      case Failure(e) => println("Error: " + e)
     }
     cardDB.onComplete {
-      case Success(_) => print("Connection to DB & Creation of cardTable successful!")
-      case Failure(e) => print("Error: " + e)
+      case Success(_) => println("Creation of cardTable successful!")
+      case Failure(e) => println("Error: " + e)
     }
   }
 
@@ -130,5 +130,4 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
     val res = Await.result[Seq[(Int,String)]](database.run(query), Duration.Inf)
     println(res)
   }
-
 }

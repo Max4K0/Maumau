@@ -19,12 +19,10 @@ services:
     build:
       context: ./Persistence/
       dockerfile: ./Dockerfile
-    ports:
-      - "8081:8081"
     stdin_open: true
     tty: true
-    depends_on:
-      - db
+    ports:
+      - "8081:8081"
     container_name: persistence_service
 
   maumau:

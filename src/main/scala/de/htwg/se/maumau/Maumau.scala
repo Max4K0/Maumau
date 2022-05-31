@@ -28,8 +28,6 @@ object Maumau {
       tui.processInputLine(input)
     }
     controller.saveFile()
-    controller.quit()
-    "exit".!
   }
 }
 
