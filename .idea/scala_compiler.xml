@@ -9,13 +9,13 @@
         <parameter value="-explain-types" />
       </parameters>
     </profile>
-    <profile name="sbt 3" modules="Maumau">
+    <profile name="sbt 3" modules="Maumau,Scala.Maumau">
       <parameters>
         <parameter value="-explain" />
         <parameter value="-explain-types" />
       </parameters>
     </profile>
-    <profile name="sbt 4" modules="Maumau-Persistence">
+    <profile name="sbt 4" modules="Maumau-Persistence,Persistence.Maumau-Persistence">
       <parameters>
         <parameter value="-Xignore-scala2-macros" />
         <parameter value="-explain" />

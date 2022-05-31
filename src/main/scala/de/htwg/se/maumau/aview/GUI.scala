@@ -45,16 +45,24 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
       //--------------------------------------------------------------------------------------------------------------------------------
       //----------------------------------------------------Creating Scene + Variables--------------------------------------------------
       //--------------------------------------------------------------------------------------------------------------------------------
+      //--------------------------------------------------------------------------------------------------------------------------------
+      //----------------------------------------------------Creating Scene + Variables--------------------------------------------------
+      //--------------------------------------------------------------------------------------------------------------------------------
       scene = new Scene(1320, 900) {
         val cardRatio = 0.25
         val cardSizeX = 500 * cardRatio
         val cardSizeY = 726 * cardRatio
         val table = new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/Table.png", 1000, 1000, false, true)
+        val table2 = new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/Table2.png", 1329, 920, false, false)
+        val table3 = new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/Table3.png", 1329, 920, false, false)
         val img = new Image(controller.table.tableDecks(1).cards.last.imgPath, cardSizeX - 10, cardSizeY - 10, false, false)
         val playerNumber = if (State.state == "Player1:") 1 else 0
         val view = new ImageView(img)
         val view2 = new ImageView(table)
+        val view3 = new ImageView(table2)
+        val view4 = new ImageView(table3)
         view2.setStyle("-fx-background-color: transparent")
+
         content = view2
 
         labels

@@ -3,6 +3,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Maumau" options="javafx.platform=x11" />
+      <module name="Scala.Maumau" options="javafx.platform=x11" />
     </option>
   </component>
 </project>
