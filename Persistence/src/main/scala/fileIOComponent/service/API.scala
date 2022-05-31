@@ -20,12 +20,14 @@ import scala.io.StdIn
 object API:
   val injector: Injector = Guice.createInjector(new FileIOComponent)
   val fileIO: FileIOInterface = injector.getInstance(classOf[FileIOInterface])
+
+  val connectIP = sys.env.getOrElse("FILEIO_SERVICE_HOST", "localhost").toString
+  val connectPort = sys.env.getOrElse("FILEIO_SERVICE_PORT", 8081).toString.toInt
   val routes: String =
     """
         Welcome to the Persistence REST service! Available routes:
-          GET   /fileio/load
-          POST  /fileio/save
-          POST  /fileio/quit
+          GET
+          POST
         """.stripMargin
 
   // needed to run the route
@@ -34,32 +36,34 @@ object API:
 
   // needed for the future flatMap/onComplete in the end
   val executionContext: ExecutionContextExecutor = system.executionContext
-
   given ExecutionContextExecutor = executionContext
 
   val route: Route = concat(
-
     pathSingleSlash {
       complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, routes))
     },
     get {
-      path("fileio" / "load") {
-        complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, fileIO.load()))
-      }
+      complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, fileIO.load()))
     },
     post {
-      path("fileio" / "save") {
-        entity(as[String]) { game =>
-          fileIO.save(game)
-          complete("game saved")
-        }
+      entity(as[String]) { game =>
+        fileIO.save(game)
+        complete("game saved")
       }
     }
   )
-  val bindingFuture: Future[Http.ServerBinding] = Http().newServerAt("localhost", 8081).bind(route)
+  val bindingFuture: Future[Http.ServerBinding] = Http().newServerAt(connectIP, connectPort).bind(route)
+  bindingFuture.onComplete {
+    case Success(binding) =>
+      val address = binding.localAddress
+      println(s"File IO REST service online at http://${address.getAddress}:${address.getPort}")
 
+    case Failure(exception) => println("File IO REST service couldn't be started! Error: " + exception + "\n")
+  }
   StdIn.readLine()
   bindingFuture
     .flatMap(_.unbind())
     .onComplete(_ => system.terminate())
+
+
 

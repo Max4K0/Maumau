@@ -62,7 +62,7 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
   def writeCardList(deckId: Int, cards: List[String]): List[Int] = {
     val ids = ListBuffer[Int]()
     for (card <- cards){
-      val query : DBIO[Int] = sqlu"""INSERT INTO "CARDS" VALUES ($deckId, "$card")"""
+      val query : DBIO[Int] = sqlu"""INSERT INTO "CARDS" VALUES ($deckId, '$card');"""
       ids += Await.result(database.run(query), atMost = 10.second)
     }
     ids.toList
@@ -75,7 +75,7 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
     val deckIdQuery : DBIOAction[Seq[Int], slick.dbio.NoStream, Nothing] = deckTable.sortBy(_.id.desc).take(1).result
     val deckId : Int = Await.result[Seq[Int]](database.run(deckIdQuery), atMost = 10.second).head + 1
     val cardListId : List[Int] = writeCardList(deckId+1, deck)
-    val query : DBIO[Int] = sqlu"""INSERT INTO "DECKS" VALUES ($deckId)"""
+    val query : DBIO[Int] = sqlu"""INSERT INTO "DECKS" VALUES ($deckId);"""
     Await.result[Seq[Int]](database.run(deckIdQuery), atMost = 10.second).head
   }
   def readDeck(id: Int): List[String] = {
@@ -91,7 +91,7 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
 
   def writePlayer(name: String, deck: String): String = {
     val deckId : Int = writeDeck(Json.parse(deck).as[List[String]])
-    val query : DBIO[Int] = sqlu"""INSERT INTO "PLAYERS" VALUES ("$name", $deckId);"""
+    val query : DBIO[Int] = sqlu"""INSERT INTO "PLAYERS" VALUES ('$name', $deckId);"""
     Await.result[Int](database.run(query), atMost = 10.second)
     name
   }
@@ -114,14 +114,13 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
   }
 
   def writeTable(table: String): Unit = {
-    println("Writing Table")
-    val q : DBIO[Int] = sqlu"""INSERT INTO "CARDS" VALUES(1, "hello world")"""
+    val q : DBIO[Int] = sqlu"""INSERT INTO "CARDS" VALUES(1, 'hello world');"""
     Await.result(database.run(q), atMost = 100.second)
     val tableJson: JsValue = Json.parse(table)
     val players: List[String] = writePlayerList((tableJson \ "player").get.as[List[String]])
     val deckIds: List[Int] = writeDeckList((tableJson \ "tableDecks").get.as[List[String]])
 
-    val query : DBIO[Int] = sqlu"""INSERT INTO "GAME_TABLE" VALUES (NULL, "${players.head}", "${players.last}", ${deckIds.head}, ${deckIds.last});"""
+    val query : DBIO[Int] = sqlu"""INSERT INTO "GAME_TABLE" VALUES (NULL, '${players.head}', '${players.last}', ${deckIds.head}, ${deckIds.last});"""
     Await.result(database.run(query), atMost = 100.second)
   }
   def readTable(): String = {

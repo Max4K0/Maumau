@@ -26,7 +26,8 @@ import scala.util.{Failure, Success}
 class Controller @Inject()() extends ControllerInterface {
   var table: Table = Table()
   private val undoManager = new UndoManager
-  val fileIOServer = "http://localhost:8081/fileio"
+  val fileIoPort: Int = sys.env.getOrElse("FILE_IO_PORT", 8081).toString.toInt
+  val fileIoHost: String = sys.env.getOrElse("FILE_IO_HOST", "localhost")
   var tables: mutable.Stack[Table] = mutable.Stack[Table]()
   var states: mutable.Stack[String] = mutable.Stack[String]("")
   var strategy = 1
@@ -59,12 +60,21 @@ class Controller @Inject()() extends ControllerInterface {
 
     val responseFuture: Future[HttpResponse] = Http().singleRequest(HttpRequest(
       method = HttpMethods.POST,
-      uri = fileIOServer + "/save",
+      uri = s"http://$fileIoHost:$fileIoPort",
       entity = this.table.toJson,
 
     ))
-    val res = Await.ready(responseFuture, Duration.Inf)
-    println(res)
+    responseFuture
+      .onComplete {
+        case Failure(_) => println(responseFuture)
+        case Success(value) => Unmarshal(value.entity).to[String].onComplete {
+          case Failure(_) => sys.error("Failed unmarshalling")
+          case Success(value) => {
+            println("Response: " + value)
+          }
+        }
+      }
+    notifyObservers()
   }
 
   def loadFile(): Unit = {
@@ -72,7 +82,10 @@ class Controller @Inject()() extends ControllerInterface {
 
     implicit val executionContext: ExecutionContextExecutor = system.executionContext
 
-    val responseFuture: Future[HttpResponse] = Http().singleRequest(HttpRequest(uri = fileIOServer + "/load"))
+    val responseFuture: Future[HttpResponse] = Http().singleRequest(HttpRequest(
+      method = HttpMethods.GET,
+      uri = s"http://$fileIoHost:$fileIoPort"
+    ))
 
     responseFuture
       .onComplete {
