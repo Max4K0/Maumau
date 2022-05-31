@@ -58,13 +58,8 @@ object API:
   )
   val bindingFuture: Future[Http.ServerBinding] = Http().newServerAt("0.0.0.0", 8081).bind(route)
 
-  bindingFuture.onComplete {
-    case Success(binding) =>
-      val address = binding.localAddress
-      println(s"File IO REST service online at http://localhost:${address.getPort}")
-      while (true){
-        ;
-      }
-    case Failure(exception) => println("File IO REST service couldn't be started! Error: " + exception + "\n")
-  }
+  StdIn.readLine()
+  bindingFuture
+    .flatMap(_.unbind())
+    .onComplete(_ => system.terminate())
 

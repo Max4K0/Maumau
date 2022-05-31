@@ -18,7 +18,7 @@ import databaseComponent.Slick.tables.{CardTable, DeckTable, GameTable, PlayerTa
 
 class DatabaseImpl @Inject () extends DatabaseInterface {
 
-  val connectIP = "172.18.0.1"
+  val connectIP = "172.19.0.1"
   val connectPort = 5432
   val database_user = "postgres"
   val database_pw = "postgres"

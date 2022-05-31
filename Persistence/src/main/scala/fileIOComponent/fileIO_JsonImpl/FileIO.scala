@@ -16,7 +16,6 @@ class FileIO extends FileIOInterface {
 
   override def save(gameState: String): Unit = {
     database.writeTable(gameState)
-    database.printDB()
   }
 
   override def load(): String = {
