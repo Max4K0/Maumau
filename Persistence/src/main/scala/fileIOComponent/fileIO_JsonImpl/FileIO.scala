@@ -9,6 +9,9 @@ import scala.io.Source
 import scala.io.*
 import databaseComponent.*
 
+import scala.concurrent.{Await, Future}
+import scala.util.{Failure, Success, Try}
+
 class FileIO extends FileIOInterface {
 
   val injector = Guice.createInjector(new FileIOComponent)
@@ -16,12 +19,18 @@ class FileIO extends FileIOInterface {
 
   override def save(gameState: String): Unit = {
     println("saving")
-    database.writeTable(gameState)
+    Try({
+      database.writeTable(gameState)
+    }) match {
+      case Success(_) => println("success")
+      case Failure(exception) => println(exception)
+    }
   }
 
   override def load(): String = {
     database.readTable()
   }
+
 
 /*
   val file = new File("save.json")

@@ -15,10 +15,13 @@ import scala.concurrent.{Await, Future}
 import scala.io.StdIn
 import scala.util.{Failure, Success, Try}
 import databaseComponent.Slick.tables.{CardTable, DeckTable, GameTable, PlayerTable}
+import io.circe.syntax._
+import io.circe.Json as CirceJson
+
 
 class DatabaseImpl @Inject () extends DatabaseInterface {
 
-  val connectIP = "db"
+  val connectIP = "localhost"
   val connectPort = 5432
   val database_user = "postgres"
   val database_pw = "postgres"
@@ -55,85 +58,124 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
     }
     cardDB.onComplete {
       case Success(_) => println("Creation of cardTable successful!")
-        //val q : DBIO[Int] = sqlu"insert into cards values(1, 'hello world');"
-        //Await.result(database.run(q), atMost = 100.second)
       case Failure(e) => println("Error: " + e)
     }
   }
 
-  def writeCardList(deckId: Int, cards: List[String]): List[Int] = {
+  def writeCardList(gameId: Int, deckId: Int, cards: List[String]): List[Int] = {
     val ids = ListBuffer[Int]()
     for (card <- cards){
-      val query : DBIO[Int] = sqlu"""insert into "CARDS" values ($deckId, '$card');"""
-      ids += Await.result(database.run(query), atMost = 10.second)
+      val query : DBIO[Int] = sqlu"""insert into "cards" values ($gameId, $deckId, $card);"""
+      Try({
+        ids += Await.result(database.run(query), atMost = 10.second)
+      }) match {
+        case Success(_) => println("success card list")
+        case Failure(exception) => println(exception)
+      }
     }
     ids.toList
   }
-  def readCardList(id: Int): List[String] = {
-    List[String]()
+  def readCardList(deckId: Int, gameId: Int): CirceJson = {
+    val action = cardTable.filter(_.deckId === deckId).filter(_.gameId === gameId).map(_.name).result
+    val result = Await.result[Seq[String]](database.run(action), atMost=10.second)
+    result.toList.asJson
   }
 
-  def writeDeck(deck: List[String]): Int = {
-    val deckIdQuery : DBIOAction[Seq[Int], slick.dbio.NoStream, Nothing] = deckTable.sortBy(_.id.desc).take(1).result
-    val deckId : Int = Await.result[Seq[Int]](database.run(deckIdQuery), atMost = 10.second).head + 1
-    val cardListId : List[Int] = writeCardList(deckId+1, deck)
-    val query : DBIO[Int] = sqlu"""insert into "DECKS" values ($deckId);"""
-    Await.result[Seq[Int]](database.run(deckIdQuery), atMost = 10.second).head
-  }
-  def readDeck(id: Int): List[String] = {
-    List[String]()
-  }
-
-  def writeDeckList(decks: List[String]): List[Int]  = {
-    List[Int]()
-  }
-  def readDeckList(id: Int): List[List[String]] = {
-    List[List[String]]()
-  }
-
-  def writePlayer(name: String, deck: String): String = {
-    val deckId : Int = writeDeck(Json.parse(deck).as[List[String]])
-    val query : DBIO[Int] = sqlu"""insert into "PLAYERS" values ('$name', $deckId);"""
+  def writeDeck(gameId: Int, deck: List[String]): Int = {
+    val query : DBIO[Int] = sqlu"""insert into "decks" ("gameid") values ($gameId);"""
     Await.result[Int](database.run(query), atMost = 10.second)
+    val action = deckTable.map(_.id).max.result
+    val deckId = Await.result(database.run(action), atMost=10.second) match
+      case Some(a) => a
+      case None => 1
+    println(deckId)
+    writeCardList(gameId, deckId, deck)
+    deckId
+  }
+
+  def writeDeckList(gameId: Int, decks: List[String]): List[Int]  = {
+    val ids = ListBuffer[Int]()
+    for (deck <- decks) {
+      ids += writeDeck(gameId, Json.parse(deck).as[List[String]])
+    }
+    ids.toList
+  }
+  def readDeckList(gameId: Int): CirceJson = {
+    val action = deckTable.filter(_.gameId === gameId).map(_.id).result
+    val result = Await.result[Seq[Int]](database.run(action), atMost = 10.second).toList
+    result.map(a => readCardList(a, gameId)).asJson
+  }
+
+  def writePlayer(gameId: Int, name: String, deck: List[String]): String = {
+    val deckId : Int = writeDeck(gameId, deck)
+    val query : DBIO[Int] = sqlu"""insert into "players" values ($gameId, $name, $deckId);"""
+    Try({
+      Await.result[Int](database.run(query), atMost = 10.second)
+    }) match {
+      case Success(_) => println("success player")
+      case Failure(exception) => println(exception)
+    }
     name
   }
-  def readPlayer(name: String): String = {
-    "test"
+  def readPlayer(gameId: Int, name: String): CirceJson = {
+    val action = playerTable.filter(_.gameId === gameId).filter(_.name === name).map(_.deck).take(1).result
+    val result = Await.result[Seq[Int]](database.run(action), atMost = 10.second).toList.head
+    Map[String, CirceJson](
+      "name" -> name.asJson,
+      "playerDeck" -> readCardList(result, gameId)
+    ).asJson
   }
 
-  def writePlayerList(players: List[String]): List[String] = {
+  def writePlayerList(gameId: Int, players: List[String]): List[String] = {
     val ids = ListBuffer[String]()
     for (player <- players) {
       val playerJson: JsValue = Json.parse(player)
       val playerName: String = (playerJson \ "name").get.toString
-      val playerDeck: String = (playerJson \ "playerDeck").get.as[String]
-      ids += writePlayer(playerName, playerDeck)
+      val playerDeck: List[String] = (playerJson \ "playerDeck").as[List[String]]
+      ids += writePlayer(gameId, playerName, playerDeck)
     }
     ids.toList
   }
-  def readPlayerList(name: String): List[String] = {
-    List[String]()
+  def readPlayerList(gameId: Int): CirceJson = {
+    val action = playerTable.filter(_.gameId === gameId).map(_.name).result
+    val result = Await.result[Seq[String]](database.run(action), atMost = 10.second).toList
+    result.map(playerName => readPlayer(gameId, playerName)).asJson
   }
 
   def writeTable(table: String): Unit = {
-    database withTransaction {
-      cardTable +=
-    }
-    val q : DBIO[Int] = sqlu"insert into CARDS values(1, 'hello world');"
-    Await.result(database.run(q), atMost = 100.second)
-   /* val tableJson: JsValue = Json.parse(table)
-    val players: List[String] = writePlayerList((tableJson \ "player").get.as[List[String]])
-    val deckIds: List[Int] = writeDeckList((tableJson \ "tableDecks").get.as[List[String]])
+    val tableJson: JsValue = Json.parse(table)
+    val query: DBIO[Int] = sqlu"""insert into "game_table" ("playerone", "playertwo", "deckone", "decktwo") values (NULL, NULL, NULL, NULL);"""
+    Await.result(database.run(query), atMost = 100.second)
+    val action = gameTable.sortBy(_.id.desc).take(1).map(_.id).result.head
+    val gameId = Await.result(database.run(action), atMost = 10.second)
+    val players: List[String] = writePlayerList(gameId, (tableJson \ "player").get.toString
+      .replace("},{", "}-{")
+      .replace("[{", "{")
+      .replace("}]", "}")
+      .split("-").toList)
+    println((tableJson\"tableDecks").get.toString)
+    val deckIds: List[Int] = writeDeckList(gameId, (tableJson \ "tableDecks").get.toString
+      .replace("],[", "]-[")
+      .replace("[[", "[")
+      .replace("]]", "]")
+      .split("-").toList)
+    val updateQuery: DBIO[Int] = sqlu"""UPDATE "game_table" SET "playerone"=${players.head}, "playertwo"=${players.last}, "deckone"=${deckIds.head}, "decktwo"=${deckIds.last} WHERE "id"=$gameId;"""
+    Await.result(database.run(updateQuery), atMost = 100.second)
 
-    val query : DBIO[Int] = sqlu"""insert into "GAME_TABLE" values (NULL, '${players.head}', '${players.last}', ${deckIds.head}, ${deckIds.last});"""
-    Await.result(database.run(query), atMost = 100.second)*/
   }
   def readTable(): String = {
-    "test"
+    val action = gameTable.map(_.id).max.result
+    val gameId = Await.result(database.run(action), atMost=10.second) match
+      case Some(a) => a
+      case None => 1
+    Map[String, CirceJson](
+      "player" -> readPlayerList(gameId),
+      "tableDecks" -> readDeckList(gameId)
+    ).asJson.toString()
   }
 
   override def printDB(): Unit = {
-    val query = sql"""select * from "CARDS"""".as[(Int, String)]
+    val query = sql"""select * from "cards"""".as[(Int, String)]
     val res = Await.result[Seq[(Int,String)]](database.run(query), atMost = 100.second)
     println(res)
   }

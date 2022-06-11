@@ -27,7 +27,7 @@ class Controller @Inject()() extends ControllerInterface {
   var table: Table = Table()
   private val undoManager = new UndoManager
   val fileIoPort: Int = sys.env.getOrElse("FILE_IO_PORT", 8081).toString.toInt
-  val fileIoHost: String = sys.env.getOrElse("FILE_IO_HOST", "localhost")
+  val fileIoHost: String = "localhost"
   var tables: mutable.Stack[Table] = mutable.Stack[Table]()
   var states: mutable.Stack[String] = mutable.Stack[String]("")
   var strategy = 1
@@ -60,18 +60,16 @@ class Controller @Inject()() extends ControllerInterface {
 
     val responseFuture: Future[HttpResponse] = Http().singleRequest(HttpRequest(
       method = HttpMethods.POST,
-      uri = s"http://$fileIoHost:$fileIoPort",
+      uri = s"http://$fileIoHost:$fileIoPort/save",
       entity = this.table.toJson,
-
     ))
     responseFuture
       .onComplete {
-        case Failure(_) => println(responseFuture)
+        case Failure(_) => println("failing here ")
         case Success(value) => Unmarshal(value.entity).to[String].onComplete {
           case Failure(_) => sys.error("Failed unmarshalling")
-          case Success(value) => {
+          case Success(value) =>
             println("Response: " + value)
-          }
         }
       }
     notifyObservers()
@@ -84,7 +82,7 @@ class Controller @Inject()() extends ControllerInterface {
 
     val responseFuture: Future[HttpResponse] = Http().singleRequest(HttpRequest(
       method = HttpMethods.GET,
-      uri = s"http://$fileIoHost:$fileIoPort"
+      uri = s"http://$fileIoHost:$fileIoPort/load"
     ))
 
     responseFuture

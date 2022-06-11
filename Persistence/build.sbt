@@ -11,6 +11,7 @@ scalacOptions ++= Seq(
   "-explain",
   "-explain-types"
 )
+val circeVersion = "0.14.1"
 
 
 resolvers += "jitpack" at "https://jitpack.io"
@@ -28,6 +29,12 @@ libraryDependencies ++= Seq(
 //FileIO
 libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "2.0.1"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.10.0-RC5"
+
+libraryDependencies ++= Seq(
+  ("io.circe" %% "circe-core"% circeVersion).cross(CrossVersion.for3Use2_13),
+  ("io.circe" %% "circe-generic"% circeVersion).cross(CrossVersion.for3Use2_13),
+  ("io.circe" %% "circe-parser"% circeVersion).cross(CrossVersion.for3Use2_13)
+)
 
 //Database
 libraryDependencies +=  "org.slf4j" % "slf4j-nop" % "2.0.0-alpha7"

@@ -1,17 +1,18 @@
 package databaseComponent
 
+import io.circe.Json
+
 trait DatabaseInterface {
   def createDB(): Unit
-  def writeCardList(deckId: Int, cards: List[String]): List[Int]
-  def readCardList(id: Int): List[String]
-  def writeDeck(deck: List[String]): Int
-  def readDeck(id: Int): List[String]
-  def writeDeckList(decks: List[String]): List[Int]
-  def readDeckList(id: Int): List[List[String]]
-  def writePlayer(name: String, deck: String): String
-  def readPlayer(name: String): String
-  def writePlayerList(players: List[String]): List[String]
-  def readPlayerList(name: String): List[String]
+  def writeCardList(gameId: Int, deckId: Int, cards: List[String]): List[Int]
+  def readCardList(deckId: Int, gameId: Int): Json
+  def writeDeck(gameId: Int, deck: List[String]): Int
+  def writeDeckList(gameId: Int, decks: List[String]): List[Int]
+  def readDeckList(gameId: Int): Json
+  def writePlayer(gameId: Int, name: String, deck: List[String]): String
+  def readPlayer(gameId: Int, name: String): Json
+  def writePlayerList(gameId: Int, players: List[String]): List[String]
+  def readPlayerList(gameId: Int): Json
   def writeTable(table: String): Unit
   def readTable(): String
   def printDB(): Unit

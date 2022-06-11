@@ -17,8 +17,8 @@ object Maumau {
     val tui = TUI(controller)
     var input: String = ""
     println("Use GUI?")
-    input = readLine()
-    if (input == "y"){
+    input = readLine().toLowerCase()
+    if (input == "y" || input == "yes"){
       val gui = GUIApp(controller)
     }
 

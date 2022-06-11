@@ -2,10 +2,10 @@ package databaseComponent.Slick.tables
 
 import slick.jdbc.PostgresProfile.api.*
 
-case class Card(deckId: Int, name: String)
-
-class CardTable(tag: Tag) extends Table[Card](tag, "CARDS"){
-  def deckId = column[Int]("DECKID")
-  def name = column[String]("NAME")
-  override def * = (deckId, name)
+class CardTable(tag: Tag) extends Table[(Int, Int, String)](tag, "cards"){
+  def gameId = column[Int]("gameid")
+  def deckId = column[Int]("deckid")
+  def name = column[String]("name")
+  def pk = primaryKey("card_pk", (gameId, deckId, name))
+  override def * = (gameId, deckId, name)
 }
