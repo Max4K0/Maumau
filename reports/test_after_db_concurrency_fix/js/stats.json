@@ -1,0 +1,317 @@
+{
+  "type": "GROUP",
+"name": "Global Information",
+"path": "",
+"pathFormatted": "group_missing-name-b06d1",
+"stats": {
+    "name": "Global Information",
+    "numberOfRequests": {
+        "total": 150,
+        "ok": 150,
+        "ko": 0
+    },
+    "minResponseTime": {
+        "total": 95,
+        "ok": 95,
+        "ko": 0
+    },
+    "maxResponseTime": {
+        "total": 11287,
+        "ok": 11287,
+        "ko": 0
+    },
+    "meanResponseTime": {
+        "total": 4580,
+        "ok": 4580,
+        "ko": 0
+    },
+    "standardDeviation": {
+        "total": 4640,
+        "ok": 4640,
+        "ko": 0
+    },
+    "percentiles1": {
+        "total": 2489,
+        "ok": 2489,
+        "ko": 0
+    },
+    "percentiles2": {
+        "total": 10955,
+        "ok": 10955,
+        "ko": 0
+    },
+    "percentiles3": {
+        "total": 11127,
+        "ok": 11127,
+        "ko": 0
+    },
+    "percentiles4": {
+        "total": 11198,
+        "ok": 11198,
+        "ko": 0
+    },
+    "group1": {
+    "name": "t < 800 ms",
+    "count": 50,
+    "percentage": 33
+},
+    "group2": {
+    "name": "800 ms < t < 1200 ms",
+    "count": 0,
+    "percentage": 0
+},
+    "group3": {
+    "name": "t > 1200 ms",
+    "count": 100,
+    "percentage": 67
+},
+    "group4": {
+    "name": "failed",
+    "count": 0,
+    "percentage": 0
+},
+    "meanNumberOfRequestsPerSecond": {
+        "total": 5.769230769230769,
+        "ok": 5.769230769230769,
+        "ko": 0
+    }
+},
+"contents": {
+"req_get-routes-4500c": {
+        "type": "REQUEST",
+        "name": "get_routes",
+"path": "get_routes",
+"pathFormatted": "req_get-routes-4500c",
+"stats": {
+    "name": "get_routes",
+    "numberOfRequests": {
+        "total": 50,
+        "ok": 50,
+        "ko": 0
+    },
+    "minResponseTime": {
+        "total": 95,
+        "ok": 95,
+        "ko": 0
+    },
+    "maxResponseTime": {
+        "total": 365,
+        "ok": 365,
+        "ko": 0
+    },
+    "meanResponseTime": {
+        "total": 255,
+        "ok": 255,
+        "ko": 0
+    },
+    "standardDeviation": {
+        "total": 69,
+        "ok": 69,
+        "ko": 0
+    },
+    "percentiles1": {
+        "total": 290,
+        "ok": 290,
+        "ko": 0
+    },
+    "percentiles2": {
+        "total": 297,
+        "ok": 297,
+        "ko": 0
+    },
+    "percentiles3": {
+        "total": 334,
+        "ok": 334,
+        "ko": 0
+    },
+    "percentiles4": {
+        "total": 364,
+        "ok": 364,
+        "ko": 0
+    },
+    "group1": {
+    "name": "t < 800 ms",
+    "count": 50,
+    "percentage": 100
+},
+    "group2": {
+    "name": "800 ms < t < 1200 ms",
+    "count": 0,
+    "percentage": 0
+},
+    "group3": {
+    "name": "t > 1200 ms",
+    "count": 0,
+    "percentage": 0
+},
+    "group4": {
+    "name": "failed",
+    "count": 0,
+    "percentage": 0
+},
+    "meanNumberOfRequestsPerSecond": {
+        "total": 1.9230769230769231,
+        "ok": 1.9230769230769231,
+        "ko": 0
+    }
+}
+    },"req_load-game-f28a2": {
+        "type": "REQUEST",
+        "name": "load_game",
+"path": "load_game",
+"pathFormatted": "req_load-game-f28a2",
+"stats": {
+    "name": "load_game",
+    "numberOfRequests": {
+        "total": 50,
+        "ok": 50,
+        "ko": 0
+    },
+    "minResponseTime": {
+        "total": 2260,
+        "ok": 2260,
+        "ko": 0
+    },
+    "maxResponseTime": {
+        "total": 2653,
+        "ok": 2653,
+        "ko": 0
+    },
+    "meanResponseTime": {
+        "total": 2471,
+        "ok": 2471,
+        "ko": 0
+    },
+    "standardDeviation": {
+        "total": 90,
+        "ok": 90,
+        "ko": 0
+    },
+    "percentiles1": {
+        "total": 2489,
+        "ok": 2489,
+        "ko": 0
+    },
+    "percentiles2": {
+        "total": 2532,
+        "ok": 2532,
+        "ko": 0
+    },
+    "percentiles3": {
+        "total": 2610,
+        "ok": 2610,
+        "ko": 0
+    },
+    "percentiles4": {
+        "total": 2638,
+        "ok": 2638,
+        "ko": 0
+    },
+    "group1": {
+    "name": "t < 800 ms",
+    "count": 0,
+    "percentage": 0
+},
+    "group2": {
+    "name": "800 ms < t < 1200 ms",
+    "count": 0,
+    "percentage": 0
+},
+    "group3": {
+    "name": "t > 1200 ms",
+    "count": 50,
+    "percentage": 100
+},
+    "group4": {
+    "name": "failed",
+    "count": 0,
+    "percentage": 0
+},
+    "meanNumberOfRequestsPerSecond": {
+        "total": 1.9230769230769231,
+        "ok": 1.9230769230769231,
+        "ko": 0
+    }
+}
+    },"req_save-game-cfc36": {
+        "type": "REQUEST",
+        "name": "save_game",
+"path": "save_game",
+"pathFormatted": "req_save-game-cfc36",
+"stats": {
+    "name": "save_game",
+    "numberOfRequests": {
+        "total": 50,
+        "ok": 50,
+        "ko": 0
+    },
+    "minResponseTime": {
+        "total": 10486,
+        "ok": 10486,
+        "ko": 0
+    },
+    "maxResponseTime": {
+        "total": 11287,
+        "ok": 11287,
+        "ko": 0
+    },
+    "meanResponseTime": {
+        "total": 11014,
+        "ok": 11014,
+        "ko": 0
+    },
+    "standardDeviation": {
+        "total": 148,
+        "ok": 148,
+        "ko": 0
+    },
+    "percentiles1": {
+        "total": 11060,
+        "ok": 11060,
+        "ko": 0
+    },
+    "percentiles2": {
+        "total": 11101,
+        "ok": 11101,
+        "ko": 0
+    },
+    "percentiles3": {
+        "total": 11178,
+        "ok": 11178,
+        "ko": 0
+    },
+    "percentiles4": {
+        "total": 11245,
+        "ok": 11245,
+        "ko": 0
+    },
+    "group1": {
+    "name": "t < 800 ms",
+    "count": 0,
+    "percentage": 0
+},
+    "group2": {
+    "name": "800 ms < t < 1200 ms",
+    "count": 0,
+    "percentage": 0
+},
+    "group3": {
+    "name": "t > 1200 ms",
+    "count": 50,
+    "percentage": 100
+},
+    "group4": {
+    "name": "failed",
+    "count": 0,
+    "percentage": 0
+},
+    "meanNumberOfRequestsPerSecond": {
+        "total": 1.9230769230769231,
+        "ok": 1.9230769230769231,
+        "ko": 0
+    }
+}
+    }
+}
+
+}

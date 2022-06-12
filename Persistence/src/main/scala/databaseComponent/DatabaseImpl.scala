@@ -143,9 +143,10 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
 
   def writeTable(table: String): Unit = {
     val tableJson: JsValue = Json.parse(table)
-    val query: DBIO[Int] = sqlu"""insert into "game_table" ("playerone", "playertwo", "deckone", "decktwo") values (NULL, NULL, NULL, NULL);"""
-    Await.result(database.run(query), atMost = 100.second)
-    val action = gameTable.sortBy(_.id.desc).take(1).map(_.id).result.head
+    val action = (gameTable.map(g => (g.playerOne, g.playerTwo, g.deckOne, g.deckTwo)) returning gameTable.map(_.id)) += (None, None, None, None)
+    //val query: DBIO[Int] = sqlu"""insert into "game_table" ("playerone", "playertwo", "deckone", "decktwo") values (NULL, NULL, NULL, NULL);"""
+    //Await.result(database.run(query), atMost = 100.second)
+    //val action = gameTable.sortBy(_.id.desc).take(1).map(_.id).result.head
     val gameId = Await.result(database.run(action), atMost = 10.second)
     val players: List[String] = writePlayerList(gameId, (tableJson \ "player").get.toString
       .replace("},{", "}-{")

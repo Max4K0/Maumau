@@ -70,11 +70,11 @@ class Controller @Inject()() extends ControllerInterface {
           case Failure(_) => sys.error("Failed unmarshalling")
           case Success(value) =>
             println("Response: " + value)
+            sys.exit(0)
         }
       }
     Await.ready(responseFuture, Duration.Inf)
     notifyObservers()
-    sys.exit(0)
   }
 
   def loadFile(): Unit = {
