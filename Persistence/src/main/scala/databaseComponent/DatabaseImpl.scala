@@ -69,8 +69,8 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
       Try({
         ids += Await.result(database.run(query), atMost = 10.second)
       }) match {
-        case Success(_) => println("success card list")
-        case Failure(exception) => println(exception)
+        case Success(_) =>
+        case Failure(exception) => throw exception
       }
     }
     ids.toList
@@ -87,8 +87,7 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
     val action = deckTable.map(_.id).max.result
     val deckId = Await.result(database.run(action), atMost=10.second) match
       case Some(a) => a
-      case None => 1
-    println(deckId)
+      case None => throw Exception("500")
     writeCardList(gameId, deckId, deck)
     deckId
   }
@@ -112,8 +111,8 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
     Try({
       Await.result[Int](database.run(query), atMost = 10.second)
     }) match {
-      case Success(_) => println("success player")
-      case Failure(exception) => println(exception)
+      case Success(_) =>
+      case Failure(exception) => throw exception
     }
     name
   }
@@ -153,7 +152,6 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
       .replace("[{", "{")
       .replace("}]", "}")
       .split("-").toList)
-    println((tableJson\"tableDecks").get.toString)
     val deckIds: List[Int] = writeDeckList(gameId, (tableJson \ "tableDecks").get.toString
       .replace("],[", "]-[")
       .replace("[[", "[")
@@ -167,7 +165,7 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
     val action = gameTable.map(_.id).max.result
     val gameId = Await.result(database.run(action), atMost=10.second) match
       case Some(a) => a
-      case None => 1
+      case None => throw Exception("500")
     Map[String, CirceJson](
       "player" -> readPlayerList(gameId),
       "tableDecks" -> readDeckList(gameId)

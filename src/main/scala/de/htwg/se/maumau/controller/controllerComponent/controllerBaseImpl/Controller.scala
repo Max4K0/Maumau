@@ -72,7 +72,9 @@ class Controller @Inject()() extends ControllerInterface {
             println("Response: " + value)
         }
       }
+    Await.ready(responseFuture, Duration.Inf)
     notifyObservers()
+    sys.exit(0)
   }
 
   def loadFile(): Unit = {

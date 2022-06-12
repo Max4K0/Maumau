@@ -15,17 +15,16 @@ object Maumau {
   def main(args: Array[String]): Unit = {
     welcome.welcome()
     val tui = TUI(controller)
-    var input: String = ""
     println("Use GUI?")
-    input = readLine().toLowerCase()
+    val input = readLine().toLowerCase()
     if (input == "y" || input == "yes"){
       val gui = GUIApp(controller)
     }
-
-    input = ""
-    while (input != "quit") {
-      input = readLine()
-      tui.processInputLine(input)
+    controller.notifyObservers()
+    var tuiInput = ""
+    while (tuiInput != "quit") {
+      tuiInput = readLine()
+      tui.processInputLine(tuiInput)
     }
   }
 }

@@ -1,0 +1,10 @@
+{
+  "simulation": "maumau.RecordedSimulation",
+  "simulationId": "recordedsimulation",
+  "start": 1655031437909,
+  "description": "",
+  "scenarios": ["RecordedSimulation"],
+  "assertions": [
+
+  ]
+}

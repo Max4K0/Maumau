@@ -3,5 +3,5 @@ package fileIOComponent
 trait FileIOInterface {
 
   def load(): String
-  def save(gameState: String): Unit
+  def save(gameState: String): String
 }

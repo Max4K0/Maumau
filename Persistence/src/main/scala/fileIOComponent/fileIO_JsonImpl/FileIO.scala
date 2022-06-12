@@ -17,18 +17,22 @@ class FileIO extends FileIOInterface {
   val injector = Guice.createInjector(new FileIOComponent)
   val database = injector.getInstance(classOf[DatabaseInterface])
 
-  override def save(gameState: String): Unit = {
-    println("saving")
+  override def save(gameState: String): String = {
     Try({
       database.writeTable(gameState)
     }) match {
-      case Success(_) => println("success")
-      case Failure(exception) => println(exception)
+      case Success(_) => "200"
+      case Failure(exception) => "500"
     }
   }
 
   override def load(): String = {
-    database.readTable()
+    Try({
+      database.readTable()
+    }) match {
+      case Success(value) => value
+      case Failure(exception) => sys.error(exception.getMessage)
+    }
   }
 
 
