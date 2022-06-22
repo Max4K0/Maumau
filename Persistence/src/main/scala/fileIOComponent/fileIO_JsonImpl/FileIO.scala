@@ -18,6 +18,7 @@ class FileIO extends FileIOInterface {
   val database = injector.getInstance(classOf[DatabaseInterface])
 
   override def save(gameState: String): String = {
+    println("savind: " + gameState)
     Try({
       database.writeTable(gameState)
     }) match {
