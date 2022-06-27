@@ -70,7 +70,7 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
         ids += Await.result(database.run(query), atMost = 10.second)
       }) match {
         case Success(_) =>
-        case Failure(exception) => throw exception
+        case Failure(exception) => throw Exception("500")
       }
     }
     ids.toList
@@ -102,7 +102,7 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
   def readDeckList(gameId: Int): CirceJson = {
     val action = deckTable.filter(_.gameId === gameId).map(_.id).result
     val result = Await.result[Seq[Int]](database.run(action), atMost = 10.second).toList
-    result.map(a => readCardList(a, gameId)).asJson
+    result.map(a => readCardList(a, gameId)).drop(2).asJson
   }
 
   def writePlayer(gameId: Int, name: String, deck: List[String]): String = {
@@ -111,10 +111,9 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
     Try({
       Await.result[Int](database.run(query), atMost = 10.second)
     }) match {
-      case Success(_) =>
-      case Failure(exception) => throw exception
+      case Success(_) => name
+      case Failure(exception) => throw Exception("500")
     }
-    name
   }
   def readPlayer(gameId: Int, name: String): CirceJson = {
     val action = playerTable.filter(_.gameId === gameId).filter(_.name === name).map(_.deck).take(1).result
@@ -171,11 +170,5 @@ class DatabaseImpl @Inject () extends DatabaseInterface {
       "player" -> readPlayerList(gameId),
       "tableDecks" -> readDeckList(gameId)
     ).asJson.toString()
-  }
-
-  override def printDB(): Unit = {
-    val query = sql"""select * from "cards"""".as[(Int, String)]
-    val res = Await.result[Seq[(Int,String)]](database.run(query), atMost = 100.second)
-    println(res)
   }
 }

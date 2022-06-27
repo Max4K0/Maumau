@@ -15,5 +15,4 @@ trait DatabaseInterface {
   def readPlayerList(gameId: Int): Json
   def writeTable(table: String): Unit
   def readTable(): String
-  def printDB(): Unit
 }
