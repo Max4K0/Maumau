@@ -63,7 +63,23 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
         val view4 = new ImageView(table3)
         view2.setStyle("-fx-background-color: transparent")
 
-        content = view2
+
+        controller.visiblethememanager match {
+
+          case 0 => {
+            content = view2
+          }
+
+          case 1 => {
+            content = view3
+            content += view2
+          }
+          case 2 => {
+            content = view4
+            content += view2
+          }
+
+        }
 
         labels
 
@@ -165,7 +181,16 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
                   //-------------------------------------
                   // Theme Manager
                   //-------------------------------------
-                  this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 45, cardSizeY - 45, true, true)))
+                  controller.visiblecardthememanager match {
+                    case 0 => {
+                      this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 45, cardSizeY - 45, true, true)))
+                    }
+
+                    case 1 => {
+                      this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back_alternative.png", cardSizeX - 45, cardSizeY - 45, true, true)))
+                    }
+
+                  }
                   //-------------------------------------
                   // Card Effects
                   //-------------------------------------
@@ -204,7 +229,14 @@ case class GUI (guiApp: GUIApp, controller: ControllerInterface) extends JFXApp3
                 //-------------------------------------
                 // Theme Manager
                 //-------------------------------------
-                this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
+                controller.visiblecardthememanager match {
+                  case 0 => {
+                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back2.png", cardSizeX - 10, cardSizeY - 10, true, true)))
+                  }
+                  case 1 => {
+                    this.setGraphic(new ImageView(new Image("file:src/main/scala/de/htwg/se/maumau/util/textures/red_back_alternative.png", cardSizeX - 10, cardSizeY - 10, true, true)))
+                  }
+                }
                 //-------------------------------------
                 // Card Effects
                 //-------------------------------------

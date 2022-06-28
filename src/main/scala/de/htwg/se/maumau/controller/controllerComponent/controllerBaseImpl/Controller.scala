@@ -34,7 +34,7 @@ class Controller @Inject()() extends ControllerInterface {
   var shouldUpdate = true
   var checkCardLable = false
   var visiblesettings = false
-  var visiblethememanager = 0
+  var visiblethememanager = 2
   var visiblecardthememanager = 0
   //var commands = Stack[Comma]()
 
